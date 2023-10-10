@@ -74,11 +74,12 @@ const HIEProfileDataTable = ({ tableInfo }) => {
             </Table>
           )}
         </DataTable>
+        {/* to do: adjust when table transactions implemented */}
         <Pagination
           backwardText="Previous page"
           forwardText="Next page"
           itemsPerPageText="Items per page:"
-          onChange={function noRefCheck() {}}
+          // onChange={{}}
           page={1}
           pageSize={10}
           pageSizes={[10, 20, 30, 40, 50]}
