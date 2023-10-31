@@ -35,7 +35,7 @@ export const profileTransactionsHeaders = [
   {
     id: "1",
     key: "identifier",
-    header: "HIV CLINIC NO",
+    header: "ART NO",
     accessor: "identifier",
   },
   {
@@ -62,7 +62,7 @@ export const incomingTransactionsHeaders = [
   {
     id: "1",
     key: "identifier",
-    header: "HIV CLINIC NO",
+    header: "ART NO",
     accessor: "identifier",
   },
   {

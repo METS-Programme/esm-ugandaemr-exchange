@@ -13,6 +13,13 @@ enum ScaleTypes {
   TIME = "time",
 }
 
+export enum ChartTheme {
+  WHITE = "white",
+  G100 = "g100",
+  G90 = "g90",
+  G10 = "g10",
+}
+
 export const donutGenderData = [
   {
     group: "Male",
@@ -74,6 +81,7 @@ export const donutDepartmentOptions = {
     },
   },
   height: "300px",
+  theme: ChartTheme.WHITE,
 };
 
 export const stackedBarData = [
@@ -215,7 +223,7 @@ export const stackedBarOptions = {
     },
   },
   height: "500px",
-  width: "40rem",
+  width: "auto",
 };
 
 export const horizontalBarData = [
