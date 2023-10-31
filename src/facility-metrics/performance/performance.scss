@@ -14,6 +14,10 @@
   padding: 1rem
 }
 
+.chartItemStacked {
+  width: 50%;
+}
+
 .boxHeader {
   @include type.type-style("heading-03");
 }

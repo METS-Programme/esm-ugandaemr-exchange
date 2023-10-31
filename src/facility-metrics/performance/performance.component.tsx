@@ -57,7 +57,7 @@ const Performance: React.FC = () => {
       </div>
 
       <div className={styles.chartRowContainer}>
-        <div>
+        <div className={styles.chartItemStacked}>
           <StackedBarChart data={stackedBarData} options={stackedBarOptions} />
         </div>
         <div className={styles.chartItem}>
