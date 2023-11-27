@@ -6,6 +6,7 @@ import HIEDashboard from "../hie-metrics/hie-dashboard.component";
 import styles from "./tab-builder.scss";
 import FacilityPerformance from "../performance/performance.component";
 import EntryStatistics from "../data-entry-statistics/data-entry-statistics.component";
+import UserDashboard from "../user-dashboard/user-dashboard.component";
 
 interface TabItem {
   name: string;
@@ -18,6 +19,10 @@ const TabBuilder: React.FC = () => {
     {
       name: t("hie", "HIE Metrics"),
       component: <HIEDashboard />,
+    },
+    {
+      name: t("userDashboard", "User Dashboard"),
+      component: <UserDashboard />,
     },
     {
       name: t("performance", "Performance"),
