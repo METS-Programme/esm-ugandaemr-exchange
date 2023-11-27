@@ -1,1 +1,6 @@
-{}
+{
+  "userDashboard": "User Dashboard",
+  "hie": "HIE Metrics",
+  "performance": "Performance",
+  "dataEntryStats": "Data Entry Statistics"
+}
