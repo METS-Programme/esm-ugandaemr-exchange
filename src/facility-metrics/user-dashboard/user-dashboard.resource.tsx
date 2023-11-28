@@ -108,7 +108,9 @@ export function useGetSavedDashboards() {
               cols={1}
               rowHeight={5}
               width={1200}
-              onDragStart={() => {}}
+              onDragStart={() => {
+                // This is an empty function
+              }}
             >
               {dashboardItem?.items?.map((item, index) =>
                 pivotRender(item, index, keysArray)
