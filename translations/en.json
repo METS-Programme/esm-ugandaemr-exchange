@@ -1,6 +1,7 @@
 {
-  "userDashboard": "User Dashboard",
-  "hie": "HIE Metrics",
-  "performance": "Performance",
-  "dataEntryStats": "Data Entry Statistics"
+    "userDashboard": "User Dashboard",
+    "hie": "HIE Metrics",
+    "performance": "Performance",
+    "dataEntryStats": "Data Entry Statistics",
+    "vlSuppressionPrediction": "VL Suppression Prediction"
 }

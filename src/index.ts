@@ -46,6 +46,26 @@ export const fhirProfileLink = getSyncLifecycle(
   options
 );
 
+export const VLSuppressionPrediction = getAsyncLifecycle(
+  () =>
+    import("./components/workspace/vl-suppression-prediction-button.component"),
+  {
+    featureName: "vl suppression prediction workspace",
+    moduleName,
+  }
+);
+
+export const VLSuppressionPredictionWorkspace = getAsyncLifecycle(
+  () =>
+    import(
+      "./components/workspace/vl-suppression-prediction-workspace.component"
+    ),
+  {
+    featureName: "vl suppression prediction workspace",
+    moduleName,
+  }
+);
+
 export function startupApp() {
   defineConfigSchema(moduleName, configSchema);
 }

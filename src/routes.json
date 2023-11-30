@@ -1,40 +1,46 @@
 {
-  "$schema": "https://json.openmrs.org/routes.schema.json",
-  "backendDependencies": {
-    "fhir2": "^1.2.0",
-    "webservices.rest": "^2.24.0"
-  },
-  "pages": [
-    {
-      "component": "root",
-      "route": "health-exchange"
-    }
-  ],
-  "extensions": [
-    {
-      "name": "health-exchange-link",
-      "component": "healthExchangeLink",
-      "slot": "homepage-dashboard-slot",
-      "meta": {
-        "name": "health-exchange",
-        "slot": "health-exchange-dashboard-slot",
-        "title": "Health Exchange Dashboard"
-      }
+    "$schema": "https://json.openmrs.org/routes.schema.json",
+    "backendDependencies": {
+        "fhir2": "^1.2.0",
+        "webservices.rest": "^2.24.0"
     },
-    {
-      "component": "root",
-      "name": "health-exchange-dashboard",
-      "slot": "health-exchange-dashboard-slot"
-    },
-    {
-      "component": "hieHomeLink",
-      "name": "hie-home-link",
-      "slot": "health-exchange-left-panel-slot"
-    },
-    {
-      "component": "fhirProfileLink",
-      "name": "fhir-profile-link",
-      "slot": "health-exchange-left-panel-slot"
-    }
-  ]
+    "pages": [{
+        "component": "root",
+        "route": "health-exchange"
+    }],
+    "extensions": [{
+            "name": "health-exchange-link",
+            "component": "healthExchangeLink",
+            "slot": "homepage-dashboard-slot",
+            "meta": {
+                "name": "health-exchange",
+                "slot": "health-exchange-dashboard-slot",
+                "title": "Health Exchange Dashboard"
+            }
+        },
+        {
+            "component": "root",
+            "name": "health-exchange-dashboard",
+            "slot": "health-exchange-dashboard-slot"
+        },
+        {
+            "component": "hieHomeLink",
+            "name": "hie-home-link",
+            "slot": "health-exchange-left-panel-slot"
+        },
+        {
+            "component": "fhirProfileLink",
+            "name": "fhir-profile-link",
+            "slot": "health-exchange-left-panel-slot"
+        },
+        {
+            "name": "vl-suppression-prediction",
+            "component": "VLSuppressionPrediction",
+            "slot": "action-menu-chart-items-slot"
+        },
+        {
+            "name": "vl-suppression-prediction-workspace",
+            "component": "VLSuppressionPredictionWorkspace"
+        }
+    ]
 }
