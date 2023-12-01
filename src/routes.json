@@ -39,7 +39,7 @@
             "slot": "action-menu-chart-items-slot"
         },
         {
-            "name": "vl-suppression-prediction-workspace",
+            "name": "VL Suppression Prediction",
             "component": "VLSuppressionPredictionWorkspace"
         }
     ]

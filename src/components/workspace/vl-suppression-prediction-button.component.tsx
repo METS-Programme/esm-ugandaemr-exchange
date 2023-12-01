@@ -11,7 +11,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
   const { t } = useTranslation();
 
   const handleClick = useCallback(
-    () => launchPatientWorkspace("vl-suppression-prediction-workspace"),
+    () => launchPatientWorkspace("VL Suppression Prediction"),
     []
   );
 
