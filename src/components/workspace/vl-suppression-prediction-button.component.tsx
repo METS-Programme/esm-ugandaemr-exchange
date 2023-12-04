@@ -11,7 +11,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
   const { t } = useTranslation();
 
   const handleClick = useCallback(
-    () => launchPatientWorkspace("VL Suppression Prediction"),
+    () => launchPatientWorkspace("AI Predictions"),
     []
   );
 
@@ -22,10 +22,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
         className={`${styles.container}`}
         role="button"
         tabIndex={0}
-        iconDescription={t(
-          "vlSuppressionPrediction",
-          "VL Suppression Prediction"
-        )}
+        iconDescription={t("aiPrediction", "AI Predictions")}
         onClick={handleClick}
       />
     );

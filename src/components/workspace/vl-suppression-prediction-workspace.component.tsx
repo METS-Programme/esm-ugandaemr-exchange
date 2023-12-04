@@ -39,16 +39,13 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
     return <ErrorState error={isErrorInSendingRequest} headerTitle={"Error"} />;
   }
 
-  if (isErrorInSendingRequest) {
-    console.info(data);
-  }
   return (
     <div className={styles.divContainer}>
       <section className={styles.section}>
-        <div className={styles.title}>VL Suppression Prediction</div>
+        <div className={styles.title}>VL Suppression</div>
 
         <div>
-          <p>Prediction: {}</p>
+          Prediction: <>{data}</>
         </div>
       </section>
     </div>

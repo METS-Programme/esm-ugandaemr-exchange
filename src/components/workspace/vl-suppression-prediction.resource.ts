@@ -18,7 +18,7 @@ interface PredictionData {
 }
 
 export function useVLSuppressionDetails(params: SaveParams) {
-  const apiUrl = "http://161.97.98.248:8080/predict";
+  const apiUrl = "https://ai.mets.or.ug/predict";
 
   const fetcher = async () => {
     try {
@@ -26,7 +26,6 @@ export function useVLSuppressionDetails(params: SaveParams) {
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       });
 
       return response.data as PredictionData;
@@ -41,7 +40,7 @@ export function useVLSuppressionDetails(params: SaveParams) {
   >(apiUrl, fetcher);
 
   return {
-    data: data ?? {},
+    data: data?.Prediction.Client ?? {},
     isErrorInSendingRequest: error,
     isLoadingPrediction: isLoading,
     isValidatingParams: isValidating,
