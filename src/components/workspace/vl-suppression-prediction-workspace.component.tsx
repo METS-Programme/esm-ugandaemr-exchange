@@ -43,11 +43,11 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
     <div className={styles.divContainer}>
       <section className={styles.section}>
         <div className={styles.title}>VL Suppression</div>
-
-        <div>
+        <div className={styles.divVL}>
           Prediction: <>{data}</>
         </div>
       </section>
+      <section></section>
     </div>
   );
 };

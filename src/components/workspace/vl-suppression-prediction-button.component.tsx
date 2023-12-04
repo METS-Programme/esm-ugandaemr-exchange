@@ -39,10 +39,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
         </div>
       )}
       hasIconOnly
-      iconDescription={t(
-        "vlSuppressionPrediction",
-        "VL Suppression Prediction"
-      )}
+      iconDescription={t("aiPrediction", "AI Predictions")}
       enterDelayMs={1000}
       tooltipAlignment="center"
       tooltipPosition="left"

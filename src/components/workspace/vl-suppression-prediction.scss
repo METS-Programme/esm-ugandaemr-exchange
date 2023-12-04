@@ -8,6 +8,11 @@
 .section {
     margin: 1rem 0;
     background-color: $ui-01;
+    .divVL {
+        padding: 1rem 0;
+        display: flex;
+        justify-content: center;
+    }
 }
 
 .button {
@@ -35,7 +40,9 @@
 
 .title {
     font-weight: bold!important;
-    padding: 10px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: center;
 }
 
 .container {
