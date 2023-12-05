@@ -39,7 +39,7 @@
             "slot": "action-menu-chart-items-slot"
         },
         {
-            "name": "AI Predictions",
+            "name": "ai-predictions-workspace",
             "component": "VLSuppressionPredictionWorkspace"
         }
     ]
