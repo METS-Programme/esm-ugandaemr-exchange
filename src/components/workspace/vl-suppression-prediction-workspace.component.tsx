@@ -9,20 +9,20 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
   const [artStartDate, setArtStartDate] = useState("2020-04-20");
   const [dateOfBirth, setDateOfBirth] = useState("1992-04-20");
   const [gender, setGender] = useState("Female");
-  const [arvAdherence, setArvAdherence] = useState("Good");
+  const [arvAdherence, setArvAdherence] = useState("90157");
   const [currentRegimen, setCurrentRegimen] = useState("TDF-3TC-DTG");
   const [indicationForVLTesting, setIndicationForVLTesting] =
     useState("168684");
 
   const { data, isErrorInSendingRequest, isLoadingPrediction } =
     useVLSuppressionDetails({
-      encounter_date: encounterDate,
+      last_encounter_date: encounterDate,
       art_start_date: artStartDate,
       date_birth: dateOfBirth,
       gender: gender,
-      arv_adherence: arvAdherence,
+      last_arv_adherence: arvAdherence,
       current_regimen: currentRegimen,
-      Indication_for_VL_Testing: indicationForVLTesting,
+      last_indication_for_VL_Testing: indicationForVLTesting,
     });
 
   if (isLoadingPrediction) {

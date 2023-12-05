@@ -2,13 +2,13 @@ import useSWR from "swr";
 import axios from "axios";
 
 interface SaveParams {
-  encounter_date: string;
+  last_encounter_date: string;
   art_start_date: string;
   date_birth: string;
   gender: string;
-  arv_adherence: string;
+  last_arv_adherence: string;
   current_regimen: string;
-  Indication_for_VL_Testing: string;
+  last_indication_for_VL_Testing: string;
 }
 
 interface PredictionData {
