@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { InlineLoading } from "@carbon/react";
 import styles from "./vl-suppression-prediction.scss";
-import { useVLSuppressionDetails } from "./vl-suppression-prediction.resource";
+import {
+  useGetARTStartDate,
+  useVLSuppressionDetails,
+} from "./vl-suppression-prediction.resource";
 import { ErrorState } from "@openmrs/esm-framework";
 
 const VLSuppressionPredictionWorkSpace: React.FC = () => {
@@ -14,6 +17,18 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
   const [indicationForVLTesting, setIndicationForVLTesting] =
     useState("168684");
 
+  const [patientUuid, setPatientUuid] = useState(
+    "93e4e7e1-c916-47d3-b00d-c7c0aa6d1ce6"
+  );
+  const [conceptUuid, setConceptUuid] = useState(
+    "ab505422-26d9-41f1-a079-c3d222000440"
+  );
+  const { artStartDateData, isLoading, conceptuuid, patientuuid } =
+    useGetARTStartDate({
+      patientuuid: patientUuid,
+      conceptuuid: conceptUuid,
+    });
+
   const { data, isErrorInSendingRequest, isLoadingPrediction } =
     useVLSuppressionDetails({
       last_encounter_date: encounterDate,
@@ -25,7 +40,15 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
       last_indication_for_VL_Testing: indicationForVLTesting,
     });
 
+  if (isLoading && patientuuid && conceptuuid) {
+    setPatientUuid(patientuuid);
+    setConceptUuid(conceptuuid);
+  }
+
   if (isLoadingPrediction) {
+    console.info("ART START DATE", artStartDateData);
+    console.info("Concept uuid", conceptuuid);
+    console.info("Person uuid", patientuuid);
     return (
       <InlineLoading
         status="active"
