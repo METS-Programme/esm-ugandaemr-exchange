@@ -1,8 +1,28 @@
 import useSWR from "swr";
 import axios from "axios";
 import { openmrsFetch } from "@openmrs/esm-framework";
+import { useEffect } from "react";
 
-interface SaveParams {
+export interface Root {
+  results: Result[];
+}
+export interface Result {
+  uuid: string;
+  concept: Concept;
+  person: Person;
+  value: string;
+}
+
+export interface Concept {
+  uuid: string;
+  display: string;
+}
+
+export interface Person {
+  uuid: string;
+}
+
+export interface SaveParams {
   last_encounter_date: string;
   art_start_date: string;
   date_birth: string;
@@ -12,7 +32,7 @@ interface SaveParams {
   last_indication_for_VL_Testing: string;
 }
 
-interface PredictionData {
+export interface PredictionData {
   Prediction: {
     Client: string;
   };
@@ -62,15 +82,40 @@ function extractDate(timestamp: string): string {
   return `${year}-${month}-${day}`;
 }
 
-export function useGetARTStartDate(params: ARTStartDateRequest) {
+export function useGetARTStartDate(
+  params: ARTStartDateRequest,
+  onArtStartDateDataReceived: (artStartDateData: string) => void,
+  onConceptuuidReceived: (conceptuuid: string) => void,
+  onPatientuuidReceived: (patientuuid: string) => void
+) {
   const apiUrl = `/ws/rest/v1/obs?concept=${params.conceptuuid}&patient=${params.patientuuid}&v=full`;
-  const { data, error, isLoading, isValidating, mutate } = useSWR<
+  const { data, error, isLoading, mutate } = useSWR<
     { data: { results: any } },
     Error
   >(apiUrl, openmrsFetch);
   const artStartDateData = data ? extractDate(data.data.results[0].value) : [];
   const conceptuuid = data ? data?.data.results[0].concept.uuid : null;
   const patientuuid = data ? data?.data.results[0].person.uuid : null;
+
+  useEffect(() => {
+    if (artStartDateData !== null) {
+      onArtStartDateDataReceived(artStartDateData as string);
+    }
+    if (conceptuuid !== null) {
+      onConceptuuidReceived(conceptuuid as string);
+    }
+    if (patientuuid !== null) {
+      onPatientuuidReceived(patientuuid as string);
+    }
+  }, [
+    artStartDateData,
+    conceptuuid,
+    patientuuid,
+    onArtStartDateDataReceived,
+    onConceptuuidReceived,
+    onPatientuuidReceived,
+  ]);
+
   return {
     artStartDateData,
     conceptuuid,
