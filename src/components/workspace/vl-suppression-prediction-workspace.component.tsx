@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-import { Button, InlineLoading } from "@carbon/react";
+import React, { useMemo, useState } from "react";
+import { Button, InlineLoading, Loading } from "@carbon/react";
 import { Intersect } from "@carbon/react/icons";
 import styles from "./vl-suppression-prediction.scss";
 import {
+  extractDate,
   useGetARTStartDate,
   useVLSuppressionDetails,
 } from "./vl-suppression-prediction.resource";
-import { ErrorState } from "@openmrs/esm-framework";
 import logo from "../../assets/images/artificial-intelligence-logo.png";
+import { PatientChartProps } from "../../types";
+import { usePatient } from "@openmrs/esm-framework";
 
-const VLSuppressionPredictionWorkSpace: React.FC = () => {
-  const [patientUuid, setPatientUuid] = useState(
-    "93e4e7e1-c916-47d3-b00d-c7c0aa6d1ce6"
-  );
+const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
+  patientUuid,
+}) => {
+  const { patient } = usePatient(patientUuid);
   const [conceptUuid, setConceptUuid] = useState(
     "ab505422-26d9-41f1-a079-c3d222000440"
   );
@@ -20,31 +22,33 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
     "2023-04-20"
   );
 
-  const [artStartDate, setArtStartDate] = useState("2020-04-20");
+  const [artStartDate, setArtStartDate] = useState("");
   const handleArtStartDateDataReceived = (newArtStartDate: string) => {
     setArtStartDate(newArtStartDate);
   };
 
-  const handleConceptUuidReceived = (newConceptUuid: string) => {
-    setConceptUuid(newConceptUuid);
-  };
-
-  const handlePatientuuidReceived = (newPatientuuid: string) => {
-    setPatientUuid(newPatientuuid);
-  };
-
-  const { conceptuuid, patientuuid } = useGetARTStartDate(
+  const { conceptuuid } = useGetARTStartDate(
     {
       patientuuid: patientUuid,
       conceptuuid: conceptUuid,
     },
-    handleArtStartDateDataReceived,
-    handleConceptUuidReceived,
-    handlePatientuuidReceived
+    handleArtStartDateDataReceived
   );
 
-  const [dateOfBirth, setDateOfBirth] = useState("1992-04-20");
-  const [gender, setGender] = useState("Female");
+  const gender = useMemo(() => {
+    return patient ? patient.gender : "Female";
+  }, [patient]);
+
+  const dateOfBirth = useMemo(() => {
+    return patient ? extractDate(patient.birthDate) : "";
+  }, [patient]);
+
+  const patientDisplay = useMemo(() => {
+    return patient
+      ? `${patient.name[0].given.join(" ")} ${patient.name[0].family}`
+      : "Patient";
+  }, [patient]);
+
   const [arvAdherence, setArvAdherence] = useState("90157");
   const [currentRegimen, setCurrentRegimen] = useState("TDF-3TC-DTG");
   const [indicationForVLTesting, setIndicationForVLTesting] =
@@ -64,13 +68,31 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
     });
 
   if (isErrorInSendingRequest) {
-    return <ErrorState error={isErrorInSendingRequest} headerTitle={"Error"} />;
+    return (
+      <InlineLoading
+        status="active"
+        iconDescription="Loading"
+        description="Getting Patient Details..."
+      />
+    );
+  }
+
+  if (isLoadingPrediction) {
+    return (
+      <InlineLoading
+        status="active"
+        iconDescription="Loading"
+        description="Loading data..."
+      />
+    );
   }
 
   const handleButtonClick = () => {
-    console.info("PatientUuid", patientUuid);
-    console.info("Patientuuid", patientuuid);
+    console.info("ART Start Date", artStartDate);
     console.info("Concept uuid", conceptuuid);
+    console.info("Birth Date", dateOfBirth);
+    console.info("Gender", gender);
+    console.info("Data", patient);
     setshowPredictions(true);
   };
 
@@ -83,8 +105,8 @@ const VLSuppressionPredictionWorkSpace: React.FC = () => {
           <p>Your AI Partner</p>
         </div>
         <span className={styles.divSpan}>
-          Click the Run button for an AI based diagnostic assessment for
-          (Patient Name)
+          Click the Run button for an AI based diagnostic assessment for{" "}
+          {patientDisplay}
         </span>
       </section>
       <div className={styles.actionButton}>

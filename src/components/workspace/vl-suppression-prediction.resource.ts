@@ -3,25 +3,6 @@ import axios from "axios";
 import { openmrsFetch } from "@openmrs/esm-framework";
 import { useEffect } from "react";
 
-export interface Root {
-  results: Result[];
-}
-export interface Result {
-  uuid: string;
-  concept: Concept;
-  person: Person;
-  value: string;
-}
-
-export interface Concept {
-  uuid: string;
-  display: string;
-}
-
-export interface Person {
-  uuid: string;
-}
-
 export interface SaveParams {
   last_encounter_date: string;
   art_start_date: string;
@@ -40,6 +21,10 @@ export interface PredictionData {
 
 type ARTStartDateRequest = {
   conceptuuid: string;
+  patientuuid: string;
+};
+
+type GenderDOBNameRequest = {
   patientuuid: string;
 };
 
@@ -73,7 +58,7 @@ export function useVLSuppressionDetails(params: SaveParams) {
   };
 }
 
-function extractDate(timestamp: string): string {
+export function extractDate(timestamp: string): string {
   const dateObject = new Date(timestamp);
   const year = dateObject.getFullYear();
   const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
@@ -84,9 +69,7 @@ function extractDate(timestamp: string): string {
 
 export function useGetARTStartDate(
   params: ARTStartDateRequest,
-  onArtStartDateDataReceived: (artStartDateData: string) => void,
-  onConceptuuidReceived: (conceptuuid: string) => void,
-  onPatientuuidReceived: (patientuuid: string) => void
+  onArtStartDateDataReceived: (artStartDateData: string) => void
 ) {
   const apiUrl = `/ws/rest/v1/obs?concept=${params.conceptuuid}&patient=${params.patientuuid}&v=full`;
   const { data, error, isLoading, mutate } = useSWR<
@@ -95,31 +78,16 @@ export function useGetARTStartDate(
   >(apiUrl, openmrsFetch);
   const artStartDateData = data ? extractDate(data.data.results[0].value) : [];
   const conceptuuid = data ? data?.data.results[0].concept.uuid : null;
-  const patientuuid = data ? data?.data.results[0].person.uuid : null;
 
   useEffect(() => {
     if (artStartDateData !== null) {
       onArtStartDateDataReceived(artStartDateData as string);
     }
-    if (conceptuuid !== null) {
-      onConceptuuidReceived(conceptuuid as string);
-    }
-    if (patientuuid !== null) {
-      onPatientuuidReceived(patientuuid as string);
-    }
-  }, [
-    artStartDateData,
-    conceptuuid,
-    patientuuid,
-    onArtStartDateDataReceived,
-    onConceptuuidReceived,
-    onPatientuuidReceived,
-  ]);
+  }, [artStartDateData, conceptuuid, onArtStartDateDataReceived]);
 
   return {
     artStartDateData,
     conceptuuid,
-    patientuuid,
     isError: error,
     isLoading: isLoading,
     mutate,
