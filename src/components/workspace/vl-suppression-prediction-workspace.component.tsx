@@ -91,9 +91,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   }
 
   if (isLoadingPrediction) {
-    console.info("ART START DATE", artStartDateData);
-    console.info("Concept uuid", conceptuuid);
-    console.info("Person uuid", patientuuid);
     return (
       <InlineLoading
         status="active"
@@ -104,7 +101,7 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   }
 
   const handleButtonClick = () => {
-    console.info("Last Encounter Date", encounterDate);
+    console.info(encounterDate);
     setshowPredictions(true);
   };
 

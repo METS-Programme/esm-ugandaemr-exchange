@@ -2,7 +2,7 @@ import useSWR from "swr";
 import axios from "axios";
 import { openmrsFetch } from "@openmrs/esm-framework";
 import { useEffect } from "react";
-
+type SaveParams = {
   last_encounter_date: string;
   art_start_date: string;
   date_birth: string;
@@ -10,7 +10,7 @@ import { useEffect } from "react";
   last_arv_adherence: string;
   current_regimen: string;
   last_indication_for_VL_Testing: string;
-}
+};
 
 export interface PredictionData {
   Prediction: {
@@ -54,7 +54,6 @@ export function useVLSuppressionDetails(params: SaveParams) {
 }
 
 export function extractDate(timestamp: string): string {
-
   const dateObject = new Date(timestamp);
   const year = dateObject.getFullYear();
   const month = (dateObject.getMonth() + 1).toString().padStart(2, "0");
@@ -69,7 +68,6 @@ export function useGetARTStartDate(
 ) {
   const apiUrl = `/ws/rest/v1/obs?concept=${params.conceptuuid}&patient=${params.patientuuid}&v=full`;
   const { data, error, isLoading, mutate } = useSWR<
-
     { data: { results: any } },
     Error
   >(apiUrl, openmrsFetch);
