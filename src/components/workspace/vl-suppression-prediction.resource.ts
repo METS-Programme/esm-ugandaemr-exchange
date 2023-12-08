@@ -24,10 +24,6 @@ type ARTStartDateRequest = {
   patientuuid: string;
 };
 
-type GenderDOBNameRequest = {
-  patientuuid: string;
-};
-
 export function useVLSuppressionDetails(params: SaveParams) {
   const apiUrl = "https://ai.mets.or.ug/predict";
 
@@ -88,6 +84,41 @@ export function useGetARTStartDate(
   return {
     artStartDateData,
     conceptuuid,
+    isError: error,
+    isLoading: isLoading,
+    mutate,
+  };
+}
+
+export function useGetLastEncounterDate(
+  params: ARTStartDateRequest,
+  onLastEncounterReceived: (lastEncounterData: string) => void
+) {
+  const apiUrl = `/ws/rest/v1/encounter?patient=${params.patientuuid}&concept=${params.conceptuuid}&v=default`;
+  const { data, error, isLoading, mutate } = useSWR<
+    { data: { results: any } },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  useEffect(() => {
+    if (data && data.data.results.length > 0) {
+      const sortedEncounters = data.data.results.sort(
+        (a, b) =>
+          new Date(b.encounterDatetime).getTime() -
+          new Date(a.encounterDatetime).getTime()
+      );
+
+      const lastEncounterData = extractDate(
+        sortedEncounters[0].encounterDatetime
+      );
+      onLastEncounterReceived(lastEncounterData);
+    }
+  }, [data, onLastEncounterReceived]);
+
+  return {
+    lastEncounterData: data
+      ? extractDate(data.data.results[0].encounterDatetime)
+      : [],
     isError: error,
     isLoading: isLoading,
     mutate,

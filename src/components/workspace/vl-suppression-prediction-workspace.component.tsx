@@ -5,6 +5,7 @@ import styles from "./vl-suppression-prediction.scss";
 import {
   extractDate,
   useGetARTStartDate,
+  useGetLastEncounterDate,
   useVLSuppressionDetails,
 } from "./vl-suppression-prediction.resource";
 import logo from "../../assets/images/artificial-intelligence-logo.png";
@@ -18,21 +19,33 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   const [conceptUuid, setConceptUuid] = useState(
     "ab505422-26d9-41f1-a079-c3d222000440"
   );
+
   const [encounterDate, setEncounterDate] = useState<string | null>(
     "2023-04-20"
   );
+  const handleLastEncounterDateReceived = (newLastEncounterDate: string) => {
+    setEncounterDate(newLastEncounterDate);
+  };
 
   const [artStartDate, setArtStartDate] = useState("");
   const handleArtStartDateDataReceived = (newArtStartDate: string) => {
     setArtStartDate(newArtStartDate);
   };
 
-  const { conceptuuid } = useGetARTStartDate(
+  useGetARTStartDate(
     {
       patientuuid: patientUuid,
       conceptuuid: conceptUuid,
     },
     handleArtStartDateDataReceived
+  );
+
+  useGetLastEncounterDate(
+    {
+      patientuuid: patientUuid,
+      conceptuuid: conceptUuid,
+    },
+    handleLastEncounterDateReceived
   );
 
   const gender = useMemo(() => {
@@ -88,11 +101,7 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   }
 
   const handleButtonClick = () => {
-    console.info("ART Start Date", artStartDate);
-    console.info("Concept uuid", conceptuuid);
-    console.info("Birth Date", dateOfBirth);
-    console.info("Gender", gender);
-    console.info("Data", patient);
+    console.info("Last Encounter Date", encounterDate);
     setshowPredictions(true);
   };
 
