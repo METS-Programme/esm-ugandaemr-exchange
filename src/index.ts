@@ -21,15 +21,6 @@ export const importTranslation = require.context(
   "lazy"
 );
 
-export const healthExchangeLink = getSyncLifecycle(
-  createDashboardLink({
-    name: "health-exchange",
-    slot: "health-exchange-dashboard-slot",
-    title: "Health Exchange",
-  }),
-  options
-);
-
 export const hieHomeLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "",

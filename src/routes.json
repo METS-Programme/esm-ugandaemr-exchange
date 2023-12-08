@@ -9,16 +9,6 @@
         "route": "health-exchange"
     }],
     "extensions": [{
-            "name": "health-exchange-link",
-            "component": "healthExchangeLink",
-            "slot": "homepage-dashboard-slot",
-            "meta": {
-                "name": "health-exchange",
-                "slot": "health-exchange-dashboard-slot",
-                "title": "Health Exchange Dashboard"
-            }
-        },
-        {
             "component": "root",
             "name": "health-exchange-dashboard",
             "slot": "health-exchange-dashboard-slot"
