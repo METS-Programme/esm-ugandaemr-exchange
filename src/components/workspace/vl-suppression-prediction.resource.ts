@@ -124,3 +124,31 @@ export function useGetLastEncounterDate(
     mutate,
   };
 }
+
+export function useGetCurrentRegimen(
+  params: ARTStartDateRequest,
+  onCurrentARVRegimenReceived: (artStartDateData: string) => void
+) {
+  const apiUrl = `/ws/rest/v1/obs?concept=${params.conceptuuid}&patient=${params.patientuuid}&v=full`;
+  const { data, error, isLoading, mutate } = useSWR<
+    { data: { results: any } },
+    Error
+  >(apiUrl, openmrsFetch);
+  const currentARVRegimen = data ? data?.data.results[0].value?.display : null;
+  const conceptuuid = data ? data?.data.results[0].concept.uuid : null;
+
+  useEffect(() => {
+    if (currentARVRegimen !== null) {
+      onCurrentARVRegimenReceived(currentARVRegimen as string);
+    }
+  }, [currentARVRegimen, conceptuuid, onCurrentARVRegimenReceived]);
+
+  console.info(currentARVRegimen);
+  return {
+    currentARVRegimen,
+    conceptuuid,
+    isError: error,
+    isLoading: isLoading,
+    mutate,
+  };
+}

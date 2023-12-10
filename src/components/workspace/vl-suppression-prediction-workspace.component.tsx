@@ -4,6 +4,7 @@ import { Intersect } from "@carbon/react/icons";
 import styles from "./vl-suppression-prediction.scss";
 import {
   extractDate,
+  useGetCurrentRegimen,
   useGetARTStartDate,
   useGetLastEncounterDate,
   useVLSuppressionDetails,
@@ -32,6 +33,11 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
     setArtStartDate(newArtStartDate);
   };
 
+  const [currentRegimen, setCurrentRegimen] = useState("TDF-3TC-DTG");
+  const handleCurrentRegimenReceived = (newCurrentRegimen: string) => {
+    setCurrentRegimen(newCurrentRegimen);
+  };
+
   useGetARTStartDate(
     {
       patientuuid: patientUuid,
@@ -46,6 +52,14 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       conceptuuid: conceptUuid,
     },
     handleLastEncounterDateReceived
+  );
+
+  useGetCurrentRegimen(
+    {
+      patientuuid: patientUuid,
+      conceptuuid: conceptUuid,
+    },
+    handleCurrentRegimenReceived
   );
 
   const gender = useMemo(() => {
@@ -63,7 +77,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   }, [patient]);
 
   const [arvAdherence, setArvAdherence] = useState("90157");
-  const [currentRegimen, setCurrentRegimen] = useState("TDF-3TC-DTG");
   const [indicationForVLTesting, setIndicationForVLTesting] =
     useState("168684");
 
@@ -101,7 +114,7 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   }
 
   const handleButtonClick = () => {
-    console.info(encounterDate);
+    console.info("Current Regimen", currentRegimen);
     setshowPredictions(true);
   };
 
