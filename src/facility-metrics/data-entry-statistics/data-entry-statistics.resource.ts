@@ -36,3 +36,13 @@ export function useGetDataEntryStatistics(params: encounterRequest) {
     clearCache,
   };
 }
+
+
+export async function getDataEntryStatistics(params: encounterRequest) {
+  const apiUrl = `${restBaseUrl}dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
+  const abortController = new AbortController();
+
+  return openmrsFetch(apiUrl, {
+    signal: abortController.signal,
+  });
+}

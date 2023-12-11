@@ -267,3 +267,20 @@ export const horizontalBarOptions = {
     },
   },
 };
+
+export const lineOptions = {
+  title: "User Entry Statistics",
+  axes: {
+    bottom: {
+      title: "User",
+      mapsTo: "key",
+      scaleType: ScaleTypes.LABELS,
+    },
+    left: {
+      mapsTo: "value",
+      title: "Number Of Entries",
+      scaleType: ScaleTypes.LINEAR,
+    },
+  },
+  height: "400px",
+};

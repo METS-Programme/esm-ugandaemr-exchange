@@ -11,7 +11,6 @@
     flex-direction: row;
     justify-content: space-evenly;
     flex-flow: row wrap;
-    height: 10rem;
     padding: spacing.$spacing-05;
     border-radius: 0.2rem;
     margin: 1rem 0;
@@ -32,8 +31,10 @@
     }
 }
 
-.dataTableContainer {
-    background-color: colors.$gray-10;
+.dataChartContainer {
+  background-color: #f4f4f4de;
+  padding: 1rem;
+  margin-top: 2rem;
 }
 
 .tableContainer {
@@ -69,4 +70,23 @@
 .explainerTable {
     @include type.type-style('body-compact-01');
     color: colors.$gray-70;
+}
+
+.dataEntryContainer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -2.5rem;
+
+  .actionButton {
+    height: 2.45rem;
+  }
+}
+
+.datePickerContainer {
+  margin-right: 8px;
+}
+
+.buttonContainer {
+  margin-right: 0;
+  margin-top: 1.5rem;
 }
