@@ -76,9 +76,10 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       : "Patient";
   }, [patient]);
 
-  const [arvAdherence, setArvAdherence] = useState("90157");
-  const [indicationForVLTesting, setIndicationForVLTesting] =
-    useState("168684");
+  const [arvAdherence, setArvAdherence] = useState("Good");
+  const [indicationForVLTesting, setIndicationForVLTesting] = useState(
+    "12 months after ART initiation"
+  );
 
   const [showPredictions, setshowPredictions] = useState(false);
 

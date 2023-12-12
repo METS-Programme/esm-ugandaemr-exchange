@@ -134,7 +134,7 @@ export function useGetCurrentRegimen(
     { data: { results: any } },
     Error
   >(apiUrl, openmrsFetch);
-  const currentARVRegimen = data ? data?.data.results[0].value?.display : null;
+  const currentARVRegimen = data ? data?.data.results[0].value?.uuid : null;
   const conceptuuid = data ? data?.data.results[0].concept.uuid : null;
 
   useEffect(() => {
@@ -142,7 +142,6 @@ export function useGetCurrentRegimen(
       onCurrentARVRegimenReceived(currentARVRegimen as string);
     }
   }, [currentARVRegimen, conceptuuid, onCurrentARVRegimenReceived]);
-
   console.info(currentARVRegimen);
   return {
     currentARVRegimen,
