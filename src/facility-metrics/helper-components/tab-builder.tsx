@@ -21,12 +21,12 @@ const TabBuilder: React.FC = () => {
       component: <HIEDashboard />,
     },
     {
-      name: t("userDashboard", "User Dashboard"),
-      component: <UserDashboard />,
+      name: t("performanceMetrics", "Performance Metrics"),
+      component: <FacilityPerformance />,
     },
     {
-      name: t("performance", "Performance"),
-      component: <FacilityPerformance />,
+      name: t("userDashboard", "User Dashboard"),
+      component: <UserDashboard />,
     },
     {
       name: t("dataEntryStats", "Data Entry Statistics"),
