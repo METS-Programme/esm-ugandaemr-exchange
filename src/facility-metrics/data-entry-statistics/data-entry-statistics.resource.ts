@@ -9,9 +9,6 @@ type encounterRequest = {
 };
 
 export function useGetDataEntryStatistics(params: encounterRequest) {
-  // const apiUrl = params.fromDate
-  //   ? `${restBaseUrl}dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`
-  //   : null;
   const apiUrl = `${restBaseUrl}dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
   const abortController = new AbortController();
 
@@ -24,11 +21,11 @@ export function useGetDataEntryStatistics(params: encounterRequest) {
     });
 
   const { data, error, isLoading, isValidating } = useSWR<
-    { data: { encounterData: [] } },
+    { data: { any } },
     Error
   >(apiUrl, fetcher);
   return {
-    encounterData: data ? data.data : [],
+    encounterData: data ? data?.data : [],
     isLoading,
     isError: error,
     isValidating,

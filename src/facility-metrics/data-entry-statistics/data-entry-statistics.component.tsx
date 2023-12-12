@@ -11,11 +11,15 @@ import {
 import styles from "./data-entry-statistics-tile.scss";
 import { Intersect } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
-import { getDataEntryStatistics } from "./data-entry-statistics.resource";
+import {
+  getDataEntryStatistics,
+  useGetDataEntryStatistics,
+} from "./data-entry-statistics.resource";
 import { showNotification, useLayoutType } from "@openmrs/esm-framework";
 import EmptyStateIllustration from "./empty-state-illustration.component";
 import { LineChart } from "@carbon/charts-react";
 import { lineOptions } from "../performance/mock-data";
+import { fetchTransactionCount } from "../facility-metrics.resource";
 
 type EntryTypeData = {
   fullName: string;
@@ -23,53 +27,32 @@ type EntryTypeData = {
   numberOfEntries: number;
 };
 
+interface EncounterEntry {
+  entryType: string;
+  fullName: string;
+  numberOfEntries: number;
+}
+
 const EntryStatistics: React.FC = () => {
   const { t } = useTranslation();
   const layout = useLayoutType();
   const isTablet = useLayoutType() === "tablet";
   const responsiveSize = isTablet ? "lg" : "sm";
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [fromDate, setFromDate] = useState(new Date("2023-09-01"));
+  const [toDate, setToDate] = useState(new Date(new Date("2023-12-13")));
   const [encUserColumn, setEncUserColumn] = useState("creator");
   const [groupBy, setGroupBy] = useState("creator");
   const [loading, setLoading] = useState(true);
   const [showTable, setShowTable] = useState(false);
   const [statsChartData, setStatsChartData] = useState([]);
-  const [allRows, setAllRows] = useState([]);
+  const [willUpdateStatistics, setWillUpdateStatistics] = useState(true);
 
   const handleStartDateChange = (selectedDate) => {
-    setFromDate(dayjs(selectedDate[0]).format("YYYY-MM-DD"));
+    setFromDate(selectedDate[0]);
   };
 
   const handleEndDateChange = (selectedDate) => {
-    setToDate(dayjs(selectedDate[0]).format("YYYY-MM-DD"));
-  };
-
-  const items = [
-    {
-      id: "option-1",
-      text: "Data Entry Assistant",
-    },
-    {
-      id: "option-2",
-      text: "Provider",
-    },
-  ];
-
-  const handleEncounterDropdownChange = (event) => {
-    if (event.selectedItem.text === "Data Entry Assistant") {
-      setEncUserColumn("creator");
-    } else {
-      setEncUserColumn(event.selectedItem.text);
-    }
-  };
-
-  const handleProviderDropdownChange = (event) => {
-    if (event.selectedItem.text === "Data Entry Assistant") {
-      setGroupBy("creator");
-    } else {
-      setGroupBy(event.selectedItem.text);
-    }
+    setToDate(selectedDate[0]);
   };
 
   const handleUpdateReport = useCallback(() => {
@@ -77,8 +60,8 @@ const EntryStatistics: React.FC = () => {
     setShowTable(true);
 
     getDataEntryStatistics({
-      fromDate: fromDate,
-      toDate: toDate,
+      fromDate: dayjs(fromDate).format("YYYY-MM-DD"),
+      toDate: dayjs(toDate).format("YYYY-MM-DD"),
       encUserColumn: encUserColumn,
       groupBy: groupBy,
     }).then(
@@ -113,6 +96,30 @@ const EntryStatistics: React.FC = () => {
       }
     );
   }, [encUserColumn, fromDate, groupBy, toDate]);
+
+  const { isLoading, encounterData } = useGetDataEntryStatistics({
+    fromDate: dayjs(fromDate).format("YYYY-MM-DD"),
+    toDate: dayjs(toDate).format("YYYY-MM-DD"),
+    encUserColumn: encUserColumn,
+    groupBy: groupBy,
+  });
+
+  if (!isLoading) {
+    if (willUpdateStatistics) {
+      const dataEntrydata = [];
+      (encounterData as EncounterEntry[]).forEach((entry) => {
+        dataEntrydata.push({
+          group: entry.entryType,
+          key: entry.fullName,
+          value: entry.numberOfEntries,
+        });
+      });
+      setShowTable(true);
+      setStatsChartData(Object.values(dataEntrydata));
+      setWillUpdateStatistics(false);
+      setLoading(false);
+    }
+  }
 
   return (
     <>

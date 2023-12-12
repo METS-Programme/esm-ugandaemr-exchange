@@ -16,6 +16,8 @@
 
 .chartItemStacked {
   width: 50%;
+  border: 1px #8080801f solid;
+  padding: 1rem
 }
 
 .boxHeader {
@@ -42,4 +44,10 @@
 
 .boxThirdItem {
   @include type.type-style("legal-01");
+}
+
+.statsContainer {
+  width: 100%;
+  border: 1px #8080801f solid;
+  padding: 1rem
 }

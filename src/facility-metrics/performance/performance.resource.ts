@@ -49,11 +49,7 @@ export function mapFacilityMetrics(dataArray) {
         {
           group: "Foreigner",
           value: dataArray?.gender?.totalPatients / 4,
-        },
-        {
-          group: "Uncategorized",
-          value: dataArray?.gender?.totalPatients / 4,
-        },
+        }
       ],
     };
   }

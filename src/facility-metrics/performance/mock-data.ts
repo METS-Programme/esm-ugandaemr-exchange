@@ -34,9 +34,6 @@ export const donutGenderData = [
 export const donutGenderOptions = {
   title: "Patients by Gender",
   resizable: true,
-  legend: {
-    position: LegendPositions.TOP,
-  },
   donut: {
     center: {
       label: "Total",
@@ -200,7 +197,7 @@ export const stackedBarData = [
 ];
 
 export const stackedBarOptions = {
-  title: "Patients",
+  title: "POC Actived Points",
   legend: {
     position: LegendPositions.TOP,
   },
@@ -228,7 +225,7 @@ export const horizontalBarData = [
     value: 29123,
   },
   {
-    group: "OPD",
+    group: "LAB",
     value: 35213,
   },
   {
@@ -236,13 +233,13 @@ export const horizontalBarData = [
     value: 51213,
   },
   {
-    group: "IPD",
+    group: "HTS",
     value: 16932,
   },
 ];
 
 export const horizontalBarOptions = {
-  title: "Departments",
+  title: "Patients Served Vs Service Point",
   legend: {
     position: LegendPositions.TOP,
   },
@@ -255,7 +252,7 @@ export const horizontalBarOptions = {
       mapsTo: "value",
     },
   },
-  height: "450px",
+  height: "500px",
   grid: {
     x: {
       enabled: true,

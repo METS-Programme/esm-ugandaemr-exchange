@@ -5,7 +5,6 @@ import { useTranslation } from "react-i18next";
 import HIEDashboard from "../hie-metrics/hie-dashboard.component";
 import styles from "./tab-builder.scss";
 import FacilityPerformance from "../performance/performance.component";
-import EntryStatistics from "../data-entry-statistics/data-entry-statistics.component";
 import UserDashboard from "../user-dashboard/user-dashboard.component";
 
 interface TabItem {
@@ -28,10 +27,10 @@ const TabBuilder: React.FC = () => {
       name: t("userDashboard", "User Dashboard"),
       component: <UserDashboard />,
     },
-    {
-      name: t("dataEntryStats", "Data Entry Statistics"),
-      component: <EntryStatistics />,
-    },
+    // {
+    //   name: t("dataEntryStats", "Data Entry Statistics"),
+    //   component: <EntryStatistics />,
+    // },
   ];
 
   return (
