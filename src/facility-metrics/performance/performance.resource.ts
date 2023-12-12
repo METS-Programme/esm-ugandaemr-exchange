@@ -39,17 +39,20 @@ export function mapFacilityMetrics(dataArray) {
       totalPatients: dataArray?.gender?.totalPatients,
       nationality: [
         {
-          group: "Refugee",
-          value: dataArray?.gender?.totalPatients / 4,
-        },
-        {
           group: "National",
-          value: dataArray?.gender?.totalPatients / 4,
+          value: dataArray?.nationality?.disaggregation.find((entry) =>
+            // eslint-disable-next-line no-prototype-builtins
+            entry.hasOwnProperty("National")
+          )?.National,
         },
         {
           group: "Foreigner",
-          value: dataArray?.gender?.totalPatients / 4,
-        }
+          value: 6,
+        },
+        {
+          group: "Refugee",
+          value: 2,
+        },
       ],
     };
   }

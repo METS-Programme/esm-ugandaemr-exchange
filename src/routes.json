@@ -8,29 +8,48 @@
         "component": "root",
         "route": "health-exchange"
     }],
-    "extensions": [{
-            "component": "root",
-            "name": "health-exchange-dashboard",
-            "slot": "health-exchange-dashboard-slot"
-        },
-        {
-            "component": "hieHomeLink",
-            "name": "hie-home-link",
-            "slot": "health-exchange-left-panel-slot"
-        },
-        {
-            "component": "fhirProfileLink",
-            "name": "fhir-profile-link",
-            "slot": "health-exchange-left-panel-slot"
-        },
-        {
-            "name": "vl-suppression-prediction",
-            "component": "VLSuppressionPrediction",
-            "slot": "action-menu-chart-items-slot"
-        },
-        {
-            "name": "ai-predictions-workspace",
-            "component": "VLSuppressionPredictionWorkspace"
-        }
+    "extensions": [
+      {
+        "component": "root",
+        "name": "health-exchange-dashboard",
+        "slot": "health-exchange-dashboard-slot"
+      },
+      {
+        "component": "hieHomeLink",
+        "name": "hie-home-link",
+        "slot": "health-exchange-left-panel-slot"
+      },
+      {
+        "component": "fhirProfileLink",
+        "name": "fhir-profile-link",
+        "slot": "health-exchange-left-panel-slot"
+      },
+      {
+        "name": "vl-suppression-prediction",
+        "component": "VLSuppressionPrediction",
+        "slot": "action-menu-chart-items-slot"
+      },
+      {
+        "name": "ai-predictions-workspace",
+        "component": "VLSuppressionPredictionWorkspace"
+      },
+      {
+        "component": "toolsModal",
+        "name": "tools-modal",
+        "online": true,
+        "offline": true
+      },
+      {
+        "component": "hmisModal",
+        "name": "hmis-modal",
+        "online": true,
+        "offline": true
+      },
+      {
+        "component": "pepfarModal",
+        "name": "pepfar-modal",
+        "online": true,
+        "offline": true
+      }
     ]
 }

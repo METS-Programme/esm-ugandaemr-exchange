@@ -1,5 +1,6 @@
 import React from "react";
 import { DonutChart, LineChart, SimpleBarChart } from "@carbon/charts-react";
+import { showModal } from "@openmrs/esm-framework";
 import {
   donutDepartmentOptions,
   donutGenderOptions,
@@ -8,24 +9,29 @@ import {
   lineData,
   linePOCOptions,
 } from "./mock-data";
-import { CaretUp, CheckmarkOutline, Information } from "@carbon/react/icons";
+import { CaretUp, CheckmarkOutline } from "@carbon/react/icons";
 import styles from "./performance.scss";
 import { useGetFacilityMetrics } from "./performance.resource";
 import EntryStatistics from "../data-entry-statistics/data-entry-statistics.component";
-import { Button } from "@carbon/react";
 
 const Performance: React.FC = () => {
   const { isLoading, facilityMetrics } = useGetFacilityMetrics();
   const showSystemTools = () => {
-    console.info("Call popup for Tools");
+    const dispose = showModal("tools-modal", {
+      close: () => dispose(),
+    });
   };
 
   const showHMISReports = () => {
-    console.info("Call popup for HMIS");
+    const dispose = showModal("hmis-modal", {
+      close: () => dispose(),
+    });
   };
 
   const showPEPFARReports = () => {
-    console.info("Call popup for PEPFAR");
+    const dispose = showModal("pepfar-modal", {
+      close: () => dispose(),
+    });
   };
   return (
     <>

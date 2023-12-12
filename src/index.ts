@@ -65,3 +65,21 @@ export const root = getAsyncLifecycle(
   () => import("./root.component"),
   options
 );
+
+export const toolsModal = getAsyncLifecycle(
+  () =>
+    import("./facility-metrics/performance/model-components/tools.component"),
+  options
+);
+
+export const hmisModal = getAsyncLifecycle(
+  () =>
+    import("./facility-metrics/performance/model-components/hmis.component"),
+  options
+);
+
+export const pepfarModal = getAsyncLifecycle(
+  () =>
+    import("./facility-metrics/performance/model-components/pepfar.component"),
+  options
+);
