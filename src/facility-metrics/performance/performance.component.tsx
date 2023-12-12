@@ -62,7 +62,7 @@ const Performance: React.FC = () => {
                 <td className={styles.emrInfoHeader}>Tools:</td>{" "}
                 <td className={styles.boxThirdItem}>
                   <span onClick={showSystemTools} role="button" tabIndex={0}>
-                    4
+                    8
                   </span>
                 </td>
               </tr>
