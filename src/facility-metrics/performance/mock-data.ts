@@ -218,23 +218,23 @@ export const stackedBarOptions = {
 export const horizontalBarData = [
   {
     group: "ART",
-    value: 65000,
+    value: 10,
   },
   {
     group: "TB",
-    value: 29123,
+    value: 10,
   },
   {
     group: "LAB",
-    value: 35213,
+    value: 256,
   },
   {
     group: "MCH",
-    value: 51213,
+    value: 1,
   },
   {
     group: "HTS",
-    value: 16932,
+    value: 5,
   },
 ];
 
@@ -280,4 +280,64 @@ export const lineOptions = {
     },
   },
   height: "400px",
+};
+
+export const lineData = [
+  {
+    group: "ART",
+    key: "Triage",
+    value: 1,
+  },
+  {
+    group: "ART",
+    key: "Clinician",
+    value: 1,
+  },
+  {
+    group: "ART",
+    key: "LAB",
+    value: 1,
+  },
+  {
+    group: "ART",
+    key: "Pharmacy",
+    value: 1,
+  },
+  {
+    group: "TB",
+    key: "Triage",
+    value: 0,
+  },
+  {
+    group: "TB",
+    key: "Clinician",
+    value: 0,
+  },
+  {
+    group: "TB",
+    key: "LAB",
+    value: 1,
+  },
+  {
+    group: "TB",
+    key: "Pharmacy",
+    value: 1,
+  },
+];
+
+export const linePOCOptions = {
+  title: "POC Activated Service Points",
+  axes: {
+    bottom: {
+      title: "Service Point",
+      mapsTo: "key",
+      scaleType: ScaleTypes.LABELS,
+    },
+    left: {
+      mapsTo: "value",
+      title: "Status",
+      scaleType: ScaleTypes.LABELS,
+    },
+  },
+  height: "500px",
 };

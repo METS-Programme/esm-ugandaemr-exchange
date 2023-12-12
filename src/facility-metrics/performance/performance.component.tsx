@@ -1,25 +1,32 @@
 import React from "react";
-import {
-  DonutChart,
-  SimpleBarChart,
-  StackedBarChart,
-} from "@carbon/charts-react";
+import { DonutChart, LineChart, SimpleBarChart } from "@carbon/charts-react";
 import {
   donutDepartmentOptions,
   donutGenderOptions,
   horizontalBarData,
   horizontalBarOptions,
-  stackedBarData,
-  stackedBarOptions,
+  lineData,
+  linePOCOptions,
 } from "./mock-data";
-import { CaretUp } from "@carbon/react/icons";
+import { CaretUp, CheckmarkOutline, Information } from "@carbon/react/icons";
 import styles from "./performance.scss";
 import { useGetFacilityMetrics } from "./performance.resource";
 import EntryStatistics from "../data-entry-statistics/data-entry-statistics.component";
+import { Button } from "@carbon/react";
 
 const Performance: React.FC = () => {
   const { isLoading, facilityMetrics } = useGetFacilityMetrics();
+  const showSystemTools = () => {
+    console.info("Call popup for Tools");
+  };
 
+  const showHMISReports = () => {
+    console.info("Call popup for HMIS");
+  };
+
+  const showPEPFARReports = () => {
+    console.info("Call popup for PEPFAR");
+  };
   return (
     <>
       <div className={styles.chartRowContainer}>
@@ -40,21 +47,35 @@ const Performance: React.FC = () => {
           <div className={styles.emrInfo}>
             <table>
               <tr>
-                <td>Version:</td>{" "}
-                <td>
-                  4.0.0-SNAPSHOT <CaretUp size={30} />
+                <td className={styles.emrInfoHeader}>Version:</td>{" "}
+                <td className={styles.boxThirdItem}>
+                  4.0.0-SNAPSHOT <CheckmarkOutline size={15} />
                 </td>
               </tr>
               <tr>
-                <td>Tools:</td> <td> 4</td>
+                <td className={styles.emrInfoHeader}>Tools:</td>{" "}
+                <td className={styles.boxThirdItem}>
+                  <span onClick={showSystemTools} role="button" tabIndex={0}>
+                    4
+                  </span>
+                </td>
               </tr>
               <tr>
-                <td>Reports:</td> <td>HMIS - <span>5</span></td>
+                <td className={styles.emrInfoHeader}>Reports:</td>{" "}
+                <td className={styles.boxThirdItem}>
+                  HMIS -{" "}
+                  <span onClick={showHMISReports} role="button" tabIndex={0}>
+                    5
+                  </span>
+                </td>
               </tr>
               <tr>
                 <td></td>{" "}
-                <td>
-                  PEPFAR - <span>2</span>
+                <td className={styles.boxThirdItem}>
+                  PEPFAR -{" "}
+                  <span onClick={showPEPFARReports} role="button" tabIndex={0}>
+                    2
+                  </span>
                 </td>
               </tr>
             </table>
@@ -76,7 +97,7 @@ const Performance: React.FC = () => {
 
       <div className={styles.chartRowContainer}>
         <div className={styles.chartItemStacked}>
-          <StackedBarChart data={stackedBarData} options={stackedBarOptions} />
+          <LineChart data={lineData} options={linePOCOptions} />
         </div>
         <div className={styles.chartItemStacked}>
           <SimpleBarChart
