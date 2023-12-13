@@ -5,8 +5,10 @@ import styles from "./vl-suppression-prediction.scss";
 import {
   extractDate,
   useGetCurrentRegimen,
+  useGetAherence,
   useGetARTStartDate,
   useGetLastEncounterDate,
+  useGetIndicationForVLTesting,
   useVLSuppressionDetails,
 } from "./vl-suppression-prediction.resource";
 import logo from "../../assets/images/artificial-intelligence-logo.png";
@@ -17,13 +19,8 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   patientUuid,
 }) => {
   const { patient } = usePatient(patientUuid);
-  const [conceptUuid, setConceptUuid] = useState(
-    "ab505422-26d9-41f1-a079-c3d222000440"
-  );
 
-  const [encounterDate, setEncounterDate] = useState<string | null>(
-    "2023-04-20"
-  );
+  const [encounterDate, setEncounterDate] = useState<string | null>("");
   const handleLastEncounterDateReceived = (newLastEncounterDate: string) => {
     setEncounterDate(newLastEncounterDate);
   };
@@ -33,33 +30,57 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
     setArtStartDate(newArtStartDate);
   };
 
-  const [currentRegimen, setCurrentRegimen] = useState("TDF-3TC-DTG");
+  const [currentRegimen, setCurrentRegimen] = useState("");
   const handleCurrentRegimenReceived = (newCurrentRegimen: string) => {
     setCurrentRegimen(newCurrentRegimen);
+  };
+
+  const [arvAdherence, setArvAdherence] = useState("Good");
+  const handleAdherenceReceived = (newAdherenceReceivedRecieved: string) => {
+    setArvAdherence(newAdherenceReceivedRecieved);
+  };
+
+  const [indicationForVLTesting, setIndicationForVLTesting] = useState("");
+  const handleIndicationForVLTestingReceived = (
+    newIndicationForVLTesting: string
+  ) => {
+    setIndicationForVLTesting(newIndicationForVLTesting);
   };
 
   useGetARTStartDate(
     {
       patientuuid: patientUuid,
-      conceptuuid: conceptUuid,
     },
-    handleArtStartDateDataReceived
+    handleArtStartDateDataReceived,
+    "ab505422-26d9-41f1-a079-c3d222000440"
   );
 
   useGetLastEncounterDate(
     {
       patientuuid: patientUuid,
-      conceptuuid: conceptUuid,
     },
-    handleLastEncounterDateReceived
+    handleLastEncounterDateReceived,
+    "59f36196-3ebe-4fea-be92-6fc9551c3a11"
   );
 
   useGetCurrentRegimen(
     {
       patientuuid: patientUuid,
-      conceptuuid: conceptUuid,
     },
-    handleCurrentRegimenReceived
+    handleCurrentRegimenReceived,
+    "dd2b0b4d-30ab-102d-86b0-7a5022ba4115"
+  );
+
+  useGetIndicationForVLTesting(
+    { patientuuid: patientUuid },
+    handleIndicationForVLTestingReceived,
+    "59f36196-3ebe-4fea-be92-6fc9551c3a11"
+  );
+
+  useGetAherence(
+    { patientuuid: patientUuid },
+    handleAdherenceReceived,
+    "dce03b2f-30ab-102d-86b0-7a5022ba4115"
   );
 
   const gender = useMemo(() => {
@@ -76,11 +97,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       : "Patient";
   }, [patient]);
 
-  const [arvAdherence, setArvAdherence] = useState("Good");
-  const [indicationForVLTesting, setIndicationForVLTesting] = useState(
-    "12 months after ART initiation"
-  );
-
   const [showPredictions, setshowPredictions] = useState(false);
 
   const { data, isErrorInSendingRequest, isLoadingPrediction } =
@@ -94,16 +110,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       last_indication_for_VL_Testing: indicationForVLTesting,
     });
 
-  if (isErrorInSendingRequest) {
-    return (
-      <InlineLoading
-        status="active"
-        iconDescription="Loading"
-        description="Getting Patient Details..."
-      />
-    );
-  }
-
   if (isLoadingPrediction) {
     return (
       <InlineLoading
@@ -114,8 +120,17 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
     );
   }
 
+  if (isErrorInSendingRequest) {
+    return (
+      <InlineLoading
+        status="active"
+        iconDescription="Loading"
+        description="Getting Patient Details..."
+      />
+    );
+  }
+
   const handleButtonClick = () => {
-    console.info("Current Regimen", currentRegimen);
     setshowPredictions(true);
   };
 

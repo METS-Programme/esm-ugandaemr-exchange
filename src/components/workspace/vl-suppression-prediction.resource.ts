@@ -19,7 +19,6 @@ export interface PredictionData {
 }
 
 type ARTStartDateRequest = {
-  conceptuuid: string;
   patientuuid: string;
 };
 
@@ -36,7 +35,11 @@ export function useVLSuppressionDetails(params: SaveParams) {
 
       return response.data as PredictionData;
     } catch (error) {
-      throw new Error(`Error in fetcher: ${error.message}`);
+      if (error.response && error.response.data && error.response.data.error) {
+        throw new Error(error.response.data.error);
+      } else {
+        throw new Error("An unexpected error occurred.");
+      }
     }
   };
 
@@ -64,15 +67,15 @@ export function extractDate(timestamp: string): string {
 
 export function useGetARTStartDate(
   params: ARTStartDateRequest,
-  onArtStartDateDataReceived: (artStartDateData: string) => void
+  onArtStartDateDataReceived: (artStartDateData: string) => void,
+  conceptuuid: string
 ) {
-  const apiUrl = `/ws/rest/v1/obs?concept=${params.conceptuuid}&patient=${params.patientuuid}&v=full`;
+  const apiUrl = `/ws/rest/v1/obs?concept=${conceptuuid}&patient=${params.patientuuid}&v=full`;
   const { data, error, isLoading, mutate } = useSWR<
     { data: { results: any } },
     Error
   >(apiUrl, openmrsFetch);
   const artStartDateData = data ? extractDate(data.data.results[0].value) : [];
-  const conceptuuid = data ? data?.data.results[0].concept.uuid : null;
 
   useEffect(() => {
     if (artStartDateData !== null) {
@@ -91,9 +94,10 @@ export function useGetARTStartDate(
 
 export function useGetLastEncounterDate(
   params: ARTStartDateRequest,
-  onLastEncounterReceived: (lastEncounterData: string) => void
+  onLastEncounterReceived: (lastEncounterData: string) => void,
+  conceptuuid: string
 ) {
-  const apiUrl = `/ws/rest/v1/encounter?patient=${params.patientuuid}&concept=${params.conceptuuid}&v=default`;
+  const apiUrl = `/ws/rest/v1/encounter?patient=${params.patientuuid}&concept=${conceptuuid}&v=default`;
   const { data, error, isLoading, mutate } = useSWR<
     { data: { results: any } },
     Error
@@ -127,24 +131,77 @@ export function useGetLastEncounterDate(
 
 export function useGetCurrentRegimen(
   params: ARTStartDateRequest,
-  onCurrentARVRegimenReceived: (artStartDateData: string) => void
+  onCurrentARVRegimenReceived: (artStartDateData: string) => void,
+  conceptuuid: string
 ) {
-  const apiUrl = `/ws/rest/v1/obs?concept=${params.conceptuuid}&patient=${params.patientuuid}&v=full`;
+  const apiUrl = `/ws/rest/v1/obs?concept=${conceptuuid}&patient=${params.patientuuid}&v=full`;
   const { data, error, isLoading, mutate } = useSWR<
     { data: { results: any } },
     Error
   >(apiUrl, openmrsFetch);
-  const currentARVRegimen = data ? data?.data.results[0].value?.uuid : null;
-  const conceptuuid = data ? data?.data.results[0].concept.uuid : null;
+  const currentARVRegimen = data ? data?.data.results[0].value?.display : null;
 
   useEffect(() => {
     if (currentARVRegimen !== null) {
       onCurrentARVRegimenReceived(currentARVRegimen as string);
     }
   }, [currentARVRegimen, conceptuuid, onCurrentARVRegimenReceived]);
-  console.info(currentARVRegimen);
   return {
     currentARVRegimen,
+    conceptuuid,
+    isError: error,
+    isLoading: isLoading,
+    mutate,
+  };
+}
+
+export function useGetIndicationForVLTesting(
+  params: ARTStartDateRequest,
+  onIndicationForVLTestingReceived: (artStartDateData: string) => void,
+  conceptuuid: string
+) {
+  const apiUrl = `/ws/rest/v1/obs?concept=${conceptuuid}&patient=${params.patientuuid}&v=full`;
+  const { data, error, isLoading, mutate } = useSWR<
+    { data: { results: any } },
+    Error
+  >(apiUrl, openmrsFetch);
+  const indicationForVLTesting = data
+    ? data?.data.results[0].value?.display
+    : null;
+
+  useEffect(() => {
+    if (indicationForVLTesting !== null) {
+      onIndicationForVLTestingReceived(indicationForVLTesting as string);
+    }
+  }, [indicationForVLTesting, conceptuuid, onIndicationForVLTestingReceived]);
+  return {
+    indicationForVLTesting,
+    conceptuuid,
+    isError: error,
+    isLoading: isLoading,
+    mutate,
+  };
+}
+
+export function useGetAherence(
+  params: ARTStartDateRequest,
+  onAdherenceReceived: (artStartDateData: string) => void,
+  conceptuuid: string
+) {
+  const apiUrl = `/ws/rest/v1/obs?concept=${conceptuuid}&patient=${params.patientuuid}&v=full`;
+  const { data, error, isLoading, mutate } = useSWR<
+    { data: { results: any } },
+    Error
+  >(apiUrl, openmrsFetch);
+  const adherence = data ? data?.data.results[0].value?.display : null;
+
+  useEffect(() => {
+    if (adherence !== null) {
+      onAdherenceReceived(adherence as string);
+    }
+  }, [adherence, conceptuuid, onAdherenceReceived]);
+  return {
+    adherence,
     conceptuuid,
     isError: error,
     isLoading: isLoading,
