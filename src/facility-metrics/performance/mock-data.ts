@@ -34,9 +34,6 @@ export const donutGenderData = [
 export const donutGenderOptions = {
   title: "Patients by Gender",
   resizable: true,
-  legend: {
-    position: LegendPositions.TOP,
-  },
   donut: {
     center: {
       label: "Total",
@@ -200,7 +197,7 @@ export const stackedBarData = [
 ];
 
 export const stackedBarOptions = {
-  title: "Patients",
+  title: "POC Actived Points",
   legend: {
     position: LegendPositions.TOP,
   },
@@ -221,28 +218,28 @@ export const stackedBarOptions = {
 export const horizontalBarData = [
   {
     group: "ART",
-    value: 65000,
+    value: 10,
   },
   {
     group: "TB",
-    value: 29123,
+    value: 10,
   },
   {
-    group: "OPD",
-    value: 35213,
+    group: "LAB",
+    value: 256,
   },
   {
     group: "MCH",
-    value: 51213,
+    value: 1,
   },
   {
-    group: "IPD",
-    value: 16932,
+    group: "HTS",
+    value: 5,
   },
 ];
 
 export const horizontalBarOptions = {
-  title: "Departments",
+  title: "Patients Served Vs Service Point",
   legend: {
     position: LegendPositions.TOP,
   },
@@ -255,7 +252,7 @@ export const horizontalBarOptions = {
       mapsTo: "value",
     },
   },
-  height: "450px",
+  height: "500px",
   grid: {
     x: {
       enabled: true,
@@ -266,4 +263,81 @@ export const horizontalBarOptions = {
       numberOfTicks: 6,
     },
   },
+};
+
+export const lineOptions = {
+  title: "User Entry Statistics",
+  axes: {
+    bottom: {
+      title: "User",
+      mapsTo: "key",
+      scaleType: ScaleTypes.LABELS,
+    },
+    left: {
+      mapsTo: "value",
+      title: "Number Of Entries",
+      scaleType: ScaleTypes.LINEAR,
+    },
+  },
+  height: "400px",
+};
+
+export const lineData = [
+  {
+    group: "ART",
+    key: "Triage",
+    value: 1,
+  },
+  {
+    group: "ART",
+    key: "Clinician",
+    value: 1,
+  },
+  {
+    group: "ART",
+    key: "LAB",
+    value: 1,
+  },
+  {
+    group: "ART",
+    key: "Pharmacy",
+    value: 1,
+  },
+  {
+    group: "TB",
+    key: "Triage",
+    value: 0,
+  },
+  {
+    group: "TB",
+    key: "Clinician",
+    value: 0,
+  },
+  {
+    group: "TB",
+    key: "LAB",
+    value: 1,
+  },
+  {
+    group: "TB",
+    key: "Pharmacy",
+    value: 1,
+  },
+];
+
+export const linePOCOptions = {
+  title: "POC Activated Service Points",
+  axes: {
+    bottom: {
+      title: "Service Point",
+      mapsTo: "key",
+      scaleType: ScaleTypes.LABELS,
+    },
+    left: {
+      mapsTo: "value",
+      title: "Status",
+      scaleType: ScaleTypes.LABELS,
+    },
+  },
+  height: "500px",
 };

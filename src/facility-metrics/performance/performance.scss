@@ -16,6 +16,8 @@
 
 .chartItemStacked {
   width: 50%;
+  border: 1px #8080801f solid;
+  padding: 1rem
 }
 
 .boxHeader {
@@ -42,4 +44,36 @@
 
 .boxThirdItem {
   @include type.type-style("legal-01");
+}
+
+.statsContainer {
+  width: 100%;
+  border: 1px #8080801f solid;
+  padding: 1rem
+}
+
+.emrInfo {
+  margin: 4rem 0 0 2rem;
+}
+
+.emrInfoHeader {
+  text-align: right;
+  padding-right: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.boxThirdItem {
+  svg {
+    margin: 0 0 -0.2rem 0;
+    color: $brand-primary-50;
+  }
+}
+
+.boxThirdItem span {
+  color: $brand-primary-50;
+  cursor: pointer;
+}
+
+.boxThirdItem span:hover {
+  font-weight: bold;
 }
