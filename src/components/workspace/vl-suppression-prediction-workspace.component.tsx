@@ -35,7 +35,7 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
     setCurrentRegimen(newCurrentRegimen);
   };
 
-  const [arvAdherence, setArvAdherence] = useState("Good");
+  const [arvAdherence, setArvAdherence] = useState("");
   const handleAdherenceReceived = (newAdherenceReceivedRecieved: string) => {
     setArvAdherence(newAdherenceReceivedRecieved);
   };
