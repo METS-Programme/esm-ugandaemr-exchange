@@ -1,0 +1,21 @@
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+@import '../../../root.scss';
+@import '~@openmrs/esm-styleguide/src/vars';
+.botButton {
+    position: fixed;
+    bottom: 20px;
+    right: 4rem;
+    background-color: #035458;
+    border: none;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    img {
+        width: 3rem;
+        height: auto;
+    }
+}
