@@ -1,6 +1,6 @@
-// ChatbotComponent.tsx
 import React, { useState } from "react";
-import styles from "./chatbot.scss"; // Make sure the CSS file is in the same directory
+import styles from "./chatbot.scss";
+import { ChevronDown, SendAltFilled } from "@carbon/react/icons";
 
 interface ChatMessage {
   type: "incoming" | "outgoing";
@@ -25,17 +25,16 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
     setUserMessage(event.target.value);
   };
 
-  // Define your responses
   const responses = [
     { input: "hey", response: "Hello! How can I help you today?" },
     {
-      input: "how are you",
-      response: "I'm a bot, so I don't have feelings, but thanks for asking!",
+      input: "how do I use the data visualizer",
+      response:
+        "Click on Data Visualizer on the left panel. Expand Report filters by clicking the arrow on the right. Choose either fixed or dynamic report.",
     },
-    // ... more responses
+    // ... to add more responses
   ];
 
-  // Function to get a response based on the input
   const getResponse = (input: string) => {
     const trimmedInput = input.trim().toLowerCase();
     const match = responses.find((r) =>
@@ -47,25 +46,32 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
   const handleSendChat = () => {
     if (!userMessage.trim()) return;
 
-    // Add user's message to chatMessages
     addChatMessage(userMessage.trim(), "outgoing");
 
-    // Get the bot response
     const botResponse = getResponse(userMessage.trim());
 
-    // Simulate a delay to mimic real chatting experience
     setTimeout(() => {
       addChatMessage(botResponse, "incoming");
     }, 1000);
 
-    // Clear the input after sending the message
     setUserMessage("");
+  };
+
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      handleSendChat();
+    }
   };
 
   return (
     <div className={styles.chatbotContainer}>
       <div className={styles.chatbotBox}>
-        <div className={styles.chatbotHeader}>Chatbot</div>
+        <div className={styles.chatbotHeader}>
+          <span>Chatbot</span>
+          <button onClick={closeChatbotChat} className={styles.arrowButton}>
+            <ChevronDown />
+          </button>
+        </div>
         <div className={styles.chatbotMessages}>
           {chatMessages.map((msg, index) => (
             <div
@@ -79,10 +85,13 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
         <div className={styles.chatbotInput}>
           <textarea
             value={userMessage}
+            onKeyDown={handleKeyPress}
             onChange={handleInputChange}
             placeholder="Type a message..."
           />
-          <button onClick={handleSendChat}>Send</button>
+          <button onClick={handleSendChat}>
+            <SendAltFilled size={32} />
+          </button>
         </div>
       </div>
     </div>

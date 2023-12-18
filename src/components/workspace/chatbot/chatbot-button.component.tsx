@@ -7,21 +7,41 @@ import styles from "./chatbot-button.module.scss";
 const ChatbotButton = () => {
   const { t } = useTranslation();
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [showMessage, setShowMessage] = useState(true);
 
   const launchChatBotChat = useCallback(() => {
     setIsChatOpen(true);
+    setShowMessage(false);
+  }, []);
+
+  const closeChatbotText = useCallback(() => {
+    setShowMessage(false);
   }, []);
 
   const closeChatbotChat = useCallback(() => {
     setIsChatOpen(false);
   }, []);
   return (
-    <>
-      <button onClick={launchChatBotChat} className={styles.botButton}>
+    <div className={styles.chatbotButtonContainer}>
+      {showMessage && (
+        <div className={styles.messageContainer}>
+          <span className={styles.chatbotText}>
+            Hello and welcome to UgandaEMR plus Chatbot
+          </span>
+          <button className={styles.closeButton} onClick={closeChatbotText}>
+            x
+          </button>
+        </div>
+      )}
+      <button
+        onClick={launchChatBotChat}
+        className={styles.botButton}
+        type="button"
+      >
         <img src={chatIcon} alt="Chat Icon" />
       </button>
       {isChatOpen && <ChatbotComponent closeChatbotChat={closeChatbotChat} />}
-    </>
+    </div>
   );
 };
 

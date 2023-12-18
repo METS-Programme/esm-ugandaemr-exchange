@@ -3,10 +3,39 @@
 @use '@carbon/styles/scss/colors';
 @import '../../../root.scss';
 @import '~@openmrs/esm-styleguide/src/vars';
-.botButton {
+.chatbotButtonContainer {
     position: fixed;
     bottom: 20px;
     right: 4rem;
+    display: flex;
+    align-items: center;
+    .messageContainer {
+        display: flex;
+        align-items: center;
+        background: #ececec;
+        padding: 8px;
+        border-radius: 4px;
+        position: relative;
+    }
+    .chatbotText {
+        font-size: 13px;
+    }
+    .closeButton {
+        background: none;
+        border: 1px solid #dbd3d3;
+        border-radius: 1rem;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translate(-80%, -120%);
+        cursor: pointer;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: #000;
+    }
+}
+
+.botButton {
     background-color: $ui-background;
     border: none;
     border-radius: 1rem;
@@ -15,10 +44,10 @@
     justify-content: center;
     cursor: pointer;
     img {
-        width: 3rem;
+        width: 2.5rem;
         height: auto;
     }
     &:hover {
-        background-color: #035458; // a darker shade for hover
+        background-color: #035458;
     }
 }
