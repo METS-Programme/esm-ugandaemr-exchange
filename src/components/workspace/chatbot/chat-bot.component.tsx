@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styles from "./chatbot.scss";
 import {
   ChevronDown,
@@ -16,6 +16,14 @@ interface ChatbotChatProps {
 }
 
 const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
+  const [input, setInput] = useState("");
+  const chatInputRef = useRef(null);
+
+  const handleInputChange = (e) => {
+    if (chatInputRef?.current && chatInputRef.current.contains(e.target)) {
+      setInput(e.target.value);
+    }
+  };
   return (
     <div className={styles.chatbotContainer}>
       <div className={styles.chatbotHeader}>
@@ -39,7 +47,14 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
         </li>
       </ul>
       <div className={styles.chatbotInput}>
-        <textarea placeholder="Type a message..." required />
+        <textarea
+          placeholder="Type a message..."
+          required
+          onChange={handleInputChange}
+          id="content"
+          ref={chatInputRef}
+          value={input}
+        />
         <span>
           <SendAltFilled size={32} />
         </span>

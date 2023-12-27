@@ -7,7 +7,7 @@
  .chatbotContainer {
      position: fixed;
      width: 24rem;
-     height: 24rem;
+     height: 26rem;
      right: 0.25rem;
      bottom: 1.25rem;
      margin-right: 1rem;
@@ -22,6 +22,13 @@
      text-align: center;
      color: #fff;
      font-size: large;
+     .arrowButton {
+         border: none;
+         background-color: transparent;
+         color: white;
+         right: 10px;
+         position: absolute;
+     }
  }
  
  .chatBox {
@@ -85,7 +92,7 @@
      padding: 1rem 0.9375rem 1rem 0;
  }
  
- .chatbotInput button {
+ .chatbotInput span {
      align-self: flex-end;
      cursor: pointer;
      background-color: transparent;
