@@ -32,6 +32,12 @@
         font-size: 1.25rem;
         line-height: 1;
         color: #000;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
@@ -39,15 +45,22 @@
     background-color: $ui-background;
     border: none;
     border-radius: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     cursor: pointer;
+    transition: background-color 0.3s;
     img {
         width: 2.5rem;
         height: auto;
     }
     &:hover {
         background-color: #035458;
+        background-size: 0.5rem;
     }
+}
+
+.chatOpen {
+    display: block;
+}
+
+.chatClosed {
+    display: none;
 }

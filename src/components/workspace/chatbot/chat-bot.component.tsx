@@ -1,10 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./chatbot.scss";
 import {
   ChevronDown,
   MachineLearning,
+  Renew,
   SendAltFilled,
 } from "@carbon/react/icons";
+import { InlineLoading } from "@carbon/react";
 
 interface ChatMessage {
   type: "incoming" | "outgoing";
@@ -16,47 +18,109 @@ interface ChatbotChatProps {
 }
 
 const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
-  const [input, setInput] = useState("");
-  const chatInputRef = useRef(null);
+  const [userInput, setUserInput] = useState("");
+  const [chatMessages, setChatMessages] = useState<ChatMessage[]>([
+    {
+      type: "incoming",
+      text: "Hi there\nHow can I help you today?",
+    },
+  ]);
+  const [isLoading, setIsLoading] = useState(false);
+  const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setUserInput(e.target.value);
+  };
 
-  const handleInputChange = (e) => {
-    if (chatInputRef?.current && chatInputRef.current.contains(e.target)) {
-      setInput(e.target.value);
+  const handleKeyPress = (event) => {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSendChat();
     }
   };
+
+  const refreshChat = () => {
+    setChatMessages([
+      {
+        type: "incoming",
+        text: "Hi there\nHow can I help you today?",
+      },
+    ]);
+  };
+
+  const handleSendChat = () => {
+    const newMessage: ChatMessage = {
+      type: "outgoing",
+      text: userInput,
+    };
+
+    setChatMessages([...chatMessages, newMessage]);
+
+    setIsLoading(true);
+    setTimeout(() => {
+      const botResponse: ChatMessage = {
+        type: "incoming",
+        text: "This is a bot response.",
+      };
+      setChatMessages((prevMessages) => [...prevMessages, botResponse]);
+      setIsLoading(false);
+    }, 1000);
+
+    setUserInput("");
+  };
+
+  const lastMessageRef = useRef(null);
+
+  // Use useEffect to scroll to the bottom whenever chatMessages changes
+  useEffect(() => {
+    if (lastMessageRef.current) {
+      lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chatMessages]);
+
   return (
     <div className={styles.chatbotContainer}>
       <div className={styles.chatbotHeader}>
         <span>Chatbot</span>
+        <button onClick={refreshChat} className={styles.refreshButton}>
+          <Renew />
+        </button>
         <button onClick={closeChatbotChat} className={styles.arrowButton}>
           <ChevronDown />
         </button>
       </div>
       <ul className={styles.chatBox}>
-        <li className={`${styles.incoming} ${styles.chat}`}>
-          <span>
-            <MachineLearning size="24" />
-          </span>
-          <p>
-            Hi there <br />
-            How can I help you today?
-          </p>
-        </li>
-        <li className={`${styles.outgoing} ${styles.chat}`}>
-          <p>Lorem ipsum dolor </p>
-        </li>
+        {chatMessages.map((message, index) => (
+          <li
+            key={index}
+            ref={index === chatMessages.length - 1 ? lastMessageRef : null}
+            className={`${styles[message.type]} ${styles.chat}`}
+          >
+            {message.type === "incoming" && (
+              <span>
+                <MachineLearning size="24" />
+              </span>
+            )}
+            <p>{message.text}</p>
+          </li>
+        ))}
+        {isLoading && (
+          <InlineLoading
+            status="active"
+            iconDescription="Loading"
+            description="Loading..."
+          />
+        )}
       </ul>
       <div className={styles.chatbotInput}>
         <textarea
-          placeholder="Type a message..."
+          placeholder="Message Chatbot..."
           required
           onChange={handleInputChange}
+          onKeyDown={handleKeyPress}
           id="content"
-          ref={chatInputRef}
-          value={input}
+          value={userInput}
         />
         <span>
-          <SendAltFilled size={32} />
+          <SendAltFilled size={32} onClick={handleSendChat} />
         </span>
       </div>
     </div>

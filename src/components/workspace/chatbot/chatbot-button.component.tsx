@@ -21,6 +21,7 @@ const ChatbotButton = () => {
   const closeChatbotChat = useCallback(() => {
     setIsChatOpen(false);
   }, []);
+
   return (
     <div className={styles.chatbotButtonContainer}>
       {showMessage && (
@@ -40,7 +41,9 @@ const ChatbotButton = () => {
       >
         <img src={chatIcon} alt="Chat Icon" />
       </button>
-      {isChatOpen && <ChatbotComponent closeChatbotChat={closeChatbotChat} />}
+      <div className={isChatOpen ? styles.chatOpen : styles.chatClosed}>
+        <ChatbotComponent closeChatbotChat={closeChatbotChat} />
+      </div>
     </div>
   );
 };
