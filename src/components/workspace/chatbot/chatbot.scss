@@ -1,0 +1,114 @@
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+ }
+ 
+ .chatbotContainer {
+     position: fixed;
+     width: 24rem;
+     height: 26rem;
+     right: 0.25rem;
+     bottom: 1.25rem;
+     margin-right: 1rem;
+     border-radius: 1rem;
+     overflow: hidden;
+     box-shadow: 0 0 8rem 0 rgba(0, 0, 0, 0.1), 0 2rem 4rem -3rem rgba(0, 0, 0, 0.5);
+ }
+ 
+ .chatbotHeader {
+     background-color: #005d5d;
+     padding: 1rem 0;
+     text-align: center;
+     color: #fff;
+     font-size: large;
+     .arrowButton {
+         border: none;
+         background-color: transparent;
+         color: white;
+         right: 25px;
+         position: absolute;
+         cursor: pointer;
+     }
+     .refreshButton {
+         border: none;
+         background-color: transparent;
+         color: white;
+         position: absolute;
+         right: 55px;
+         cursor: pointer;
+     }
+ }
+ 
+ .chatBox {
+     height: 15rem;
+     overflow-y: auto;
+     padding: 1.875rem 1.25rem 0;
+ }
+ 
+ .chat {
+     display: flex;
+ }
+ 
+ .incoming span {
+     height: 1.5rem;
+     width: 2rem;
+     color: #fff;
+     align-self: flex-end;
+     background-color: #005d5d;
+     text-align: center;
+     line-height: 2rem;
+     border-radius: 0.25rem;
+     margin: 0 0.625rem 0.4375rem 0;
+ }
+ 
+ .outgoing {
+     margin: 1.25rem 0;
+     justify-content: flex-end;
+ }
+ 
+ .chat p {
+     color: #fff;
+     max-width: 75%;
+     padding: 0.75rem 1rem;
+     border-radius: 0.625rem 0.625rem 0 0.625rem;
+     background-color: #005d5d;
+ }
+ 
+ .incoming p {
+     color: #000;
+     background-color: #f2f2f2;
+     border-radius: 0.625rem 0.625rem 0 0.625rem;
+ }
+ 
+ .chatbotInput {
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+     display: flex;
+     gap: 5px;
+     background-color: #fff;
+     padding: 0.5rem 1.25rem;
+     border-top: 1px solid #ccc;
+ }
+ 
+ .chatbotInput textarea {
+     height: 3.5rem;
+     width: 100%;
+     border: none;
+     outline: none;
+     resize: none;
+     padding: 1rem 0.9375rem 1rem 0;
+ }
+ 
+ .chatbotInput span {
+     align-self: flex-end;
+     cursor: pointer;
+     background-color: transparent;
+     border: none;
+     visibility: hidden;
+ }
+ 
+ .chatbotInput textarea:valid~span {
+     visibility: visible;
+ }

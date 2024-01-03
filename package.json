@@ -46,11 +46,14 @@
     "dependencies": {
         "@carbon/charts-react": "^1.13.6",
         "@carbon/react": "^1.36.0",
+        "@chatscope/chat-ui-kit-react": "^1.10.1",
         "axios": "^1.6.2",
         "d3": "^7.6.1",
         "dayjs": "^1.11.10",
         "lodash-es": "^4.17.21",
-        "react-image-annotate": "^1.8.0"
+        "react-chatbot-kit": "^2.2.1",
+        "react-image-annotate": "^1.8.0",
+        "react-simple-chatbot": "^0.6.1"
     },
     "peerDependencies": {
         "@openmrs/esm-framework": "*",
