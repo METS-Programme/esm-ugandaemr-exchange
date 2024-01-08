@@ -69,7 +69,6 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
 
   const lastMessageRef = useRef(null);
 
-  // Use useEffect to scroll to the bottom whenever chatMessages changes
   useEffect(() => {
     if (lastMessageRef.current) {
       lastMessageRef.current.scrollIntoView({ behavior: "smooth" });
