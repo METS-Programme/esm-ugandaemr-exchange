@@ -22,6 +22,19 @@ type ARTStartDateRequest = {
   patientuuid: string;
 };
 
+export function validateVLSuppressionParams(params: SaveParams): string | null {
+  if (!params.last_encounter_date) return "Last encounter date is required.";
+  if (!params.art_start_date) return "ART start date is required.";
+  if (!params.art_start_date) return "ART start date is required.";
+  if (!params.date_birth) return "Date of birth is required.";
+  if (!params.gender) return "Gender is required.";
+  if (!params.last_arv_adherence) return "ARV adherence is required.";
+  if (!params.current_regimen) return "Current regimen is required.";
+  if (!params.last_indication_for_VL_Testing)
+    return "Indication for VL Testing is required.";
+  return null;
+}
+
 export function useVLSuppressionDetails(params: SaveParams) {
   const apiUrl = "https://ai.mets.or.ug/predict";
 
@@ -47,7 +60,6 @@ export function useVLSuppressionDetails(params: SaveParams) {
     PredictionData,
     Error
   >(apiUrl, fetcher);
-
   return {
     data: data?.Prediction.Client ?? {},
     isErrorInSendingRequest: error,

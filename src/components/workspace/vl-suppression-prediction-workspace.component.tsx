@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { Button, InlineLoading, Loading } from "@carbon/react";
-import { Intersect } from "@carbon/react/icons";
+import { InlineLoading } from "@carbon/react";
 import styles from "./vl-suppression-prediction.scss";
 import {
   extractDate,
@@ -97,7 +96,7 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       : "Patient";
   }, [patient]);
 
-  const [showPredictions, setshowPredictions] = useState(false);
+  const [showPredictions, setshowPredictions] = useState(true);
 
   const { data, isErrorInSendingRequest, isLoadingPrediction } =
     useVLSuppressionDetails({
@@ -110,30 +109,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       last_indication_for_VL_Testing: indicationForVLTesting,
     });
 
-  if (isLoadingPrediction) {
-    return (
-      <InlineLoading
-        status="active"
-        iconDescription="Loading"
-        description="Loading data..."
-      />
-    );
-  }
-
-  if (isErrorInSendingRequest) {
-    return (
-      <InlineLoading
-        status="active"
-        iconDescription="Loading"
-        description="Getting Patient Details..."
-      />
-    );
-  }
-
-  const handleButtonClick = () => {
-    setshowPredictions(true);
-  };
-
   return (
     <>
       <section className={styles.sectionHeader}>
@@ -143,19 +118,24 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
           <p>Your AI Partner</p>
         </div>
         <span className={styles.divSpan}>
-          Click the Run button for an AI based diagnostic assessment for{" "}
-          {patientDisplay}
+          An AI based diagnostic assessment for {patientDisplay}
         </span>
       </section>
-      <div className={styles.actionButton}>
-        <Button kind="primary" size="md" onClick={handleButtonClick}>
-          <div className={styles.icon}>
-            <Intersect />
-          </div>
-          <span className={styles.buttonSpan}>Run</span>
-        </Button>
-      </div>
-      {!isLoadingPrediction ? (
+      {isLoadingPrediction && (
+        <InlineLoading
+          status="active"
+          iconDescription="Loading"
+          description="Loading data..."
+        />
+      )}
+      {isErrorInSendingRequest && (
+        <InlineLoading
+          status="active"
+          iconDescription="Loading"
+          description="Getting Patient Details..."
+        />
+      )}
+      {!isLoadingPrediction && !isErrorInSendingRequest && (
         <>
           {showPredictions && (
             <section className={styles.section}>
@@ -166,12 +146,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
             </section>
           )}
         </>
-      ) : (
-        <InlineLoading
-          status="active"
-          iconDescription="Loading"
-          description="Loading data..."
-        />
       )}
       <section></section>
     </>
