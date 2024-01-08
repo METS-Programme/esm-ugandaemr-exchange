@@ -1,5 +1,5 @@
-import React, { useMemo, useState } from "react";
-import { InlineLoading } from "@carbon/react";
+import React, { useEffect, useMemo, useState } from "react";
+import { InlineLoading, InlineNotification } from "@carbon/react";
 import styles from "./vl-suppression-prediction.scss";
 import {
   extractDate,
@@ -9,6 +9,7 @@ import {
   useGetLastEncounterDate,
   useGetIndicationForVLTesting,
   useVLSuppressionDetails,
+  validateVLSuppressionParams,
 } from "./vl-suppression-prediction.resource";
 import logo from "../../assets/images/artificial-intelligence-logo.png";
 import { PatientChartProps } from "../../types";
@@ -18,6 +19,9 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   patientUuid,
 }) => {
   const { patient } = usePatient(patientUuid);
+
+  const [indicationError, setIndicationError] = useState("");
+  const [showErrorNotification, setShowErrorNotification] = useState(false);
 
   const [encounterDate, setEncounterDate] = useState<string | null>("");
   const handleLastEncounterDateReceived = (newLastEncounterDate: string) => {
@@ -43,7 +47,15 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   const handleIndicationForVLTestingReceived = (
     newIndicationForVLTesting: string
   ) => {
-    setIndicationForVLTesting(newIndicationForVLTesting);
+    if (
+      newIndicationForVLTesting ===
+      "No parameter for last_indication_for_VL_Testing"
+    ) {
+      setIndicationError(newIndicationForVLTesting);
+    } else {
+      setIndicationForVLTesting(newIndicationForVLTesting);
+      setIndicationError("");
+    }
   };
 
   useGetARTStartDate(
@@ -109,6 +121,32 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       last_indication_for_VL_Testing: indicationForVLTesting,
     });
 
+  const [validationError, setValidationError] = useState<string | null>(null);
+  useEffect(() => {
+    const error = validateVLSuppressionParams({
+      last_encounter_date: encounterDate,
+      art_start_date: artStartDate,
+      date_birth: dateOfBirth,
+      gender: gender,
+      last_arv_adherence: arvAdherence,
+      current_regimen: currentRegimen,
+      last_indication_for_VL_Testing: indicationForVLTesting,
+    });
+    setValidationError(error);
+  }, [
+    encounterDate,
+    artStartDate,
+    dateOfBirth,
+    gender,
+    arvAdherence,
+    currentRegimen,
+    indicationForVLTesting,
+  ]);
+
+  const handleCloseNotification = () => {
+    setShowErrorNotification(false);
+  };
+
   return (
     <>
       <section className={styles.sectionHeader}>
@@ -121,33 +159,42 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
           An AI based diagnostic assessment for {patientDisplay}
         </span>
       </section>
-      {isLoadingPrediction && (
-        <InlineLoading
-          status="active"
-          iconDescription="Loading"
-          description="Loading data..."
-        />
-      )}
-      {isErrorInSendingRequest && (
-        <InlineLoading
-          status="active"
-          iconDescription="Loading"
-          description="Getting Patient Details..."
-        />
-      )}
-      {!isLoadingPrediction && !isErrorInSendingRequest && (
+      {!validationError ? (
         <>
-          {showPredictions && (
-            <section className={styles.section}>
-              <div className={styles.title}>Viral Load Suppression</div>
-              <div className={styles.divVL}>
-                Prediction: <>{data}</>
-              </div>
-            </section>
+          {isLoadingPrediction && (
+            <InlineLoading
+              status="active"
+              iconDescription="Loading"
+              description="Loading data..."
+            />
+          )}
+          {isErrorInSendingRequest && (
+            <InlineLoading
+              status="active"
+              iconDescription="Loading"
+              description="Getting Patient Details..."
+            />
+          )}
+          {!isLoadingPrediction && !isErrorInSendingRequest && (
+            <>
+              {showPredictions && (
+                <section className={styles.section}>
+                  <div className={styles.title}>Viral Load Suppression</div>
+                  <div className={styles.divVL}>
+                    Prediction: <>{data}</>
+                  </div>
+                </section>
+              )}
+            </>
           )}
         </>
+      ) : (
+        <InlineNotification
+          kind="error"
+          onClose={handleCloseNotification}
+          title={validationError}
+        />
       )}
-      <section></section>
     </>
   );
 };

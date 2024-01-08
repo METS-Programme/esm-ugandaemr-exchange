@@ -23,15 +23,14 @@ type ARTStartDateRequest = {
 };
 
 export function validateVLSuppressionParams(params: SaveParams): string | null {
-  if (!params.last_encounter_date) return "Last encounter date is required.";
-  if (!params.art_start_date) return "ART start date is required.";
-  if (!params.art_start_date) return "ART start date is required.";
-  if (!params.date_birth) return "Date of birth is required.";
-  if (!params.gender) return "Gender is required.";
-  if (!params.last_arv_adherence) return "ARV adherence is required.";
-  if (!params.current_regimen) return "Current regimen is required.";
+  if (!params.last_encounter_date) return "Patient has no last encounter date";
+  if (!params.art_start_date) return "Patient has no ART start date";
+  if (!params.date_birth) return "Patient has no Date of birth";
+  if (!params.gender) return "Patient has no gender";
+  if (!params.last_arv_adherence) return "Patient has no ARV adherence";
+  if (!params.current_regimen) return "Patient has no current regimen";
   if (!params.last_indication_for_VL_Testing)
-    return "Indication for VL Testing is required.";
+    return "Patient has no indication for VL Testing";
   return null;
 }
 
@@ -48,7 +47,7 @@ export function useVLSuppressionDetails(params: SaveParams) {
 
       return response.data as PredictionData;
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
+      if (error.response.data.error) {
         throw new Error(error.response.data.error);
       } else {
         throw new Error("An unexpected error occurred.");
@@ -169,26 +168,37 @@ export function useGetCurrentRegimen(
 
 export function useGetIndicationForVLTesting(
   params: ARTStartDateRequest,
-  onIndicationForVLTestingReceived: (artStartDateData: string) => void,
+  onIndicationForVLTestingReceived: (indicationForVLTesting: string) => void,
   conceptuuid: string
 ) {
   const apiUrl = `/ws/rest/v1/obs?concept=${conceptuuid}&patient=${params.patientuuid}&v=full`;
   const { data, error, isLoading, mutate } = useSWR<
-    { data: { results: any } },
+    { data: { results: any[] } },
     Error
   >(apiUrl, openmrsFetch);
-  const indicationForVLTesting = data
-    ? data?.data.results[0].value?.display
-    : null;
 
   useEffect(() => {
-    if (indicationForVLTesting !== null) {
-      onIndicationForVLTestingReceived(indicationForVLTesting as string);
+    if (error) {
+      onIndicationForVLTestingReceived(
+        "An error occurred while fetching the data."
+      );
+      return;
     }
-  }, [indicationForVLTesting, conceptuuid, onIndicationForVLTestingReceived]);
+
+    if (data && data.data.results.length > 0 && data.data.results[0].value) {
+      onIndicationForVLTestingReceived(data.data.results[0].value.display);
+    } else {
+      onIndicationForVLTestingReceived(
+        "No parameter for last_indication_for_VL_Testing"
+      );
+    }
+  }, [data, error, onIndicationForVLTestingReceived]);
+
   return {
-    indicationForVLTesting,
-    conceptuuid,
+    indicationForVLTesting:
+      data && data.data.results.length > 0
+        ? data.data.results[0].value?.display
+        : null,
     isError: error,
     isLoading: isLoading,
     mutate,
