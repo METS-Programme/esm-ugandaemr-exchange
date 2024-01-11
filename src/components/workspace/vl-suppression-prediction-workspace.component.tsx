@@ -14,6 +14,7 @@ import {
 import logo from "../../assets/images/artificial-intelligence-logo.png";
 import { PatientChartProps } from "../../types";
 import { usePatient } from "@openmrs/esm-framework";
+import PatientList from "./vl-data-table.component";
 
 const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
   patientUuid,
@@ -177,11 +178,22 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
           )}
           {!isLoadingPrediction && !isErrorInSendingRequest && (
             <>
+              <div className={styles.title}>
+                {patientDisplay} 's Medical History
+              </div>
+              <PatientList />
               {showPredictions && (
                 <section className={styles.section}>
-                  <div className={styles.title}>Viral Load Suppression</div>
                   <div className={styles.divVL}>
-                    Prediction: <>{data}</>
+                    Based on the above report, Dr. Yonna predicts that the VL is{" "}
+                    <span className={styles.result}>
+                      <>{data}</>
+                    </span>
+                    .
+                  </div>
+                  <div className={styles.divVL}>
+                    Remember, this prediction is based on a model and should be
+                    used in conjunction with clinical judgment.
                   </div>
                 </section>
               )}

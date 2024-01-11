@@ -3,5 +3,7 @@
     "hie": "HIE Metrics",
     "performance": "Performance",
     "dataEntryStats": "Data Entry Statistics",
-    "drYonna": "AI Partner"
+    "drYonna": "AI Partner",
+  "artStartDate": "ART Start Date",
+  "currentArtRegimen": "Current ART Regimen"
 }

@@ -44,7 +44,7 @@ export function useVLSuppressionDetails(params: SaveParams) {
           "Content-Type": "application/json",
         },
       });
-
+      console.info(response.data);
       return response.data as PredictionData;
     } catch (error) {
       if (error.response.data.error) {

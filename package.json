@@ -7,7 +7,7 @@
     "main": "src/index.ts",
     "source": true,
     "scripts": {
-        "start": "openmrs develop --backend http://localhost:8080",
+        "start": "openmrs develop --backend http://194.163.171.253:8282",
         "serve": "webpack serve --mode=development",
         "build": "webpack --mode production",
         "analyze": "webpack --mode=production --env analyze=true",
@@ -50,7 +50,8 @@
         "d3": "^7.6.1",
         "dayjs": "^1.11.10",
         "lodash-es": "^4.17.21",
-        "react-image-annotate": "^1.8.0"
+        "react-image-annotate": "^1.8.0",
+        "recharts": "^2.10.4"
     },
     "peerDependencies": {
         "@openmrs/esm-framework": "*",
