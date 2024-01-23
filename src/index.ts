@@ -6,6 +6,7 @@ import {
 import { configSchema } from "./config-schema";
 import { createDashboardLink } from "./create-dashboard-link.component";
 import { createLeftPanelLink } from "./left-panel-link.component";
+import appMenu from "./components/exchange-menu-app/exchange-menu-app-item.component";
 
 const moduleName = "@ugandaemr/esm-ugandaemr-exchange-app";
 
@@ -56,6 +57,8 @@ export const VLSuppressionPredictionWorkspace = getAsyncLifecycle(
     moduleName,
   }
 );
+
+export const healthExchangeAppMenuItem = getSyncLifecycle(appMenu, options);
 
 export function startupApp() {
   defineConfigSchema(moduleName, configSchema);
