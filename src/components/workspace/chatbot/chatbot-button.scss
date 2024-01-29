@@ -42,9 +42,9 @@
 }
 
 .botButton {
-    background-color: $ui-background;
+    background-color: #035458;
     border: none;
-    border-radius: 1rem;
+    // border-radius: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
     img {
@@ -52,7 +52,7 @@
         height: auto;
     }
     &:hover {
-        background-color: #035458;
+        background-color: $ui-background;
         background-size: 0.5rem;
     }
 }
