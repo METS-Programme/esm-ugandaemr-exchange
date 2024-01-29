@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import ChatbotComponent from "./chat-bot.component";
-import chatIcon from "../../../assets/images/chat-icon.png";
 import styles from "./chatbot-button.scss";
 import { showNotification, useSession } from "@openmrs/esm-framework";
 import { getCareProvider } from "./chatbot.resource";
@@ -50,7 +49,7 @@ const ChatbotButton = () => {
       {showMessage && (
         <div className={styles.messageContainer}>
           <span className={styles.chatbotText}>
-            Hello {provider}, Welcome to UgandaEMR plus Chatbot
+            Hello {provider}, Welcome to UgandaEMR Plus Chatbot
           </span>
           <button className={styles.closeButton} onClick={closeChatbotText}>
             x
@@ -62,7 +61,6 @@ const ChatbotButton = () => {
         className={styles.botButton}
         type="button"
       >
-        {/* <img src={chatIcon} alt="Chat Icon" /> */}
         <ChatBot size={24} />
       </button>
       <div className={isChatOpen ? styles.chatOpen : styles.chatClosed}>

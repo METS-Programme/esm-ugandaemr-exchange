@@ -42,18 +42,24 @@
 }
 
 .botButton {
-    background-color: #035458;
+    background-color: #005d5d;
     border: none;
-    // border-radius: 1rem;
     cursor: pointer;
-    transition: background-color 0.3s;
-    img {
-        width: 2rem;
-        height: auto;
-    }
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     &:hover {
-        background-color: $ui-background;
-        background-size: 0.5rem;
+        background-color: #066e6e;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 40px 0 rgba(0, 0, 0, 0.24);
+    }
+    svg {
+        fill: #ffffff;
     }
 }
 
