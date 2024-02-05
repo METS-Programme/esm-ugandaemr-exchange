@@ -49,7 +49,7 @@ const ChatbotButton = () => {
       {showMessage && (
         <div className={styles.messageContainer}>
           <span className={styles.chatbotText}>
-            Hello {provider}, Welcome to UgandaEMR Plus Chatbot
+            Hello {provider}, Welcome to iFHIS Chatbot
           </span>
           <button className={styles.closeButton} onClick={closeChatbotText}>
             x
