@@ -12,6 +12,7 @@ const ChatbotButton = () => {
   const [showMessage, setShowMessage] = useState(true);
   const sessionUser = useSession();
 
+  const displayText = t("ifhis", "IFHIS");
   const [provider, setProvider] = useState("");
 
   const launchChatBotChat = useCallback(() => {
@@ -49,7 +50,7 @@ const ChatbotButton = () => {
       {showMessage && (
         <div className={styles.messageContainer}>
           <span className={styles.chatbotText}>
-            Hello {provider}, Welcome to iFHIS Chatbot
+            Hello {provider}, Welcome to {displayText} Chatbot
           </span>
           <button className={styles.closeButton} onClick={closeChatbotText}>
             x
