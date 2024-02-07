@@ -1,0 +1,72 @@
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
+@import '../../../root.scss';
+@import '~@openmrs/esm-styleguide/src/vars';
+.chatbotButtonContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 4rem;
+    display: flex;
+    align-items: center;
+    .messageContainer {
+        display: flex;
+        align-items: center;
+        background: #ececec;
+        padding: 8px;
+        border-radius: 4px;
+        position: relative;
+    }
+    .chatbotText {
+        font-size: 13px;
+    }
+    .closeButton {
+        background: none;
+        border: 1px solid #dbd3d3;
+        border-radius: 1rem;
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        transform: translate(-80%, -120%);
+        cursor: pointer;
+        font-size: 1.25rem;
+        line-height: 1;
+        color: #000;
+        width: 20px;
+        height: 20px;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.botButton {
+    background-color: #005d5d;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 0.5rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    &:hover {
+        background-color: #066e6e;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 12px 40px 0 rgba(0, 0, 0, 0.24);
+    }
+    svg {
+        fill: #ffffff;
+    }
+}
+
+.chatOpen {
+    display: block;
+}
+
+.chatClosed {
+    display: none;
+}

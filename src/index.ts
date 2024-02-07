@@ -40,7 +40,9 @@ export const fhirProfileLink = getSyncLifecycle(
 
 export const VLSuppressionPrediction = getAsyncLifecycle(
   () =>
-    import("./components/workspace/vl-suppression-prediction-button.component"),
+    import(
+      "./components/workspace/ai-predictions/vl-suppression-prediction-button.component"
+    ),
   {
     featureName: "vl suppression prediction workspace",
     moduleName,
@@ -50,7 +52,7 @@ export const VLSuppressionPrediction = getAsyncLifecycle(
 export const VLSuppressionPredictionWorkspace = getAsyncLifecycle(
   () =>
     import(
-      "./components/workspace/vl-suppression-prediction-workspace.component"
+      "./components/workspace/ai-predictions/vl-suppression-prediction-workspace.component"
     ),
   {
     featureName: "vl suppression prediction workspace",
@@ -58,7 +60,24 @@ export const VLSuppressionPredictionWorkspace = getAsyncLifecycle(
   }
 );
 
+
 export const healthExchangeAppMenuItem = getSyncLifecycle(appMenu, options);
+
+export const ChatbotButton = getAsyncLifecycle(
+  () => import("./components/workspace/chatbot/chatbot-button.component"),
+  {
+    featureName: "chatbot button",
+    moduleName,
+  }
+);
+export const ChatbotComponent = getAsyncLifecycle(
+  () => import("./components/workspace/chatbot/chat-bot.component"),
+  {
+    featureName: "chat bot",
+    moduleName,
+  }
+);
+
 
 export function startupApp() {
   defineConfigSchema(moduleName, configSchema);
