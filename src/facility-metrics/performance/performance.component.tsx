@@ -75,7 +75,7 @@ const Performance: React.FC = () => {
                 <td className={styles.boxThirdItem}>
                   HMIS -{" "}
                   <span onClick={showHMISReports} role="button" tabIndex={0}>
-                    5
+                    2
                   </span>
                 </td>
               </tr>
@@ -84,7 +84,7 @@ const Performance: React.FC = () => {
                 <td className={styles.boxThirdItem}>
                   PEPFAR -{" "}
                   <span onClick={showPEPFARReports} role="button" tabIndex={0}>
-                    2
+                    7
                   </span>
                 </td>
               </tr>
