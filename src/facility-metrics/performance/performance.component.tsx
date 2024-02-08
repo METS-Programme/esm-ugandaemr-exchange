@@ -1,13 +1,17 @@
 import React from "react";
-import { DonutChart, LineChart, SimpleBarChart } from "@carbon/charts-react";
+import {
+  DonutChart,
+  SimpleBarChart,
+  StackedBarChart,
+} from "@carbon/charts-react";
 import { showModal } from "@openmrs/esm-framework";
 import {
   donutDepartmentOptions,
   donutGenderOptions,
   horizontalBarData,
   horizontalBarOptions,
-  lineData,
-  linePOCOptions,
+  StackedBarData,
+  StackedBarPOCOptions,
 } from "./mock-data";
 import { CaretUp, CheckmarkOutline } from "@carbon/react/icons";
 import styles from "./performance.scss";
@@ -103,7 +107,10 @@ const Performance: React.FC = () => {
 
       <div className={styles.chartRowContainer}>
         <div className={styles.chartItemStacked}>
-          <LineChart data={lineData} options={linePOCOptions} />
+          <StackedBarChart
+            data={StackedBarData}
+            options={StackedBarPOCOptions}
+          />
         </div>
         <div className={styles.chartItemStacked}>
           <SimpleBarChart
