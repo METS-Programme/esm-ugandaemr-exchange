@@ -9,7 +9,7 @@ type encounterRequest = {
 };
 
 export function useGetDataEntryStatistics(params: encounterRequest) {
-  const apiUrl = `${restBaseUrl}dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
+  const apiUrl = `${restBaseUrl}/dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
   const abortController = new AbortController();
 
   const { mutate } = useSWRConfig();
@@ -35,7 +35,7 @@ export function useGetDataEntryStatistics(params: encounterRequest) {
 }
 
 export async function getDataEntryStatistics(params: encounterRequest) {
-  const apiUrl = `${restBaseUrl}dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
+  const apiUrl = `${restBaseUrl}/dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
   const abortController = new AbortController();
 
   return openmrsFetch(apiUrl, {
