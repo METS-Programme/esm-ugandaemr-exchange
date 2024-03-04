@@ -60,7 +60,6 @@ export const VLSuppressionPredictionWorkspace = getAsyncLifecycle(
   }
 );
 
-
 export const healthExchangeAppMenuItem = getSyncLifecycle(appMenu, options);
 
 export const ChatbotButton = getAsyncLifecycle(
@@ -77,7 +76,6 @@ export const ChatbotComponent = getAsyncLifecycle(
     moduleName,
   }
 );
-
 
 export function startupApp() {
   defineConfigSchema(moduleName, configSchema);
