@@ -4,5 +4,10 @@
     "performance": "Performance",
     "dataEntryStats": "Data Entry Statistics",
     "aiPrediction": "AI Predictions",
-    "chatBotMdodal": "Chatbot Modal"
+    "chatBotMdodal": "Chatbot Modal",
+    "resourceDefinition": "Resource Definition",
+    "resourceType": "Resource Type",
+    "caseBasedSettings": "Case Based Settings",
+    "resourceFilters": "Resource Filters",
+     "syncSettings": "Sync Settings"
 }
