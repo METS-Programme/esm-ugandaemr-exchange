@@ -73,160 +73,18 @@ export const donutDepartmentOptions = {
   theme: ChartTheme.WHITE,
 };
 
-export const stackedBarData = [
-  {
-    group: "InPatient",
-    key: "Jan",
-    value: 32432,
-  },
-  {
-    group: "InPatient",
-    key: "Feb",
-    value: 21312,
-  },
-  {
-    group: "InPatient",
-    key: "March",
-    value: 56456,
-  },
-  {
-    group: "InPatient",
-    key: "April",
-    value: 21312,
-  },
-  {
-    group: "InPatient",
-    key: "May",
-    value: 34234,
-  },
-  {
-    group: "InPatient",
-    key: "Jun",
-    value: 32432,
-  },
-  {
-    group: "InPatient",
-    key: "Jul",
-    value: 21312,
-  },
-  {
-    group: "InPatient",
-    key: "Aug",
-    value: 56456,
-  },
-  {
-    group: "InPatient",
-    key: "Sept",
-    value: 21312,
-  },
-  {
-    group: "InPatient",
-    key: "Oct",
-    value: 34234,
-  },
-  {
-    group: "InPatient",
-    key: "Nov",
-    value: 21312,
-  },
-  {
-    group: "InPatient",
-    key: "Dec",
-    value: 56456,
-  },
-  {
-    group: "OutPatient",
-    key: "Jan",
-    value: 12312,
-  },
-  {
-    group: "OutPatient",
-    key: "Feb",
-    value: 23232,
-  },
-  {
-    group: "OutPatient",
-    key: "March",
-    value: 34232,
-  },
-  {
-    group: "OutPatient",
-    key: "April",
-    value: 12312,
-  },
-  {
-    group: "OutPatient",
-    key: "May",
-    value: 34234,
-  },
-  {
-    group: "OutPatient",
-    key: "Jun",
-    value: 23232,
-  },
-  {
-    group: "OutPatient",
-    key: "Jul",
-    value: 34232,
-  },
-  {
-    group: "OutPatient",
-    key: "Aug",
-    value: 12312,
-  },
-  {
-    group: "OutPatient",
-    key: "Sept",
-    value: 34234,
-  },
-  {
-    group: "OutPatient",
-    key: "Oct",
-    value: 34232,
-  },
-  {
-    group: "OutPatient",
-    key: "Nov",
-    value: 12312,
-  },
-  {
-    group: "OutPatient",
-    key: "Dec",
-    value: 34234,
-  },
-];
-
-export const stackedBarOptions = {
-  title: "POC Actived Points",
-  legend: {
-    position: LegendPositions.TOP,
-  },
-  axes: {
-    left: {
-      mapsTo: "value",
-      stacked: true,
-    },
-    bottom: {
-      mapsTo: "key",
-      scaleType: ScaleTypes.LABELS,
-    },
-  },
-  height: "500px",
-  width: "auto",
-};
-
 export const horizontalBarData = [
   {
     group: "ART",
-    value: 10,
+    value: 16,
   },
   {
     group: "TB",
-    value: 10,
+    value: 15,
   },
   {
     group: "LAB",
-    value: 256,
+    value: 50,
   },
   {
     group: "MCH",
@@ -239,7 +97,7 @@ export const horizontalBarData = [
 ];
 
 export const horizontalBarOptions = {
-  title: "Patients Served Vs Service Point",
+  title: "Patients Served Per Service Area",
   legend: {
     position: LegendPositions.TOP,
   },
@@ -282,51 +140,51 @@ export const lineOptions = {
   height: "400px",
 };
 
-export const lineData = [
+export const StackedBarData = [
   {
     group: "ART",
     key: "Triage",
-    value: 1,
+    value: 16,
   },
   {
     group: "ART",
     key: "Clinician",
-    value: 1,
+    value: 16,
   },
   {
     group: "ART",
     key: "LAB",
-    value: 1,
+    value: 12,
   },
   {
     group: "ART",
     key: "Pharmacy",
-    value: 1,
+    value: 16,
   },
   {
     group: "TB",
     key: "Triage",
-    value: 0,
+    value: 15,
   },
   {
     group: "TB",
     key: "Clinician",
-    value: 0,
+    value: 12,
   },
   {
     group: "TB",
     key: "LAB",
-    value: 1,
+    value: 7,
   },
   {
     group: "TB",
     key: "Pharmacy",
-    value: 1,
+    value: 10,
   },
 ];
 
-export const linePOCOptions = {
-  title: "POC Activated Service Points",
+export const StackedBarPOCOptions = {
+  title: "POC Service Points",
   axes: {
     bottom: {
       title: "Service Point",
@@ -335,8 +193,8 @@ export const linePOCOptions = {
     },
     left: {
       mapsTo: "value",
-      title: "Status",
-      scaleType: ScaleTypes.LABELS,
+      title: "Clients Served",
+      scaleType: ScaleTypes.LINEAR,
     },
   },
   height: "500px",

@@ -3,7 +3,7 @@ import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
 import { EditAction } from "./fhir.component";
 
 export function useGetFhirProfiles() {
-  const apiUrl = `${restBaseUrl}syncfhirprofile`;
+  const apiUrl = `${restBaseUrl}/syncfhirprofile`;
   const { data, error, isLoading } = useSWR<{ data: { results: any } }, Error>(
     apiUrl,
     openmrsFetch

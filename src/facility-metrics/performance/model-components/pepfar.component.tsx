@@ -1,6 +1,13 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@carbon/react";
+import DataList from "../../../components/data-table/data-table.component";
+import {
+  PEPFARReports,
+  ReportHeaders,
+  Tools,
+  ToolsHeaders,
+} from "./model-constants";
 
 interface ToolsPromptProps {
   close: void;
@@ -14,7 +21,11 @@ const ToolsPrompt: React.FC<ToolsPromptProps> = ({ close }) => {
       <div className="cds--modal-header">
         <h3 className="cds--modal-header__heading">PEPFAR Reports</h3>
       </div>
-      <div className="cds--modal-content"></div>
+
+      <div className="cds--modal-content">
+        <DataList columns={ReportHeaders} data={PEPFARReports} />
+      </div>
+
       <div className="cds--modal-footer">
         <Button kind="primary" onClick={close}>
           {t("close", "Close")}

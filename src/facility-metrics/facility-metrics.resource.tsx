@@ -58,8 +58,8 @@ export async function fetchTransactionCount(
   const abortController = new AbortController();
   const apiURL =
     type === "fhirProfile"
-      ? `${restBaseUrl}syncfhirresourcestats?profile`
-      : `${restBaseUrl}synctaskstats?type`;
+      ? `${restBaseUrl}/syncfhirresourcestats?profile`
+      : `${restBaseUrl}/synctaskstats?type`;
 
   const response = await openmrsFetch(
     `${apiURL}=${uuid}&startDate=${startDate}&endDate=${endDate}`,
@@ -79,8 +79,8 @@ export async function fetchTransactions(
   const abortController = new AbortController();
   const apiURL =
     type === "fhirProfile"
-      ? `${restBaseUrl}syncfhirresourcedetails?profile`
-      : `${restBaseUrl}synctaskdetails?synctasktype`;
+      ? `${restBaseUrl}/syncfhirresourcedetails?profile`
+      : `${restBaseUrl}/synctaskdetails?synctasktype`;
 
   return await openmrsFetch(
     `${apiURL}=${uuid}&startDate=${startDate}&endDate=${endDate}`,
