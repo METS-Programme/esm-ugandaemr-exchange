@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { ContentSwitcher, Switch } from "@carbon/react";
 import { useTranslation } from "react-i18next";
+import CaseBasedSettings from "./fhir-detail-content.component.tsx/fhir-detail-content-case-based-settings.component";
 
-const RowDetails = () => {
+const RowDetails = ({ fhirProfiles }) => {
   const { t } = useTranslation();
+  const [tabType, setTabType] = useState();
+
+  const handleTabTypeChange = ({ name }) => {
+    setTabType(name);
+  };
+
   return (
     <div>
-      <ContentSwitcher>
+      <ContentSwitcher onChange={handleTabTypeChange}>
         <Switch name="Resource Definition">
           <div>
             <span>{t("resourceDefinition", "Resource Definition")}</span>
@@ -33,6 +40,9 @@ const RowDetails = () => {
           </div>
         </Switch>
       </ContentSwitcher>
+      {tabType === "Sync Settings" && (
+        <CaseBasedSettings fhirProfiles={fhirProfiles} />
+      )}
     </div>
   );
 };

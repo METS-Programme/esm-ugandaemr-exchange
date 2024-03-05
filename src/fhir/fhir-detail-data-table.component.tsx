@@ -27,6 +27,7 @@ import { useTranslation } from "react-i18next";
 import styles from "../components/data-table/data-tables.scss";
 import { saveAs } from "file-saver";
 import RowDetails from "./fhir-detail.component";
+import CaseBasedSettings from "./fhir-detail-content.component.tsx/fhir-detail-content-case-based-settings.component";
 
 type FilterProps = {
   rowIds: Array<string>;
@@ -187,7 +188,7 @@ const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
                         className={styles.expandedActiveVisitRow}
                         colSpan={headers.length + 1}
                       >
-                        <RowDetails />
+                        <RowDetails fhirProfiles={data} />
                       </TableExpandedRow>
                     ) : (
                       <TableExpandedRow
