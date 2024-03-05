@@ -11,7 +11,7 @@ const Item = () => {
     <ClickableTile
       className={styles.customTile}
       id="menu-item"
-      href={`${openmrsSpaBase}data-visualizer`}
+      href={`${openmrsSpaBase}health-exchange`}
     >
       <div className="customTileTitle">{<Db2DataSharingGroup size={24} />}</div>
       <div>Health Exchange</div>
