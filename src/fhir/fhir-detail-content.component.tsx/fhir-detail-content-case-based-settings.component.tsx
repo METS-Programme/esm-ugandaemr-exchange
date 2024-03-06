@@ -1,61 +1,51 @@
 import React from "react";
-import {
-  DataTable,
-  Table,
-  TableContainer,
-  TableHead,
-  TableRow,
-  TableHeader,
-  TableBody,
-  TableCell,
-} from "@carbon/react";
+import { Form, FormGroup, Stack, TextInput } from "@carbon/react";
+import { useTranslation } from "react-i18next";
 
-const CaseBasedSettings = ({ fhirProfiles }) => {
-  const tableHeaders = [
-    { key: "url", header: "URL" },
-    {
-      key: "numberOfResourcesInBundle",
-      header: "Number of Resources in Bundle",
-    },
-    { key: "urlUserName", header: "User Name" },
-    { key: "urlToken", header: "Token" },
-  ];
-
-  const tableRows = fhirProfiles.map((profile, index) => ({
-    id: `${index}`,
-    url: profile.url,
-    numberOfResourcesInBundle: profile.numberOfResourcesInBundle,
-    urlUserName: profile.urlUserName,
-    urlToken: profile.urlToken,
-  }));
+const CaseBasedSettings = () => {
+  const { t } = useTranslation();
 
   return (
-    <DataTable rows={tableRows} headers={tableHeaders} useZebraStyles>
-      {({ rows, headers, getHeaderProps, getTableProps, getRowProps }) => (
-        <TableContainer>
-          <Table {...getTableProps()}>
-            <TableHead>
-              <TableRow>
-                {headers.map((header) => (
-                  <TableHeader {...getHeaderProps({ header })}>
-                    {header.header?.content ?? header.header}
-                  </TableHeader>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {rows.map((row) => (
-                <TableRow {...getRowProps({ row })} key={row.id}>
-                  {row.cells.map((cell) => (
-                    <TableCell key={cell.id}>{cell.value}</TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      )}
-    </DataTable>
+    <div>
+      <Form>
+        <Stack gap={2}>
+          <FormGroup>
+            <TextInput type="text" labelText={t("url", "URL")} id="url-input" />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              type="text"
+              labelText={t(
+                "syncLimit",
+                "Number of Resources to Sync at a time"
+              )}
+              id="sync-limit-input"
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              type="text"
+              labelText={t("username", "Username")}
+              id="username-input"
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              type="text"
+              labelText={t("password", "Password")}
+              id="password-input"
+            />
+          </FormGroup>
+          <FormGroup>
+            <TextInput
+              type="text"
+              labelText={t("authToken", "Auth Token")}
+              id="auth-token-input"
+            />
+          </FormGroup>
+        </Stack>
+      </Form>
+    </div>
   );
 };
 

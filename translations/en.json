@@ -9,5 +9,10 @@
     "resourceType": "Resource Type",
     "caseBasedSettings": "Case Based Settings",
     "resourceFilters": "Resource Filters",
-     "syncSettings": "Sync Settings"
+    "syncSettings": "Sync Settings",
+    "url": "URL",
+    "username": "Username",
+    "numberOfResourcesToSync": "Number of Resources to Sync at a time",
+    "password": "Password",
+    "authToken": "Auth Token"
 }
