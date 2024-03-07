@@ -2,7 +2,13 @@ import React from "react";
 import { Form, FormGroup, Stack, TextInput } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 
-const CaseBasedSettings = () => {
+const CaseBasedSettings = ({
+  url,
+  syncLimit,
+  urlToken,
+  urlUserName,
+  urlPassword,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -10,7 +16,12 @@ const CaseBasedSettings = () => {
       <Form>
         <Stack gap={2}>
           <FormGroup>
-            <TextInput type="text" labelText={t("url", "URL")} id="url-input" />
+            <TextInput
+              type="text"
+              labelText={t("url", "URL")}
+              id="url-input"
+              value={url}
+            />
           </FormGroup>
           <FormGroup>
             <TextInput

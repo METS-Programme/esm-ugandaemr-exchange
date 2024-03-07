@@ -175,28 +175,30 @@ const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
-                  <React.Fragment key={row.id}>
-                    <TableExpandRow {...getRowProps({ row })}>
-                      {row.cells.map((cell) => (
-                        <TableCell key={cell.id}>{cell.value}</TableCell>
-                      ))}
-                    </TableExpandRow>
-                    {row.isExpanded ? (
-                      <TableExpandedRow
-                        className={styles.expandedActiveVisitRow}
-                        colSpan={headers.length + 1}
-                      >
-                        <RowDetails />
-                      </TableExpandedRow>
-                    ) : (
-                      <TableExpandedRow
-                        className={styles.hiddenRow}
-                        colSpan={headers.length + 1}
-                      />
-                    )}
-                  </React.Fragment>
-                ))}
+                {rows.map((row) => {
+                  return (
+                    <React.Fragment key={row.id}>
+                      <TableExpandRow {...getRowProps({ row })}>
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id}>{cell.value}</TableCell>
+                        ))}
+                      </TableExpandRow>
+                      {row.isExpanded ? (
+                        <TableExpandedRow
+                          className={styles.expandedActiveVisitRow}
+                          colSpan={headers.length + 1}
+                        >
+                          <RowDetails selectedProfileData={row} />
+                        </TableExpandedRow>
+                      ) : (
+                        <TableExpandedRow
+                          className={styles.hiddenRow}
+                          colSpan={headers.length + 1}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </TableBody>
             </Table>
             {rows.length === 0 ? (
