@@ -23,7 +23,7 @@ export function mapDataElements(dataArray: Array<Record<string, any>>) {
         name: profile?.name,
         uuid: profile?.uuid,
         resourceTypes: profile?.resourceTypes,
-        profileEnabled: profile?.profileEnabled, // Keep this property if you want to show whether a profile is enabled, but don't filter out profiles based on this
+        profileEnabled: profile?.profileEnabled,
         patientIdentifierType: profile?.patientIdentifierType,
         numberOfResourcesInBundle: profile?.numberOfResourcesInBundle,
         durationToKeepSyncedResources: profile?.durationToKeepSyncedResources,

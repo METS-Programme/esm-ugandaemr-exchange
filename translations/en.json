@@ -14,5 +14,15 @@
     "username": "Username",
     "numberOfResourcesToSync": "Number of Resources to Sync at a time",
     "password": "Password",
-    "authToken": "Auth Token"
+    "authToken": "Auth Token",
+    "patientIdentifierType": "Patient Identifier Type",
+    "patientIdentifierSourceId": "Patient Identifier Source ID",
+    "encounterTypeUuids": "Encounter Type UUIDS",
+    "observationConceptId": "Observation Concept IDs",
+    "syncFhirProfileName": "Sync Fhir Profile Name",
+    "enableProfile": "Enable Profile",
+    "generateBundle": "Generate Bundle",
+    "syncHistoricalData": "Sync Historical Data",
+    "noOfResourcesInBundle": "No of Resources in Bundle",
+    "durationKeepSyncedResource": "Duration To Keep Synced Resource (Days)"
 }

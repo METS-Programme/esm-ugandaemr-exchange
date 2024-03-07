@@ -30,6 +30,7 @@ const CaseBasedSettings = ({
                 "syncLimit",
                 "Number of Resources to Sync at a time"
               )}
+              value={syncLimit}
               id="sync-limit-input"
             />
           </FormGroup>
@@ -37,6 +38,7 @@ const CaseBasedSettings = ({
             <TextInput
               type="text"
               labelText={t("username", "Username")}
+              value={urlUserName}
               id="username-input"
             />
           </FormGroup>
@@ -44,6 +46,7 @@ const CaseBasedSettings = ({
             <TextInput
               type="text"
               labelText={t("password", "Password")}
+              value={urlPassword}
               id="password-input"
             />
           </FormGroup>
@@ -51,6 +54,7 @@ const CaseBasedSettings = ({
             <TextInput
               type="text"
               labelText={t("authToken", "Auth Token")}
+              value={urlToken}
               id="auth-token-input"
             />
           </FormGroup>
