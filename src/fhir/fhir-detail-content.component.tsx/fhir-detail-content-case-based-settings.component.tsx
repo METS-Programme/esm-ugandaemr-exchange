@@ -9,6 +9,7 @@ const CaseBasedSettings = ({
   urlToken,
   urlUserName,
   urlPassword,
+  isEditMode,
 }) => {
   const { t } = useTranslation();
 
@@ -23,6 +24,7 @@ const CaseBasedSettings = ({
                 labelText={t("url", "URL")}
                 id="url-input"
                 value={url}
+                disabled={!isEditMode}
               />
             </FormGroup>
             <FormGroup>

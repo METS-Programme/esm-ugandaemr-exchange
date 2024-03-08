@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { ContentSwitcher, Switch } from "@carbon/react";
+import { Button, ContentSwitcher, Switch } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import CaseBasedSettings from "./fhir-detail-content.component.tsx/fhir-detail-content-case-based-settings.component";
 import ResourceFilters from "./fhir-detail-content.component.tsx/fhir-detial-content-resource-filters.component";
 import ResourceDefinition from "./fhir-detail-content.component.tsx/fhir-detail-content-resource-definition.component";
 import { AssemblyCluster, Filter, Settings } from "@carbon/react/icons";
 import styles from "../fhir/fhir-detail.scss";
-import { Button } from "@carbon/react";
-
 const RowDetails = ({ selectedProfileData }) => {
   const { t } = useTranslation();
   const [tabType, setTabType] = useState("Resource Definition");
@@ -71,6 +69,7 @@ const RowDetails = ({ selectedProfileData }) => {
           urlToken={selectedProfileData.urlToken}
           urlUserName={selectedProfileData.urlUserName}
           urlPassword={selectedProfileData.urlPassword}
+          isEditMode={isEditMode}
         />
       )}
       <div className={styles.editButtonsContainer}>
