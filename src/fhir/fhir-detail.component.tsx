@@ -6,7 +6,7 @@ import ResourceFilters from "./fhir-detail-content.component.tsx/fhir-detial-con
 import ResourceDefinition from "./fhir-detail-content.component.tsx/fhir-detail-content-resource-definition.component";
 import { AssemblyCluster, Filter, Settings } from "@carbon/react/icons";
 import styles from "../fhir/fhir-detail.scss";
-import { useGetPatientIdentifierType } from "./fhir.resource";
+import { Button } from "@carbon/react";
 
 const RowDetails = ({ selectedProfileData }) => {
   const { t } = useTranslation();
@@ -14,6 +14,21 @@ const RowDetails = ({ selectedProfileData }) => {
 
   const handleTabTypeChange = ({ name }) => {
     setTabType(name);
+  };
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const handleEdit = () => {
+    setIsEditMode(true);
+  };
+
+  const handleSubmit = () => {
+    // Submit logic for all tabs
+    setIsEditMode(false);
+  };
+
+  const handleCancel = () => {
+    // Cancel logic for all tabs
+    setIsEditMode(false);
   };
 
   return (
@@ -58,6 +73,23 @@ const RowDetails = ({ selectedProfileData }) => {
           urlPassword={selectedProfileData.urlPassword}
         />
       )}
+      <div className={styles.editButtonsContainer}>
+        {!isEditMode && (
+          <Button kind="primary" onClick={handleEdit}>
+            Edit
+          </Button>
+        )}
+        {isEditMode && (
+          <>
+            <Button kind="secondary" onClick={handleCancel}>
+              Cancel
+            </Button>
+            <Button kind="primary" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };
