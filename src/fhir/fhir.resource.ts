@@ -1,6 +1,5 @@
 import useSWR from "swr";
 import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
-import { EditAction } from "./fhir.component";
 
 export function useGetFhirProfiles() {
   const apiUrl = `${restBaseUrl}/syncfhirprofile`;
@@ -9,10 +8,21 @@ export function useGetFhirProfiles() {
     openmrsFetch
   );
   return {
-    // fhirProfiles: data ? mapDataElements(data?.data["results"]) : [],
     fhirProfiles: data ? data?.data?.results : [],
     isError: error,
     isLoadingFhirProfiles: isLoading,
+  };
+}
+export function useGetPatientIdentifierType() {
+  const apiUrl = `${restBaseUrl}/patientidentifiertype`;
+  const { data, error, isLoading } = useSWR<{ data: { results: any } }, Error>(
+    apiUrl,
+    openmrsFetch
+  );
+  return {
+    patientIdentifierTypes: data ? data?.data?.results : [],
+    isError: error,
+    isLoadingPatientIdentifierTypes: isLoading,
   };
 }
 
@@ -40,7 +50,6 @@ export function mapDataElements(dataArray: Array<Record<string, any>>) {
         urlUserName: profile?.urlUserName,
         urlPassword: profile?.urlPassword,
         links: profile?.links,
-        actions: EditAction(),
       });
     });
   }

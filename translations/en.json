@@ -24,5 +24,17 @@
     "generateBundle": "Generate Bundle",
     "syncHistoricalData": "Sync Historical Data",
     "noOfResourcesInBundle": "No of Resources in Bundle",
-    "durationKeepSyncedResource": "Duration To Keep Synced Resource (Days)"
+    "durationKeepSyncedResource": "Duration To Keep Synced Resource (Days)",
+    "episodeOfCareUuids": "Episode of Care (Program) UUIDS",
+    "patient": "Patient",
+    "person": "Person",
+    "episodeOfCare": "Episode of Care (Program)",
+    "encounter": "Encounter",
+    "observation": "Observation",
+    "serviceRequest": "Service Request (Lab Orders)",
+    "medicationRequest": "Medication Request (Medication Orders)",
+    "practitioner": "Practioner (Provider)",
+    "profileCaseBased": "Is Profile Case Based",
+    "caseBasedPrimaryResourceType": "Case Based Primary Resource Type",
+    "caseBasedPrimaryResourceTypeIdentifier": "Case Based Primary Resource Type Identifier"
 }

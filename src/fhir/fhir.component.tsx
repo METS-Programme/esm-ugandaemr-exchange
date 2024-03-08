@@ -40,28 +40,3 @@ const Fhir: React.FC = () => {
 };
 
 export default Fhir;
-
-export const EditAction = () => {
-  return (
-    <>
-      <Button
-        type="button"
-        size="sm"
-        className="submitButton clear-padding-margin"
-        iconDescription={"Edit"}
-        kind="ghost"
-        renderIcon={Edit}
-        hasIconOnly
-      />
-      <Button
-        type="button"
-        size="sm"
-        className="submitButton clear-padding-margin"
-        iconDescription={"View"}
-        kind="ghost"
-        renderIcon={View}
-        hasIconOnly
-      />
-    </>
-  );
-};
