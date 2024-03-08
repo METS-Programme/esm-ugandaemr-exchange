@@ -26,7 +26,7 @@ const ResourceDefinition = ({
               type="text"
               labelText={t("syncFhirProfileName", "Sync Fhir Profile Name")}
               id="sync-fhir-profile-name"
-              value={syncFhirName}
+              value={syncFhirName || ""}
             />
           </FormGroup>
           <div>
@@ -67,7 +67,7 @@ const ResourceDefinition = ({
                 "No of Resources in Bundle"
               )}
               id="no-of-resources-in-bundle"
-              value={resourcesInBundle}
+              value={resourcesInBundle || ""}
             />
           </FormGroup>
           <FormGroup>

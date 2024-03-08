@@ -9,7 +9,8 @@ export function useGetFhirProfiles() {
     openmrsFetch
   );
   return {
-    fhirProfiles: data ? mapDataElements(data?.data["results"]) : [],
+    // fhirProfiles: data ? mapDataElements(data?.data["results"]) : [],
+    fhirProfiles: data ? data?.data?.results : [],
     isError: error,
     isLoadingFhirProfiles: isLoading,
   };

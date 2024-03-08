@@ -12,21 +12,8 @@ const RowDetails = ({ selectedProfileData }) => {
   const handleTabTypeChange = ({ name }) => {
     setTabType(name);
   };
-  const findCell = (key) => {
-    const cell = selectedProfileData.cells.find((cell) =>
-      cell.id.endsWith(`:${key}`)
-    );
-    return cell ? cell.value : "";
-  };
 
-  const [name, setNameUrl] = useState(findCell("name"));
-  const [url, setUrl] = useState(findCell("url"));
-  const [syncLimit, setSyncLimit] = useState(findCell("syncLimit"));
-  const [urlUserName, setUrlUserName] = useState(findCell("urlUserName"));
-  const [urlPassword, setUrlPassword] = useState(findCell("urlPassword"));
-  const [authToken, setAuthToken] = useState(findCell("urlToken"));
-
-  console.info(selectedProfileData);
+  // console.info(selectedProfileData);
 
   return (
     <div>
@@ -48,23 +35,23 @@ const RowDetails = ({ selectedProfileData }) => {
         </Switch>
       </ContentSwitcher>
 
-      {tabType === "Resource Definition" && selectedProfileData && (
+      {tabType === "Resource Definition" && (
         <ResourceDefinition
-          syncFhirName={name}
-          resourcesInBundle="hey"
-          durationSyncedResources="hey"
+          syncFhirName={selectedProfileData.name}
+          resourcesInBundle={selectedProfileData.numberOfResourcesInBundle}
+          durationSyncedResources={
+            selectedProfileData.durationToKeepSyncedResources
+          }
         />
       )}
-      {tabType === "Resource Filters" && selectedProfileData && (
-        <ResourceFilters />
-      )}
-      {tabType === "Sync Settings" && selectedProfileData && (
+      {tabType === "Resource Filters" && <ResourceFilters />}
+      {tabType === "Sync Settings" && (
         <CaseBasedSettings
-          url={url}
-          syncLimit={syncLimit}
-          urlToken={authToken}
-          urlUserName={urlUserName}
-          urlPassword={urlPassword}
+          url={selectedProfileData.url}
+          syncLimit={selectedProfileData.syncLimit}
+          urlToken={selectedProfileData.urlToken}
+          urlUserName={selectedProfileData.urlUserName}
+          urlPassword={selectedProfileData.urlPassword}
         />
       )}
     </div>

@@ -27,6 +27,7 @@ import { useTranslation } from "react-i18next";
 import styles from "../components/data-table/data-tables.scss";
 import { saveAs } from "file-saver";
 import RowDetails from "./fhir-detail.component";
+import { useGetFhirProfiles } from "./fhir.resource";
 
 type FilterProps = {
   rowIds: Array<string>;
@@ -108,7 +109,6 @@ const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
     );
     return [header, ...rows].join("\n");
   };
-
   return (
     <DataTable
       data-floating-menu-container
@@ -188,7 +188,9 @@ const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
                           className={styles.expandedActiveVisitRow}
                           colSpan={headers.length + 1}
                         >
-                          <RowDetails selectedProfileData={row} />
+                          <RowDetails
+                            selectedProfileData={data.find((item) => item.uuid)}
+                          />
                         </TableExpandedRow>
                       ) : (
                         <TableExpandedRow
