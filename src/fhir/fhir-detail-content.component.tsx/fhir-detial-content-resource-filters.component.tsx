@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dropdown, Form, FormGroup, Stack, TextInput } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import { useGetPatientIdentifierType } from "../fhir.resource";
-import { caseBasedPrimaryResourceTypes } from "../../constants";
 import styles from "../fhir-detail.scss";
 
-const ResourceFilters = () => {
+const ResourceFilters = ({ isEditMode, patientIdentifierType }) => {
   const { t } = useTranslation();
 
   const { patientIdentifierTypes } = useGetPatientIdentifierType();
@@ -15,11 +14,27 @@ const ResourceFilters = () => {
     label: type.display,
   }));
 
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState(
+    patientIdentifierType
+      ? {
+          id: patientIdentifierType.uuid,
+          label: patientIdentifierType.display,
+        }
+      : null
+  );
 
   const handleSelectionChange = (selectedItem) => {
     setSelectedItem(selectedItem);
   };
+
+  useEffect(() => {
+    if (patientIdentifierType) {
+      setSelectedItem({
+        id: patientIdentifierType.uuid,
+        label: patientIdentifierType.display,
+      });
+    }
+  }, [patientIdentifierType]);
 
   return (
     <div className={styles.formContainer}>
@@ -38,6 +53,7 @@ const ResourceFilters = () => {
                 onChange={(event) => handleSelectionChange(event.selectedItem)}
                 itemToString={(item) => (item ? item.label : "")}
                 label="Select Patient Identifier Type"
+                disabled={!isEditMode}
               />
             </FormGroup>
             <FormGroup>
@@ -48,6 +64,7 @@ const ResourceFilters = () => {
                   "Patient Identifier Source ID"
                 )}
                 id="patient-identifier-source-id"
+                disabled={!isEditMode}
               />
             </FormGroup>
             <FormGroup>
@@ -55,6 +72,7 @@ const ResourceFilters = () => {
                 type="text"
                 labelText={t("encounterTypeUuids", "Encounter Type UUIDS")}
                 id="encounter-type-uuids"
+                disabled={!isEditMode}
               />
             </FormGroup>
             <FormGroup>
@@ -62,6 +80,7 @@ const ResourceFilters = () => {
                 type="text"
                 labelText={t("observationConceptId", "Observation Concept IDs")}
                 id="observation-concept-id"
+                disabled={!isEditMode}
               />
             </FormGroup>
           </Stack>
@@ -78,6 +97,7 @@ const ResourceFilters = () => {
                   "Episode of Care (Program) UUIDS"
                 )}
                 id="episode-of-care"
+                disabled={!isEditMode}
               />
             </FormGroup>
           </Stack>

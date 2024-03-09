@@ -36,5 +36,10 @@
     "practitioner": "Practioner (Provider)",
     "profileCaseBased": "Is Profile Case Based",
     "caseBasedPrimaryResourceType": "Case Based Primary Resource Type",
-    "caseBasedPrimaryResourceTypeIdentifier": "Case Based Primary Resource Type Identifier"
+    "caseBasedPrimaryResourceTypeIdentifier": "Case Based Primary Resource Type Identifier",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "profileSearchable": "Is Profile Searchable",
+    "syncStartDate": "Sync Start Date"
 }

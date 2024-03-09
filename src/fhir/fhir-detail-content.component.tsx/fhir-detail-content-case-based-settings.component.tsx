@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, FormGroup, Stack, TextInput } from "@carbon/react";
+import { Checkbox, Form, FormGroup, Stack, TextInput } from "@carbon/react";
 import { useTranslation } from "react-i18next";
 import styles from "../fhir-detail.scss";
 
@@ -9,6 +9,8 @@ const CaseBasedSettings = ({
   urlToken,
   urlUserName,
   urlPassword,
+  searchable,
+  searchURL,
   isEditMode,
 }) => {
   const { t } = useTranslation();
@@ -36,6 +38,7 @@ const CaseBasedSettings = ({
                 )}
                 value={syncLimit}
                 id="sync-limit-input"
+                disabled={!isEditMode}
               />
             </FormGroup>
             <FormGroup>
@@ -44,6 +47,7 @@ const CaseBasedSettings = ({
                 labelText={t("username", "Username")}
                 value={urlUserName}
                 id="username-input"
+                disabled={!isEditMode}
               />
             </FormGroup>
             <FormGroup>
@@ -52,6 +56,7 @@ const CaseBasedSettings = ({
                 labelText={t("password", "Password")}
                 value={urlPassword}
                 id="password-input"
+                disabled={!isEditMode}
               />
             </FormGroup>
           </Stack>
@@ -66,6 +71,22 @@ const CaseBasedSettings = ({
                 labelText={t("authToken", "Auth Token")}
                 value={urlToken}
                 id="auth-token-input"
+                disabled={!isEditMode}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Checkbox
+                labelText={t("syncHistoricalData", "Sync Historical Data")}
+                id="checkbox-label-2"
+                checked={searchable}
+                disabled={!isEditMode}
+              />
+              <TextInput
+                type="text"
+                labelText={t("profileSearchable", "Is Profile Searchable")}
+                id="url-input"
+                value={searchURL}
+                disabled={!isEditMode}
               />
             </FormGroup>
           </Stack>

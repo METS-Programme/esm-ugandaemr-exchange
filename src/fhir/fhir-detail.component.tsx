@@ -4,7 +4,13 @@ import { useTranslation } from "react-i18next";
 import CaseBasedSettings from "./fhir-detail-content.component.tsx/fhir-detail-content-case-based-settings.component";
 import ResourceFilters from "./fhir-detail-content.component.tsx/fhir-detial-content-resource-filters.component";
 import ResourceDefinition from "./fhir-detail-content.component.tsx/fhir-detail-content-resource-definition.component";
-import { AssemblyCluster, Filter, Settings } from "@carbon/react/icons";
+import {
+  AssemblyCluster,
+  Edit,
+  Filter,
+  Save,
+  Settings,
+} from "@carbon/react/icons";
 import styles from "../fhir/fhir-detail.scss";
 const RowDetails = ({ selectedProfileData }) => {
   const { t } = useTranslation();
@@ -20,12 +26,10 @@ const RowDetails = ({ selectedProfileData }) => {
   };
 
   const handleSubmit = () => {
-    // Submit logic for all tabs
     setIsEditMode(false);
   };
 
   const handleCancel = () => {
-    // Cancel logic for all tabs
     setIsEditMode(false);
   };
 
@@ -59,9 +63,27 @@ const RowDetails = ({ selectedProfileData }) => {
           durationSyncedResources={
             selectedProfileData.durationToKeepSyncedResources
           }
+          isCaseBasedProfile={selectedProfileData.isCaseBasedProfile}
+          generateBundle={selectedProfileData.generateBundle}
+          resourceTypes={selectedProfileData.resourceTypes}
+          profileEnabled={selectedProfileData.profileEnabled}
+          syncDataEverSince={selectedProfileData.syncDataEverSince}
+          caseBasedPrimaryResourceType={
+            selectedProfileData.caseBasedPrimaryResourceType
+          }
+          caseBasedPrimaryResourceTypeId={
+            selectedProfileData.caseBasedPrimaryResourceTypeId
+          }
+          dataToSyncStartDate={selectedProfileData.dataToSyncStartDate}
+          isEditMode={isEditMode}
         />
       )}
-      {tabType === "Resource Filters" && <ResourceFilters />}
+      {tabType === "Resource Filters" && (
+        <ResourceFilters
+          patientIdentifierType={selectedProfileData.patientIdentifierType}
+          isEditMode={isEditMode}
+        />
+      )}
       {tabType === "Sync Settings" && (
         <CaseBasedSettings
           url={selectedProfileData.url}
@@ -69,22 +91,36 @@ const RowDetails = ({ selectedProfileData }) => {
           urlToken={selectedProfileData.urlToken}
           urlUserName={selectedProfileData.urlUserName}
           urlPassword={selectedProfileData.urlPassword}
+          searchable={selectedProfileData.searchable}
+          searchURL={selectedProfileData.searchURL}
           isEditMode={isEditMode}
         />
       )}
       <div className={styles.editButtonsContainer}>
         {!isEditMode && (
-          <Button kind="primary" onClick={handleEdit}>
-            Edit
+          <Button
+            kind="primary"
+            size="md"
+            className={styles.actionButton}
+            onClick={handleEdit}
+          >
+            <Edit />
+            <span>{t("edit", "Edit")}</span>
           </Button>
         )}
         {isEditMode && (
           <>
             <Button kind="secondary" onClick={handleCancel}>
-              Cancel
+              <span>{t("cancel", "Cancel")}</span>
             </Button>
-            <Button kind="primary" onClick={handleSubmit}>
-              Submit
+            <Button
+              kind="primary"
+              size="md"
+              className={styles.actionButton}
+              onClick={handleSubmit}
+            >
+              <Save />
+              <span>{t("save", "Save")}</span>
             </Button>
           </>
         )}
