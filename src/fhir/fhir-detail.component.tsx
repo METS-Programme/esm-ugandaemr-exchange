@@ -16,6 +16,11 @@ const RowDetails = ({ selectedProfileData }) => {
   const { t } = useTranslation();
   const [tabType, setTabType] = useState("Resource Definition");
 
+  const resourceSearchParameterObject = JSON.parse(
+    selectedProfileData.resourceSearchParameter
+  );
+  // console.info(resourceSearchParameterObject.observationFilter.code);
+
   const handleTabTypeChange = ({ name }) => {
     setTabType(name);
   };
@@ -32,8 +37,6 @@ const RowDetails = ({ selectedProfileData }) => {
   const handleCancel = () => {
     setIsEditMode(false);
   };
-  // const jsonObject = JSON.parse(selectedProfileData.resourceSearchParameter)
-  // console.info(jsonObject.observationFilter.code);
 
   return (
     <div>
