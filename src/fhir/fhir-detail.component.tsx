@@ -32,6 +32,8 @@ const RowDetails = ({ selectedProfileData }) => {
   const handleCancel = () => {
     setIsEditMode(false);
   };
+  // const jsonObject = JSON.parse(selectedProfileData.resourceSearchParameter)
+  // console.info(jsonObject.observationFilter.code);
 
   return (
     <div>
