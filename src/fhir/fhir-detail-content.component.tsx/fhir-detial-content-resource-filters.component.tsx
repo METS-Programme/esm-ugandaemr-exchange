@@ -4,7 +4,12 @@ import { useTranslation } from "react-i18next";
 import { useGetPatientIdentifierType } from "../fhir.resource";
 import styles from "../fhir-detail.scss";
 
-const ResourceFilters = ({ isEditMode, patientIdentifierType }) => {
+const ResourceFilters = ({
+  isEditMode,
+  patientIdentifierType,
+  observationFilterCodes,
+  encounterTypeUUIDS,
+}) => {
   const { t } = useTranslation();
 
   const { patientIdentifierTypes } = useGetPatientIdentifierType();
@@ -13,6 +18,9 @@ const ResourceFilters = ({ isEditMode, patientIdentifierType }) => {
     id: type.uuid,
     label: type.display,
   }));
+
+  const [observationConceptIds, setObservationConceptIds] = useState("");
+  const [encounterTypeUuids, setEncounterTypeUuids] = useState("");
 
   const [selectedItem, setSelectedItem] = useState(
     patientIdentifierType
@@ -35,6 +43,18 @@ const ResourceFilters = ({ isEditMode, patientIdentifierType }) => {
       });
     }
   }, [patientIdentifierType]);
+
+  useEffect(() => {
+    if (observationFilterCodes) {
+      setObservationConceptIds(observationFilterCodes);
+    }
+  }, [observationFilterCodes]);
+
+  useEffect(() => {
+    if (encounterTypeUUIDS) {
+      setEncounterTypeUuids(encounterTypeUUIDS);
+    }
+  }, [encounterTypeUUIDS]);
 
   return (
     <div className={styles.formContainer}>
@@ -71,6 +91,8 @@ const ResourceFilters = ({ isEditMode, patientIdentifierType }) => {
               <TextInput
                 type="text"
                 labelText={t("encounterTypeUuids", "Encounter Type UUIDS")}
+                value={encounterTypeUuids}
+                onChange={(e) => setEncounterTypeUuids(e.target.value)}
                 id="encounter-type-uuids"
                 disabled={!isEditMode}
               />
@@ -80,6 +102,8 @@ const ResourceFilters = ({ isEditMode, patientIdentifierType }) => {
                 type="text"
                 labelText={t("observationConceptId", "Observation Concept IDs")}
                 id="observation-concept-id"
+                value={observationConceptIds}
+                onChange={(e) => setObservationConceptIds(e.target.value)}
                 disabled={!isEditMode}
               />
             </FormGroup>

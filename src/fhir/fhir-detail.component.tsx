@@ -19,7 +19,6 @@ const RowDetails = ({ selectedProfileData }) => {
   const resourceSearchParameterObject = JSON.parse(
     selectedProfileData.resourceSearchParameter
   );
-  // console.info(resourceSearchParameterObject.observationFilter.code);
 
   const handleTabTypeChange = ({ name }) => {
     setTabType(name);
@@ -86,6 +85,12 @@ const RowDetails = ({ selectedProfileData }) => {
       {tabType === "Resource Filters" && (
         <ResourceFilters
           patientIdentifierType={selectedProfileData.patientIdentifierType}
+          observationFilterCodes={resourceSearchParameterObject.observationFilter.code.join(
+            ","
+          )}
+          encounterTypeUUIDS={resourceSearchParameterObject.encounterFilter.type.join(
+            ","
+          )}
           isEditMode={isEditMode}
         />
       )}
