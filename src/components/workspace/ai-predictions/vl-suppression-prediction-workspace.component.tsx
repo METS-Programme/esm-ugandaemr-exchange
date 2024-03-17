@@ -12,7 +12,7 @@ import {
   validateVLSuppressionParams,
 } from "./vl-suppression-prediction.resource";
 import logo from "../../assets/images/artificial-intelligence-logo.png";
-import { PatientChartProps } from "../../types";
+import { PatientChartProps } from "../../../types";
 import { usePatient } from "@openmrs/esm-framework";
 import PatientList from "./vl-data-table.component";
 
