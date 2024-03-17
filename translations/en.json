@@ -3,7 +3,6 @@
     "hie": "HIE Metrics",
     "performance": "Performance",
     "dataEntryStats": "Data Entry Statistics",
-    "drYonna": "AI Partner",
-  "artStartDate": "ART Start Date",
-  "currentArtRegimen": "Current ART Regimen"
+    "aiPrediction": "AI Predictions",
+    "chatBotMdodal": "Chatbot Modal"
 }

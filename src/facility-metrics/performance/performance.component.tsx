@@ -1,13 +1,17 @@
 import React from "react";
-import { DonutChart, LineChart, SimpleBarChart } from "@carbon/charts-react";
+import {
+  DonutChart,
+  SimpleBarChart,
+  StackedBarChart,
+} from "@carbon/charts-react";
 import { showModal } from "@openmrs/esm-framework";
 import {
   donutDepartmentOptions,
   donutGenderOptions,
   horizontalBarData,
   horizontalBarOptions,
-  lineData,
-  linePOCOptions,
+  StackedBarData,
+  StackedBarPOCOptions,
 } from "./mock-data";
 import { CaretUp, CheckmarkOutline } from "@carbon/react/icons";
 import styles from "./performance.scss";
@@ -71,7 +75,7 @@ const Performance: React.FC = () => {
                 <td className={styles.boxThirdItem}>
                   HMIS -{" "}
                   <span onClick={showHMISReports} role="button" tabIndex={0}>
-                    5
+                    2
                   </span>
                 </td>
               </tr>
@@ -80,7 +84,7 @@ const Performance: React.FC = () => {
                 <td className={styles.boxThirdItem}>
                   PEPFAR -{" "}
                   <span onClick={showPEPFARReports} role="button" tabIndex={0}>
-                    2
+                    7
                   </span>
                 </td>
               </tr>
@@ -103,7 +107,10 @@ const Performance: React.FC = () => {
 
       <div className={styles.chartRowContainer}>
         <div className={styles.chartItemStacked}>
-          <LineChart data={lineData} options={linePOCOptions} />
+          <StackedBarChart
+            data={StackedBarData}
+            options={StackedBarPOCOptions}
+          />
         </div>
         <div className={styles.chartItemStacked}>
           <SimpleBarChart

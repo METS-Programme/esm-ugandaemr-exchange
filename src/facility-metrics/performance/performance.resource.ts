@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
 
 export function useGetFacilityMetrics() {
-  const apiURL = `${restBaseUrl}ugandaemrreports/genderMetrics`;
+  const apiURL = `${restBaseUrl}/ugandaemrreports/genderMetrics`;
 
   const { data, error, isLoading } = useSWR<{ data: { results: any } }, Error>(
     apiURL,
