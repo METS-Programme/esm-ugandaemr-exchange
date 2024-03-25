@@ -8,10 +8,11 @@ type encounterRequest = {
   groupBy: string;
 };
 
-type EncounterEntry = {
-  entryType: string;
-  fullName: string;
-  numberOfEntries: number;
+export type dataProvider = {
+  group: string;
+  key: string;
+  value: number;
+  personUuid: string;
 };
 
 export function useGetDataEntryStatistics(params: encounterRequest) {
@@ -53,14 +54,14 @@ export async function getDataEntryStatistics(params: encounterRequest) {
 }
 
 export function formatReults(dataResults) {
-  const dataEntryData: Array<{ group: string; key: string; value: number }> =
-    [];
+  const dataEntryData: Array<dataProvider> = [];
 
   dataResults?.forEach((entry) => {
     dataEntryData.push({
       group: entry.entryType,
       key: entry.fullName,
       value: entry.numberOfEntries,
+      personUuid: entry.personUuid,
     });
   });
 
