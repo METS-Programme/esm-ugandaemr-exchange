@@ -8,6 +8,12 @@ type encounterRequest = {
   groupBy: string;
 };
 
+type EncounterEntry = {
+  entryType: string;
+  fullName: string;
+  numberOfEntries: number;
+};
+
 export function useGetDataEntryStatistics(params: encounterRequest) {
   const apiUrl = `${restBaseUrl}/dataentrystatistics?fromDate=${params.fromDate}&toDate=${params.toDate}&encUserColumn=${params.encUserColumn}&groupBy=${params.groupBy}`;
   const abortController = new AbortController();
@@ -24,9 +30,12 @@ export function useGetDataEntryStatistics(params: encounterRequest) {
     { data: { any } },
     Error
   >(apiUrl, fetcher);
+
+  const dataResults: Array<{ group: string; key: string; value: number }> = formatReults(data?.data);
+
   return {
-    encounterData: data ? data?.data : [],
-    isLoading,
+    encounterData: dataResults ? dataResults : [],
+    isLoadingStats: isLoading,
     isError: error,
     isValidating,
     mutate,
@@ -41,4 +50,19 @@ export async function getDataEntryStatistics(params: encounterRequest) {
   return openmrsFetch(apiUrl, {
     signal: abortController.signal,
   });
+}
+
+export function formatReults(dataResults) {
+  const dataEntryData: Array<{ group: string; key: string; value: number }> =
+    [];
+
+  dataResults?.forEach((entry) => {
+    dataEntryData.push({
+      group: entry.entryType,
+      key: entry.fullName,
+      value: entry.numberOfEntries,
+    });
+  });
+
+  return dataEntryData;
 }
