@@ -29,15 +29,20 @@ import dayjs from "dayjs";
 
 const Performance: React.FC = () => {
   const { isLoading, facilityMetrics } = useGetFacilityMetrics();
-  const [dateArray, setDateArray] = useState([new Date(), new Date()]);
   const [encUserColumn] = useState("creator");
   const [groupBy] = useState("creator");
   const [statsChartData, setStatsChartData] = useState([]);
   const [hasUpdatedData, setHasUpdatedData] = useState(false);
   const [isUpdatingMetrics, setIsUpdatingMetrics] = useState(false);
+  const currentDate = new Date();
+  const startOfWeek = new Date(currentDate);
+  startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
+  const endOfWeek = new Date(currentDate);
+  endOfWeek.setDate(currentDate.getDate() + (6 - currentDate.getDay()));
+  const [dateArray, setDateArray] = useState([startOfWeek, endOfWeek]);
   const { isLoadingStats, encounterData } = useGetDataEntryStatistics({
-    fromDate: dayjs(new Date()).format("YYYY-MM-DD"),
-    toDate: dayjs(new Date()).format("YYYY-MM-DD"),
+    fromDate: dayjs(startOfWeek).format("YYYY-MM-DD"),
+    toDate: dayjs(endOfWeek).format("YYYY-MM-DD"),
     encUserColumn: encUserColumn,
     groupBy: groupBy,
   });
