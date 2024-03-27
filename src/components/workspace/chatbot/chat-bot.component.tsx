@@ -7,6 +7,7 @@ import {
   SendAltFilled,
 } from "@carbon/react/icons";
 import { InlineLoading } from "@carbon/react";
+import { postToChatbot } from "./chatbot.resource";
 
 interface ChatMessage {
   type: "incoming" | "outgoing";
@@ -49,20 +50,27 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
   const handleSendChat = () => {
     const newMessage: ChatMessage = {
       type: "outgoing",
-      text: userInput,
+      text: userInput.trim(),
     };
 
-    setChatMessages([...chatMessages, newMessage]);
+    if (!userInput.trim()) return;
 
+    setChatMessages([...chatMessages, newMessage]);
     setIsLoading(true);
-    setTimeout(() => {
-      const botResponse: ChatMessage = {
-        type: "incoming",
-        text: "This is a bot response.",
-      };
-      setChatMessages((prevMessages) => [...prevMessages, botResponse]);
-      setIsLoading(false);
-    }, 1000);
+
+    postToChatbot(userInput.trim())
+      .then((response) => {
+        const botResponse: ChatMessage = {
+          type: "incoming",
+          text: response.data.message,
+        };
+        setChatMessages((prevMessages) => [...prevMessages, botResponse]);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching chat response:", error);
+        setIsLoading(false);
+      });
 
     setUserInput("");
   };
