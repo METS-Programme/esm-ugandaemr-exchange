@@ -1,19 +1,11 @@
 import React, { useCallback, useState } from "react";
-import {
-  DonutChart,
-  LineChart,
-  SimpleBarChart,
-  StackedBarChart,
-} from "@carbon/charts-react";
+import { DonutChart, PieChart, SimpleBarChart } from "@carbon/charts-react";
 import { showModal, showNotification } from "@openmrs/esm-framework";
 import {
-  donutDepartmentOptions,
+  dataEntryStatsOptions,
   donutGenderOptions,
-  horizontalBarData,
-  horizontalBarOptions,
-  lineOptions,
-  StackedBarData,
-  StackedBarPOCOptions,
+  healthWorkersDisaggregationOptions,
+  pieChartOptions,
 } from "./mock-data";
 import { CaretUp, CheckmarkOutline } from "@carbon/react/icons";
 import styles from "./performance.scss";
@@ -22,6 +14,7 @@ import { DateFilterInput } from "../helper-components/date-filter-section";
 import { DataTableSkeleton } from "@carbon/react";
 import {
   formatReults,
+  formatStatsData,
   getDataEntryStatistics,
   useGetDataEntryStatistics,
 } from "../data-entry-statistics/data-entry-statistics.resource";
@@ -46,10 +39,15 @@ const Performance: React.FC = () => {
     encUserColumn: encUserColumn,
     groupBy: groupBy,
   });
+  const [contractCategoryArray, setContractCategoryArray] = useState([]);
+  const [providersArray, setProvidersArray] = useState([]);
 
   if (!isLoadingStats) {
     if (!hasUpdatedData) {
-      setStatsChartData(Object.values(encounterData));
+      formatStatsData(Object.values(encounterData)).then((res) => {
+        setContractCategoryArray(res.contractCategory);
+        setProvidersArray(res.providers);
+      });
       setHasUpdatedData(true);
     }
   }
@@ -88,8 +86,11 @@ const Performance: React.FC = () => {
       (response) => {
         if (response.status === 200) {
           if (response?.data) {
-            const statsData = formatReults(response?.data);
-            setStatsChartData(Object.values(statsData));
+            const statsData = Object.values(formatReults(response?.data));
+            formatStatsData(statsData).then((res) => {
+              setContractCategoryArray(res.contractCategory);
+              setProvidersArray(res.providers);
+            });
           }
         }
         setIsUpdatingMetrics(false);
@@ -178,34 +179,25 @@ const Performance: React.FC = () => {
           />
         </div>
         <div className={styles.chartItem}>
-          <DonutChart
+          <PieChart
             data={isLoading ? [] : facilityMetrics?.nationality}
-            options={donutDepartmentOptions}
+            options={pieChartOptions}
           />
         </div>
       </div>
 
       <div className={styles.chartRowContainer}>
-        <div className={styles.chartItemStacked}>
-          <StackedBarChart
-            data={StackedBarData}
-            options={StackedBarPOCOptions}
+        <div className={styles.chartItem}>
+          <PieChart
+            data={contractCategoryArray}
+            options={healthWorkersDisaggregationOptions}
           />
         </div>
-        <div className={styles.chartItemStacked}>
-          <SimpleBarChart
-            data={horizontalBarData}
-            options={horizontalBarOptions}
-          />
-        </div>
+        <div className={styles.chartItemStats}></div>
       </div>
 
       <div className={styles.statsContainer}>
-        {isLoadingStats || isUpdatingMetrics ? (
-          <DataTableSkeleton role="progressbar" />
-        ) : (
-          <LineChart data={statsChartData} options={lineOptions} />
-        )}
+        <SimpleBarChart data={providersArray} options={dataEntryStatsOptions} />
       </div>
     </>
   );
