@@ -38,7 +38,7 @@ interface ComponentProps {
   endDate: Date;
 }
 
-const EntryStatistics: React.FC<ComponentProps> = ({ startDate, endDate}) => {
+const EntryStatistics: React.FC<ComponentProps> = ({ startDate, endDate }) => {
   const { t } = useTranslation();
   const layout = useLayoutType();
   const isTablet = useLayoutType() === "tablet";
