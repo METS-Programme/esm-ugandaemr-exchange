@@ -20,17 +20,6 @@ export enum ChartTheme {
   G10 = "g10",
 }
 
-export const donutGenderData = [
-  {
-    group: "Male",
-    value: 11251,
-  },
-  {
-    group: "Female",
-    value: 17955,
-  },
-];
-
 export const donutGenderOptions = {
   title: "Patients by Gender",
   resizable: true,
@@ -41,25 +30,6 @@ export const donutGenderOptions = {
   },
   height: "300px",
 };
-
-export const donutDepartmentData = [
-  {
-    group: "Refugee",
-    value: 5,
-  },
-  {
-    group: "National",
-    value: 15,
-  },
-  {
-    group: "Foreigner",
-    value: 6,
-  },
-  {
-    group: "Uncategorized",
-    value: 4,
-  },
-];
 
 export const donutDepartmentOptions = {
   title: "Patients by Nationality",
@@ -73,31 +43,20 @@ export const donutDepartmentOptions = {
   theme: ChartTheme.WHITE,
 };
 
-export const horizontalBarData = [
-  {
-    group: "ART",
-    value: 16,
-  },
-  {
-    group: "TB",
-    value: 15,
-  },
-  {
-    group: "LAB",
-    value: 50,
-  },
-  {
-    group: "MCH",
-    value: 1,
-  },
-  {
-    group: "HTS",
-    value: 5,
-  },
-];
+export const pieChartOptions = {
+  title: "Patients by Nationality",
+  resizable: true,
+  height: "300px",
+};
 
-export const horizontalBarOptions = {
-  title: "Patients Served Per Service Area",
+export const healthWorkersDisaggregationOptions = {
+  title: "Health Workers Disaggregation",
+  resizable: true,
+  height: "300px",
+};
+
+export const dataEntryStatsOptions = {
+  title: "Data Entry Statistics",
   legend: {
     position: LegendPositions.TOP,
   },
@@ -110,7 +69,7 @@ export const horizontalBarOptions = {
       mapsTo: "value",
     },
   },
-  height: "500px",
+  height: "600px",
   grid: {
     x: {
       enabled: true,

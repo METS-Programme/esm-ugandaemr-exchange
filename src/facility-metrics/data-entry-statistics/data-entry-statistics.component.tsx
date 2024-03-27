@@ -33,13 +33,18 @@ interface EncounterEntry {
   numberOfEntries: number;
 }
 
-const EntryStatistics: React.FC = () => {
+interface ComponentProps {
+  startDate: Date;
+  endDate: Date;
+}
+
+const EntryStatistics: React.FC<ComponentProps> = ({ startDate, endDate }) => {
   const { t } = useTranslation();
   const layout = useLayoutType();
   const isTablet = useLayoutType() === "tablet";
   const responsiveSize = isTablet ? "lg" : "sm";
-  const [fromDate, setFromDate] = useState(new Date("2023-09-01"));
-  const [toDate, setToDate] = useState(new Date(new Date("2023-12-13")));
+  const [fromDate, setFromDate] = useState(startDate);
+  const [toDate, setToDate] = useState(endDate);
   const [encUserColumn, setEncUserColumn] = useState("creator");
   const [groupBy, setGroupBy] = useState("creator");
   const [loading, setLoading] = useState(true);
@@ -47,13 +52,13 @@ const EntryStatistics: React.FC = () => {
   const [statsChartData, setStatsChartData] = useState([]);
   const [willUpdateStatistics, setWillUpdateStatistics] = useState(true);
 
-  const handleStartDateChange = (selectedDate) => {
-    setFromDate(selectedDate[0]);
-  };
-
-  const handleEndDateChange = (selectedDate) => {
-    setToDate(selectedDate[0]);
-  };
+  // const handleStartDateChange = (selectedDate) => {
+  //   setFromDate(selectedDate[0]);
+  // };
+  //
+  // const handleEndDateChange = (selectedDate) => {
+  //   setToDate(selectedDate[0]);
+  // };
 
   const handleUpdateReport = useCallback(() => {
     setLoading(true);
@@ -97,21 +102,21 @@ const EntryStatistics: React.FC = () => {
     );
   }, [encUserColumn, fromDate, groupBy, toDate]);
 
-  const { isLoading, encounterData } = useGetDataEntryStatistics({
+  const { isLoadingStats, encounterData } = useGetDataEntryStatistics({
     fromDate: dayjs(fromDate).format("YYYY-MM-DD"),
     toDate: dayjs(toDate).format("YYYY-MM-DD"),
     encUserColumn: encUserColumn,
     groupBy: groupBy,
   });
 
-  if (!isLoading) {
+  if (!isLoadingStats) {
     if (willUpdateStatistics) {
       const dataEntrydata = [];
-      (encounterData as EncounterEntry[]).forEach((entry) => {
+      encounterData.forEach((entry) => {
         dataEntrydata.push({
-          group: entry.entryType,
-          key: entry.fullName,
-          value: entry.numberOfEntries,
+          group: entry.group,
+          key: entry.key,
+          value: entry.value,
         });
       });
       setShowTable(true);
@@ -123,39 +128,6 @@ const EntryStatistics: React.FC = () => {
 
   return (
     <>
-      <div className={styles.dataEntryContainer}>
-        <div className={styles.datePickerContainer}>
-          <DatePicker datePickerType="single" onChange={handleStartDateChange}>
-            <DatePickerInput
-              id="date-picker-input-start"
-              placeholder="mm/dd/yyyy"
-              labelText="Start date"
-              size="md"
-            />
-          </DatePicker>
-        </div>
-        <div className={styles.datePickerContainer}>
-          <DatePicker datePickerType="single" onChange={handleEndDateChange}>
-            <DatePickerInput
-              id="date-picker-input-finish"
-              placeholder="mm/dd/yyyy"
-              labelText="End date"
-              size="md"
-            />
-          </DatePicker>
-        </div>
-        <div className={styles.buttonContainer}>
-          <Button
-            size="sm"
-            kind="primary"
-            onClick={handleUpdateReport}
-            className={styles.actionButton}
-          >
-            <Intersect />
-            <span>View</span>
-          </Button>
-        </div>
-      </div>
       {showTable ? (
         <>
           {loading && <DataTableSkeleton role="progressbar" />}
