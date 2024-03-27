@@ -1,17 +1,32 @@
 import React, { useCallback, useState } from "react";
-import { DonutChart, PieChart, SimpleBarChart } from "@carbon/charts-react";
-import { showModal, showNotification } from "@openmrs/esm-framework";
+import {
+  DonutChart,
+  PieChart,
+  SimpleBarChart,
+  StackedBarChart,
+} from "@carbon/charts-react";
+import {
+  showModal,
+  showNotification,
+  useSession,
+} from "@openmrs/esm-framework";
 import {
   dataEntryStatsOptions,
   donutGenderOptions,
   healthWorkersDisaggregationOptions,
   pieChartOptions,
+  StackedBarPOCOptions,
 } from "./mock-data";
 import { CaretUp, CheckmarkOutline } from "@carbon/react/icons";
 import styles from "./performance.scss";
-import { useGetFacilityMetrics } from "./performance.resource";
+import {
+  formatPOCData,
+  getPOCDataStatistics,
+  useGetFacilityMetrics,
+  useParentLocation,
+  useServicePointCount,
+} from "./performance.resource";
 import { DateFilterInput } from "../helper-components/date-filter-section";
-import { DataTableSkeleton } from "@carbon/react";
 import {
   formatReults,
   formatStatsData,
@@ -24,7 +39,6 @@ const Performance: React.FC = () => {
   const { isLoading, facilityMetrics } = useGetFacilityMetrics();
   const [encUserColumn] = useState("creator");
   const [groupBy] = useState("creator");
-  const [statsChartData, setStatsChartData] = useState([]);
   const [hasUpdatedData, setHasUpdatedData] = useState(false);
   const [isUpdatingMetrics, setIsUpdatingMetrics] = useState(false);
   const currentDate = new Date();
@@ -39,8 +53,17 @@ const Performance: React.FC = () => {
     encUserColumn: encUserColumn,
     groupBy: groupBy,
   });
+  const session = useSession();
+  const { location } = useParentLocation(session?.sessionLocation?.uuid);
+  const { isLoadingPOCSats, stats } = useServicePointCount(
+    location?.parentLocation?.uuid,
+    dayjs(startOfWeek).format("YYYY-MM-DD"),
+    dayjs(endOfWeek).format("YYYY-MM-DD")
+  );
   const [contractCategoryArray, setContractCategoryArray] = useState([]);
   const [providersArray, setProvidersArray] = useState([]);
+  const [pocDataStats, setPOCDataStats] = useState([]);
+  const [hasUpdatedPOCStats, setHasUpdatedPOCStats] = useState(false);
 
   if (!isLoadingStats) {
     if (!hasUpdatedData) {
@@ -52,6 +75,12 @@ const Performance: React.FC = () => {
     }
   }
 
+  if (!isLoadingPOCSats) {
+    if (!hasUpdatedPOCStats) {
+      setPOCDataStats(stats);
+      setHasUpdatedPOCStats(true);
+    }
+  }
   const showSystemTools = () => {
     const dispose = showModal("tools-modal", {
       close: () => dispose(),
@@ -104,7 +133,30 @@ const Performance: React.FC = () => {
         });
       }
     );
-  }, [encUserColumn, dateArray, groupBy]);
+
+    getPOCDataStatistics(
+      location?.parentLocation?.uuid,
+      dayjs(dateArray[0]).format("YYYY-MM-DD"),
+      dayjs(dateArray[1]).format("YYYY-MM-DD")
+    ).then(
+      (response) => {
+        if (response.status === 200) {
+          if (response?.data) {
+            setPOCDataStats(formatPOCData(response?.data?.results));
+          }
+        }
+        // setIsUpdatingMetrics(false);
+      },
+      (error) => {
+        showNotification({
+          title: "Generating Statistics Failed",
+          kind: "error",
+          critical: true,
+          description: error?.message,
+        });
+      }
+    );
+  }, [dateArray, encUserColumn, groupBy, location?.parentLocation?.uuid]);
 
   return (
     <>
@@ -193,7 +245,9 @@ const Performance: React.FC = () => {
             options={healthWorkersDisaggregationOptions}
           />
         </div>
-        <div className={styles.chartItemStats}></div>
+        <div className={styles.chartItemStats}>
+          <StackedBarChart options={StackedBarPOCOptions} data={pocDataStats} />
+        </div>
       </div>
 
       <div className={styles.statsContainer}>

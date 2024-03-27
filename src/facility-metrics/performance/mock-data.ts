@@ -55,29 +55,6 @@ export const healthWorkersDisaggregationOptions = {
   height: "300px",
 };
 
-export const horizontalBarData = [
-  {
-    group: "ART",
-    value: 16,
-  },
-  {
-    group: "TB",
-    value: 15,
-  },
-  {
-    group: "LAB",
-    value: 50,
-  },
-  {
-    group: "MCH",
-    value: 1,
-  },
-  {
-    group: "HTS",
-    value: 5,
-  },
-];
-
 export const dataEntryStatsOptions = {
   title: "Data Entry Statistics",
   legend: {
@@ -85,11 +62,11 @@ export const dataEntryStatsOptions = {
   },
   axes: {
     left: {
-      mapsTo: "value",
-    },
-    bottom: {
       mapsTo: "group",
       scaleType: ScaleTypes.LABELS,
+    },
+    bottom: {
+      mapsTo: "value",
     },
   },
   height: "600px",
