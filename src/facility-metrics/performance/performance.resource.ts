@@ -89,7 +89,7 @@ export function useParentLocation(currentLocationUuid: string) {
 
   return {
     location: data?.data,
-    isLoading,
+    isLoadingLocation: isLoading,
     isError: error,
     isValidating,
     mutate,

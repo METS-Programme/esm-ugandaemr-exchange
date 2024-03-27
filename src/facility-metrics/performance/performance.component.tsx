@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {
   DonutChart,
   PieChart,
@@ -40,7 +40,6 @@ const Performance: React.FC = () => {
   const [encUserColumn] = useState("creator");
   const [groupBy] = useState("creator");
   const [hasUpdatedData, setHasUpdatedData] = useState(false);
-  const [isUpdatingMetrics, setIsUpdatingMetrics] = useState(false);
   const currentDate = new Date();
   const startOfWeek = new Date(currentDate);
   startOfWeek.setDate(currentDate.getDate() - currentDate.getDay());
@@ -62,25 +61,35 @@ const Performance: React.FC = () => {
   );
   const [contractCategoryArray, setContractCategoryArray] = useState([]);
   const [providersArray, setProvidersArray] = useState([]);
-  const [pocDataStats, setPOCDataStats] = useState([]);
+  const [pOCDataStats, setPOCDataStats] = useState([]);
   const [hasUpdatedPOCStats, setHasUpdatedPOCStats] = useState(false);
 
-  if (!isLoadingStats) {
-    if (!hasUpdatedData) {
-      formatStatsData(Object.values(encounterData)).then((res) => {
-        setContractCategoryArray(res.contractCategory);
-        setProvidersArray(res.providers);
-      });
-      setHasUpdatedData(true);
+  useEffect(() => {
+    if (!isLoadingStats) {
+      if (!hasUpdatedData) {
+        formatStatsData(Object.values(encounterData)).then((res) => {
+          setContractCategoryArray(res.contractCategory);
+          setProvidersArray(res.providers);
+        });
+        setHasUpdatedData(true);
+      }
     }
-  }
 
-  if (!isLoadingPOCSats) {
-    if (!hasUpdatedPOCStats) {
-      setPOCDataStats(stats);
-      setHasUpdatedPOCStats(true);
+    if (!isLoadingPOCSats) {
+      if (!hasUpdatedPOCStats) {
+        setPOCDataStats(stats);
+        setHasUpdatedPOCStats(true);
+      }
     }
-  }
+  }, [
+    encounterData,
+    hasUpdatedData,
+    hasUpdatedPOCStats,
+    isLoadingPOCSats,
+    isLoadingStats,
+    stats,
+  ]);
+
   const showSystemTools = () => {
     const dispose = showModal("tools-modal", {
       close: () => dispose(),
@@ -104,8 +113,6 @@ const Performance: React.FC = () => {
   };
 
   const updatePerformanceMetrics = useCallback(() => {
-    setIsUpdatingMetrics(true);
-
     getDataEntryStatistics({
       fromDate: dayjs(dateArray[0]).format("YYYY-MM-DD"),
       toDate: dayjs(dateArray[1]).format("YYYY-MM-DD"),
@@ -122,11 +129,10 @@ const Performance: React.FC = () => {
             });
           }
         }
-        setIsUpdatingMetrics(false);
       },
       (error) => {
         showNotification({
-          title: "Generating Statistics Failed",
+          title: "Generating Data Entry Statistics Failed",
           kind: "error",
           critical: true,
           description: error?.message,
@@ -145,11 +151,10 @@ const Performance: React.FC = () => {
             setPOCDataStats(formatPOCData(response?.data?.results));
           }
         }
-        // setIsUpdatingMetrics(false);
       },
       (error) => {
         showNotification({
-          title: "Generating Statistics Failed",
+          title: "Generating POC Statistics Failed",
           kind: "error",
           critical: true,
           description: error?.message,
@@ -246,7 +251,7 @@ const Performance: React.FC = () => {
           />
         </div>
         <div className={styles.chartItemStats}>
-          <StackedBarChart options={StackedBarPOCOptions} data={pocDataStats} />
+          <StackedBarChart data={pOCDataStats} options={StackedBarPOCOptions} />
         </div>
       </div>
 
