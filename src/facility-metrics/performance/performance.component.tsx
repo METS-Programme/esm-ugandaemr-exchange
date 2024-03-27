@@ -76,7 +76,7 @@ const Performance: React.FC = () => {
     }
 
     if (!isLoadingPOCSats) {
-      if (!hasUpdatedPOCStats) {
+      if (!hasUpdatedPOCStats && stats?.length > 0) {
         setPOCDataStats(stats);
         setHasUpdatedPOCStats(true);
       }
