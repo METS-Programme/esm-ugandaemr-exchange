@@ -13,7 +13,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
   const handleClick = useCallback(
     () =>
       launchPatientWorkspace("ai-predictions-workspace", {
-        workspaceTitle: t("aiPrediction", "AI Predictions"),
+        workspaceTitle: t("drYonna", "Dr. Yonna"),
       }),
     []
   );
@@ -25,7 +25,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
         className={`${styles.container}`}
         role="button"
         tabIndex={0}
-        iconDescription={t("aiPrediction", "AI Predictions")}
+        iconDescription={t("drYonna", "AI Partner")}
         onClick={handleClick}
       />
     );
@@ -42,7 +42,7 @@ const VLSuppressionPredictionButton: React.FC = () => {
         </div>
       )}
       hasIconOnly
-      iconDescription={t("aiPrediction", "AI Predictions")}
+      iconDescription={t("drYonna", "AI Partner")}
       enterDelayMs={1000}
       tooltipAlignment="center"
       tooltipPosition="left"
