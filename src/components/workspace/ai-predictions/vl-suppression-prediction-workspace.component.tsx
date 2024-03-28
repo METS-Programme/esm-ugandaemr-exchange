@@ -121,7 +121,6 @@ const VLSuppressionPredictionWorkSpace: React.FC<PatientChartProps> = ({
       current_regimen: currentRegimen,
       last_indication_for_VL_Testing: indicationForVLTesting,
     });
-
   const [validationError, setValidationError] = useState<string | null>(null);
   useEffect(() => {
     const error = validateVLSuppressionParams({
