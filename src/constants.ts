@@ -17,18 +17,6 @@ export const fhirTableHeaders = [
     header: "UUID",
     accessor: "uuid",
   },
-  {
-    id: "4",
-    key: "profileEnabled",
-    header: "PROFILE ENABLED",
-    accessor: "profileEnabled",
-  },
-  {
-    id: "5",
-    key: "actions",
-    header: "ACTIONS",
-    accessor: "actions",
-  },
 ];
 
 export const profileTransactionsHeaders = [
@@ -88,5 +76,32 @@ export const incomingTransactionsHeaders = [
     key: "actions",
     header: "ACTIONS",
     accessor: "actions",
+  },
+];
+
+export const caseBasedPrimaryResourceTypes: Array<Item> = [
+  {
+    id: "encounter",
+    label: "Encounter",
+  },
+  {
+    id: "episodeOfCare",
+    label: "Episode of Care (Program)",
+  },
+  {
+    id: "programWorkflowState",
+    label: "Program Workflow State",
+  },
+  {
+    id: "patientIdentifierType",
+    label: "Patient Identifier Type",
+  },
+  {
+    id: "order",
+    label: "Order",
+  },
+  {
+    id: "cohortType",
+    label: "Cohort Type",
   },
 ];

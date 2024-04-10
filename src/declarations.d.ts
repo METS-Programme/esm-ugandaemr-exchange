@@ -36,7 +36,6 @@ declare type fhirProfile = {
   urlUserName?: string;
   urlPassword?: string;
   links?: Array<link>;
-  actions: any;
 };
 
 declare type exchangeProfile = {
@@ -156,4 +155,9 @@ type savedDashboard = {
   name: string;
   description: string;
   items: any;
+};
+
+declare type Item = {
+  id: string;
+  label: string;
 };
