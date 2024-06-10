@@ -62,7 +62,7 @@ const ChatbotComponent: React.FC<ChatbotChatProps> = ({ closeChatbotChat }) => {
       .then((response) => {
         const botResponse: ChatMessage = {
           type: "incoming",
-          text: response.data.message,
+          text: response.data.response,
         };
         setChatMessages((prevMessages) => [...prevMessages, botResponse]);
         setIsLoading(false);

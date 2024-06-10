@@ -13,7 +13,7 @@ export function getCareProvider(provider: string) {
 }
 
 export function postToChatbot(message) {
-  const url = "http://161.97.98.248:5000/chat";
+  const url = "https://chatbot.mets.or.ug/chat";
   const body = JSON.stringify({ message });
 
   const abortController = new AbortController();
