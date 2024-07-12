@@ -1,9 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  DonutChart,
-  PieChart,
-  StackedBarChart,
-} from "@carbon/charts-react";
+import { DonutChart, PieChart, StackedBarChart } from "@carbon/charts-react";
 import {
   showModal,
   showNotification,
