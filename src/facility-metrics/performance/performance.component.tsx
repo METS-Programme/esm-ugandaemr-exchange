@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import {
   DonutChart,
   PieChart,
-  SimpleBarChart,
   StackedBarChart,
 } from "@carbon/charts-react";
 import {
@@ -16,7 +15,7 @@ import {
   healthWorkersDisaggregationOptions,
   pieChartOptions,
   StackedBarPOCOptions,
-} from "./mock-data";
+} from "./chart-options";
 import { CaretUp, CheckmarkOutline } from "@carbon/react/icons";
 import styles from "./performance.scss";
 import {
@@ -256,7 +255,10 @@ const Performance: React.FC = () => {
       </div>
 
       <div className={styles.statsContainer}>
-        <SimpleBarChart data={providersArray} options={dataEntryStatsOptions} />
+        <StackedBarChart
+          data={providersArray}
+          options={dataEntryStatsOptions}
+        />
       </div>
     </>
   );

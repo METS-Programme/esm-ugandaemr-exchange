@@ -18,7 +18,7 @@ import {
 import { showNotification, useLayoutType } from "@openmrs/esm-framework";
 import EmptyStateIllustration from "./empty-state-illustration.component";
 import { LineChart } from "@carbon/charts-react";
-import { lineOptions } from "../performance/mock-data";
+import { lineOptions } from "../performance/chart-options";
 import { fetchTransactionCount } from "../facility-metrics.resource";
 
 type EntryTypeData = {

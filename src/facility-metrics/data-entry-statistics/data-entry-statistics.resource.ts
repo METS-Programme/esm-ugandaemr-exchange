@@ -159,17 +159,11 @@ export async function formatStatsData(statsData: Array<dataProvider>) {
           });
         });
 
-        uniqueProviders.forEach((provider) => {
-          const sum = statsData.reduce((acc, curr) => {
-            if (curr.personUuid === provider.personUuid) {
-              return acc + curr.value;
-            }
-            return acc;
-          }, 0);
-
+        statsData.map((item) => {
           providers.push({
-            group: `${provider?.key})`,
-            value: sum,
+            group: item.group,
+            key: item.key,
+            value: item.value,
           });
         });
 
