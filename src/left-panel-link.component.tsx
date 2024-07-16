@@ -6,6 +6,7 @@ import { ConfigurableLink } from "@openmrs/esm-framework";
 export interface LinkConfig {
   name: string;
   title: string;
+  slot?: string;
 }
 
 function LinkExtension({ config }: { config: LinkConfig }) {

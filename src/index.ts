@@ -4,7 +4,6 @@ import {
   defineConfigSchema,
 } from "@openmrs/esm-framework";
 import { configSchema } from "./config-schema";
-import { createDashboardLink } from "./create-dashboard-link.component";
 import { createLeftPanelLink } from "./left-panel-link.component";
 import appMenu from "./components/exchange-menu-app/exchange-menu-app-item.component";
 
@@ -33,7 +32,15 @@ export const hieHomeLink = getSyncLifecycle(
 export const fhirProfileLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "fhir-exchange",
-    title: "FHIR Profiles",
+    title: "Sync FHIR Profiles",
+  }),
+  options
+);
+
+export const syncTaskTypesLink = getSyncLifecycle(
+  createLeftPanelLink({
+    name: "sync-task-types",
+    title: "Sync Task Types",
   }),
   options
 );

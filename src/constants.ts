@@ -31,6 +31,33 @@ export const fhirTableHeaders = [
   },
 ];
 
+export const syncTaskTypeTableHeaders = [
+  {
+    id: "1",
+    key: "name",
+    header: "NAME",
+    accessor: "name",
+  },
+  {
+    id: "2",
+    key: "url",
+    header: "URL",
+    accessor: "url",
+  },
+  {
+    id: "3",
+    key: "dataType",
+    header: "DATA TYPE ID",
+    accessor: "dataType",
+  },
+  {
+    id: "4",
+    key: "uuid",
+    header: "UUID",
+    accessor: "uuid",
+  },
+];
+
 export const profileTransactionsHeaders = [
   {
     id: "1",

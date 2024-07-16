@@ -1,0 +1,12 @@
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
+.taskTypeContainer {
+    padding: 0 1rem 0 1rem;
+    overflow: auto;
+}
+
+.createIcon {
+    padding: 1.0rem;
+    margin-right: 60px;
+}

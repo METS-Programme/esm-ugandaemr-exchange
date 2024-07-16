@@ -16,17 +16,29 @@
         {
             "component": "hieHomeLink",
             "name": "hie-home-link",
-            "slot": "health-exchange-left-panel-slot"
+            "slot": "health-exchange-left-panel-slot",
+            "order": 0
         },
         {
             "component": "fhirProfileLink",
             "name": "fhir-profile-link",
-            "slot": "health-exchange-left-panel-slot"
+            "slot": "health-exchange-left-panel-slot",
+            "order": 1
+        },
+        {
+            "component": "syncTaskTypesLink",
+            "name": "sync-task-types",
+            "slot": "health-exchange-left-panel-slot",
+            "order": 2
         },
         {
             "name": "vl-suppression-prediction",
             "component": "VLSuppressionPrediction",
             "slot": "action-menu-chart-items-slot"
+        },
+        {
+            "name": "sync-task-types-component",
+            "component": "SyncTaskTypesComponent"
         },
         {
             "name": "ai-predictions-workspace",
