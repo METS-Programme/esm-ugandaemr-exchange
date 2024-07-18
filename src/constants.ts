@@ -117,3 +117,78 @@ export const incomingTransactionsHeaders = [
     accessor: "actions",
   },
 ];
+
+export const syncTaskTypeDataTypes = [
+  {
+    id: "dataType1",
+    label: "java.lang.Boolean",
+  },
+  {
+    id: "dataType1",
+    label: "java.lang.Character",
+  },
+  {
+    id: "dataType1",
+    label: "java.lang.Float",
+  },
+  {
+    id: "dataType1",
+    label: "java.lang.Integer",
+  },
+  {
+    id: "dataType1",
+    label: "java.lang.String",
+  },
+  {
+    id: "dataType1",
+    label: "java.lang.Boolean",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Concept",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Drug",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Encounter",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Order",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.TestOrder",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Location",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Patient",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Person",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.ProgramWorkflow",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.Provider",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.User",
+  },
+  {
+    id: "dataType1",
+    label: "org.openmrs.util.AttributableDate",
+  },
+];

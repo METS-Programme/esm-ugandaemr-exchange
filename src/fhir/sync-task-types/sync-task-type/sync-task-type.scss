@@ -1,0 +1,30 @@
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
+.formContainer {
+    width: 100%;
+    display: flex;
+}
+
+.form {
+    width: 50%;
+}
+
+.formFirst {
+    margin-right: 2rem;
+}
+
+.formRight {
+    margin-top: 0.3rem;
+}
+
+.editButtonsContainer {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: flex-end;
+    .actionButton {
+        svg {
+            margin-right: 0.5rem;
+        }
+    }
+}

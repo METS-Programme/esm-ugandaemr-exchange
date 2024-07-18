@@ -13,7 +13,7 @@ export interface Result {
 }
 
 export function useGetSyncTaskTypes() {
-  const apiUrl = `${restBaseUrl}/synctasktype`;
+  const apiUrl = `${restBaseUrl}/synctasktype?v=full`;
   const { data, error, isLoading } = useSWR<
     { data: SyncTaskTypeResponse },
     Error
