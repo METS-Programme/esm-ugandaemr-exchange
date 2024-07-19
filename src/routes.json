@@ -66,6 +66,11 @@
                 "name": "Health Exchange"
             }
 
+        },
+        {
+          "component": "scheduleManagerLink",
+          "name": "scheduler-manager-link",
+          "slot": "health-exchange-left-panel-slot"
         }
     ]
 }

@@ -38,6 +38,14 @@ export const fhirProfileLink = getSyncLifecycle(
   options
 );
 
+export const scheduleManagerLink = getSyncLifecycle(
+  createLeftPanelLink({
+    name: "schedule-manager",
+    title: "Schedule Manager",
+  }),
+  options
+);
+
 export const VLSuppressionPrediction = getAsyncLifecycle(
   () =>
     import(
