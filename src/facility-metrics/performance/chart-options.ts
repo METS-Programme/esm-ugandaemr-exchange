@@ -20,17 +20,6 @@ export enum ChartTheme {
   G10 = "g10",
 }
 
-export const donutGenderData = [
-  {
-    group: "Male",
-    value: 11251,
-  },
-  {
-    group: "Female",
-    value: 17955,
-  },
-];
-
 export const donutGenderOptions = {
   title: "Patients by Gender",
   resizable: true,
@@ -42,75 +31,36 @@ export const donutGenderOptions = {
   height: "300px",
 };
 
-export const donutDepartmentData = [
-  {
-    group: "Refugee",
-    value: 5,
-  },
-  {
-    group: "National",
-    value: 15,
-  },
-  {
-    group: "Foreigner",
-    value: 6,
-  },
-  {
-    group: "Uncategorized",
-    value: 4,
-  },
-];
-
-export const donutDepartmentOptions = {
+export const pieChartOptions = {
   title: "Patients by Nationality",
   resizable: true,
-  donut: {
-    center: {
-      label: "Patients",
-    },
-  },
   height: "300px",
-  theme: ChartTheme.WHITE,
 };
 
-export const horizontalBarData = [
-  {
-    group: "ART",
-    value: 16,
-  },
-  {
-    group: "TB",
-    value: 15,
-  },
-  {
-    group: "LAB",
-    value: 50,
-  },
-  {
-    group: "MCH",
-    value: 1,
-  },
-  {
-    group: "HTS",
-    value: 5,
-  },
-];
+export const healthWorkersDisaggregationOptions = {
+  title: "Health Workers Disaggregation",
+  resizable: true,
+  height: "300px",
+};
 
-export const horizontalBarOptions = {
-  title: "Patients Served Per Service Area",
+export const dataEntryStatsOptions = {
+  title: "Data Entry Statistics",
   legend: {
     position: LegendPositions.TOP,
   },
   axes: {
     left: {
-      mapsTo: "group",
+      title: "Data Entrant / Provider",
+      mapsTo: "key",
       scaleType: ScaleTypes.LABELS,
     },
     bottom: {
+      title: "Number of Entries",
       mapsTo: "value",
+      scaleType: ScaleTypes.LINEAR,
     },
   },
-  height: "500px",
+  height: "600px",
   grid: {
     x: {
       enabled: true,
@@ -139,49 +89,6 @@ export const lineOptions = {
   },
   height: "400px",
 };
-
-export const StackedBarData = [
-  {
-    group: "ART",
-    key: "Triage",
-    value: 16,
-  },
-  {
-    group: "ART",
-    key: "Clinician",
-    value: 16,
-  },
-  {
-    group: "ART",
-    key: "LAB",
-    value: 12,
-  },
-  {
-    group: "ART",
-    key: "Pharmacy",
-    value: 16,
-  },
-  {
-    group: "TB",
-    key: "Triage",
-    value: 15,
-  },
-  {
-    group: "TB",
-    key: "Clinician",
-    value: 12,
-  },
-  {
-    group: "TB",
-    key: "LAB",
-    value: 7,
-  },
-  {
-    group: "TB",
-    key: "Pharmacy",
-    value: 10,
-  },
-];
 
 export const StackedBarPOCOptions = {
   title: "POC Service Points",

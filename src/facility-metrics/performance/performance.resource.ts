@@ -59,3 +59,75 @@ export function mapFacilityMetrics(dataArray) {
 
   return facilityMetrics;
 }
+
+export function useServicePointCount(
+  parentLocation: string,
+  beforeDate: string,
+  afterDate: string
+) {
+  const apiUrl = `${restBaseUrl}/queuestatistics?parentLocation=${parentLocation}&toDate=${afterDate}&fromDate=${beforeDate}`;
+  const { data, error, isLoading, isValidating, mutate } = useSWR<
+    { data: { results: any } },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    stats: data?.data ? formatPOCData(data?.data?.results) : [],
+    isLoadingPOCSats: isLoading,
+    isError: error,
+    isValidating,
+    mutate,
+  };
+}
+
+export function useParentLocation(currentLocationUuid: string) {
+  const apiUrl = `${restBaseUrl}/location/${currentLocationUuid}`;
+  const { data, error, isLoading, isValidating, mutate } = useSWR<
+    { data: any },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    location: data?.data,
+    isLoadingLocation: isLoading,
+    isError: error,
+    isValidating,
+    mutate,
+  };
+}
+
+export async function getPOCDataStatistics(
+  parentLocation: string,
+  beforeDate: string,
+  afterDate: string
+) {
+  const abortController = new AbortController();
+  const apiUrl = `${restBaseUrl}/queuestatistics?parentLocation=${parentLocation}&toDate=${afterDate}&fromDate=${beforeDate}`;
+
+  return openmrsFetch(apiUrl, {
+    signal: abortController.signal,
+  });
+}
+
+export function formatPOCData(dataArray: Array<any>) {
+  const formatedArray = [];
+  dataArray?.map((item) => {
+    formatedArray.push({
+      group: "Pending",
+      key: item?.locationTag?.name,
+      value: item?.pending,
+    });
+    formatedArray.push({
+      group: "Serving",
+      key: item?.locationTag?.name,
+      value: item?.serving,
+    });
+    formatedArray.push({
+      group: "Completed",
+      key: item?.locationTag?.name,
+      value: item?.completed,
+    });
+  });
+
+  return formatedArray;
+}
