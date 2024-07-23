@@ -5,7 +5,7 @@ import LeftPanel from "./components/left-panel/left-panel.component";
 import styles from "./root.scss";
 import Fhir from "./fhir/fhir.component";
 import FacilityMetrics from "./facility-metrics/facility-metrics.component";
-import SyncTaskTypes from "./fhir/sync-task-types/sync-task-types.component";
+import ScheduleManager from "./scheduler/scheduler.component";
 
 const Root: React.FC = () => {
   const spaBasePath = window.spaBase;
@@ -25,7 +25,7 @@ const Root: React.FC = () => {
         <Routes>
           <Route path="/" element={<FacilityMetrics />} />
           <Route path="/fhir-exchange" element={<Fhir />} />
-          <Route path="/sync-task-types" element={<SyncTaskTypes />} />
+          <Route path="/schedule-manager" element={<ScheduleManager />} />
         </Routes>
       </main>
     </BrowserRouter>
