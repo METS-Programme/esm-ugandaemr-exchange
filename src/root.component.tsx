@@ -5,6 +5,9 @@ import LeftPanel from "./components/left-panel/left-panel.component";
 import styles from "./root.scss";
 import Fhir from "./fhir/fhir.component";
 import FacilityMetrics from "./facility-metrics/facility-metrics.component";
+import ClientRegistry from "./client-registry/client-registry.component";
+import FacilityRegistry from "./facility-registry/facility-registry.component";
+import ProductRegistry from "./product-registry/product-registry.component";
 import ScheduleManager from "./scheduler/scheduler.component";
 
 const Root: React.FC = () => {
@@ -25,6 +28,18 @@ const Root: React.FC = () => {
         <Routes>
           <Route path="/" element={<FacilityMetrics />} />
           <Route path="/fhir-exchange" element={<Fhir />} />
+          <Route
+            path="/client-registry-dashboard"
+            element={<ClientRegistry />}
+          />
+          <Route
+            path="/facility-registry-dashboard"
+            element={<FacilityRegistry />}
+          />
+          <Route
+            path="/product-registry-dashboard"
+            element={<ProductRegistry />}
+          />
           <Route path="/schedule-manager" element={<ScheduleManager />} />
         </Routes>
       </main>

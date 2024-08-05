@@ -1,0 +1,41 @@
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.form {
+    width: 50%;
+}
+
+.formFirst {
+    margin-right: 2rem;
+}
+
+.formRight {
+    margin-top: 0.3rem;
+}
+
+.formContainer {
+    width: 100%;
+    display: flex;
+}
+
+.resourceType {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.editButtonsContainer {
+    display: flex;
+    margin-top: 1rem;
+    justify-content: flex-end;
+    .actionButton {
+        svg {
+            margin-right: 0.5rem;
+        }
+    }
+}

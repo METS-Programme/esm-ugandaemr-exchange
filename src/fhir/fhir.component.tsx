@@ -6,8 +6,8 @@ import { Button } from "@carbon/react";
 import { Add, Edit, View } from "@carbon/react/icons";
 import { useGetFhirProfiles } from "./fhir.resource";
 import { fhirTableHeaders } from "../constants";
-import DataList from "../components/data-table/data-table.component";
 import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
+import FhirProfileDataList from "./fhir-detail-data-table.component";
 
 const Fhir: React.FC = () => {
   const { fhirProfiles } = useGetFhirProfiles();
@@ -28,7 +28,7 @@ const Fhir: React.FC = () => {
 
       {fhirProfiles.length > 0 ? (
         <div className={fhirStyles.fhirContainer}>
-          <DataList data={fhirProfiles} columns={fhirTableHeaders} />
+          <FhirProfileDataList data={fhirProfiles} columns={fhirTableHeaders} />
         </div>
       ) : (
         <EmptyStateComponent
@@ -40,28 +40,3 @@ const Fhir: React.FC = () => {
 };
 
 export default Fhir;
-
-export const EditAction = () => {
-  return (
-    <>
-      <Button
-        type="button"
-        size="sm"
-        className="submitButton clear-padding-margin"
-        iconDescription={"Edit"}
-        kind="ghost"
-        renderIcon={Edit}
-        hasIconOnly
-      />
-      <Button
-        type="button"
-        size="sm"
-        className="submitButton clear-padding-margin"
-        iconDescription={"View"}
-        kind="ghost"
-        renderIcon={View}
-        hasIconOnly
-      />
-    </>
-  );
-};
