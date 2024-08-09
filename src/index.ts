@@ -59,14 +59,6 @@ export const syncTaskTypesLink = getSyncLifecycle(
   options
 );
 
-export const clientRegistryLink = getSyncLifecycle(
-  createLeftPanelLink({
-    name: "client-registry",
-    title: "Client Registry",
-  }),
-  options
-);
-
 export const scheduleManagerLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "schedule-manager",

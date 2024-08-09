@@ -35,9 +35,16 @@
             "order": 2
         },
         {
+          "component": "scheduleManagerLink",
+          "name": "scheduler-manager-link",
+          "slot": "health-exchange-left-panel-slot",
+          "order": 3
+        },
+        {
             "component": "registriesDashboard",
-            "name": "client-registry-link",
-            "slot": "health-exchange-left-panel-slot"
+            "name": "registry-link",
+            "slot": "health-exchange-left-panel-slot",
+            "order": 4
         },
         {
             "name": "vl-suppression-prediction",
@@ -161,11 +168,7 @@
             "name": "product-registry-dashboard-ext",
             "slot": "product-registry-dashboard-slot",
             "component": "productRegistry"
-        },
-        {
-          "component": "scheduleManagerLink",
-          "name": "scheduler-manager-link",
-          "slot": "health-exchange-left-panel-slot"
         }
+        
     ]
 }
