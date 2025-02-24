@@ -161,3 +161,11 @@ declare type Item = {
   id: string;
   label: string;
 };
+
+type taskItem = {
+  no: number;
+  uuid: string;
+  name: string;
+  description?: string;
+  taskClass?: string;
+};
