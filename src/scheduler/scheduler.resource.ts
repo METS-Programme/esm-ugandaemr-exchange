@@ -1,10 +1,5 @@
 import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
-
-export type Task = {
-  no: string;
-  name: string;
-  description?: string;
-};
+import useSWR from "swr";
 export const schedulerTableHeaders = [
   {
     id: "1",
@@ -32,35 +27,23 @@ export const schedulerTableHeaders = [
   },
 ];
 
-export const schedulerTasks = [
-  {
-    no: "1",
-    name: "Send Viral Load Request to Central Server Task",
-    description: "Sending Viral Load requests to CPHL",
-  },
-  {
-    no: "2",
-    name: "Sending VL Program Data",
-    description: "Sending VL program data",
-  },
-  {
-    no: "3",
-    name: "Request Viral Results",
-    description: "Requesting for VL results",
-  },
-  {
-    no: "4",
-    name: "Send Analytics data to a central server",
-    description: "Sends daily EMR metrics to central server",
-  },
-  {
-    no: "5",
-    name: "Reporting Tables Flattening task",
-    description: "Creates tables for reporting using mamba",
-  },
-];
+export function useGetTasks() {
+  const apiUrl = `${restBaseUrl}/taskdefinition?v=custom:(uuid,name,description,taskClass)`;
+  const { data, error, isLoading, isValidating, mutate } = useSWR<
+    { data: any },
+    Error
+  >(apiUrl, openmrsFetch);
 
-export async function runTask(task: Task) {
+  return {
+    tasks: data ? mapTaskData(data?.data["results"]) : [],
+    isLoadingTasks: isLoading,
+    isError: error,
+    isValidating,
+    mutate,
+  };
+}
+
+export async function runTask(task: taskItem) {
   const abortController = new AbortController();
   const apiUrl = `${restBaseUrl}/taskaction`;
 
@@ -75,4 +58,20 @@ export async function runTask(task: Task) {
       tasks: [`${task.name}`],
     },
   });
+}
+export function mapTaskData(dataArray: Array<Record<string, string>>) {
+  const arrayToReturn: Array<taskItem> = [];
+  if (dataArray) {
+    dataArray.map((task: Record<string, string>, index) => {
+      arrayToReturn.push({
+        no: (index += 1),
+        uuid: task?.uuid,
+        name: task?.name,
+        description: task?.description,
+        taskClass: task?.taskClass,
+      });
+    });
+  }
+
+  return arrayToReturn;
 }

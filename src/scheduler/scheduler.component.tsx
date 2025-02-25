@@ -6,22 +6,22 @@ import DataList from "../components/data-table/data-table.component";
 import {
   runTask,
   schedulerTableHeaders,
-  schedulerTasks,
-  Task,
+  useGetTasks,
 } from "./scheduler.resource";
 import { Button, InlineLoading } from "@carbon/react";
 import { ChooseItem } from "@carbon/react/icons";
 import { showNotification, showToast } from "@openmrs/esm-framework";
 
 const ScheduleManager: React.FC = () => {
+  const { tasks } = useGetTasks();
   const [executingTaskId, setExecutingTaskId] = useState(null);
   const isExecutingTask = (taskId: string) => executingTaskId === taskId;
   const getTasks = () => {
     const taskArray = [];
-    schedulerTasks.map((task) => {
+    tasks?.map((task) => {
       taskArray.push({
         ...task,
-        actions: isExecutingTask(task.no) ? (
+        actions: isExecutingTask(task.uuid) ? (
           <InlineLoading />
         ) : (
           <Button
@@ -41,17 +41,17 @@ const ScheduleManager: React.FC = () => {
     return taskArray;
   };
 
-  const executeTask = useCallback((task: Task) => {
-    setExecutingTaskId(task.no);
+  const executeTask = useCallback((task: taskItem) => {
+    setExecutingTaskId(task.uuid);
 
     runTask(task).then(
       (response) => {
-        if (response.status === 201) {
+        if (response?.status === 201) {
           showToast({
             critical: true,
             title: "Execution Successful",
             kind: "success",
-            description: `Task ${task.name} executed Successfully`,
+            description: `Task ${task?.name} executed Successfully`,
           });
         }
         setExecutingTaskId(null);
@@ -73,7 +73,11 @@ const ScheduleManager: React.FC = () => {
       <Header illustrationComponent={<Illustration />} title={`Scheduler`} />
 
       <div className={fhirStyles.fhirContainer}>
-        <DataList data={getTasks()} columns={schedulerTableHeaders} />
+        <DataList
+          data={getTasks()}
+          columns={schedulerTableHeaders}
+          pageSize={20}
+        />
       </div>
     </>
   );

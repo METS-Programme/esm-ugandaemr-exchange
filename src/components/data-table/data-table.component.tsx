@@ -36,11 +36,12 @@ type FilterProps = {
 interface ListProps {
   columns: any;
   data: any;
+  pageSize?: number;
 }
 
 type DocumentType = "csv" | "pdf" | "json";
 
-const DataList: React.FC<ListProps> = ({ columns, data }) => {
+const DataList: React.FC<ListProps> = ({ columns, data, pageSize }) => {
   const { t } = useTranslation();
   const layout = useLayoutType();
   const isTablet = useLayoutType() === "tablet";
@@ -49,7 +50,7 @@ const DataList: React.FC<ListProps> = ({ columns, data }) => {
   const [list] = useState(data);
   const [documentType, setDocumentType] = useState<DocumentType>(null);
   const pageSizes = [10, 20, 30, 40, 50];
-  const [currentPageSize, setPageSize] = useState(10);
+  const [currentPageSize, setPageSize] = useState(pageSize ?? 10);
   const {
     goTo,
     results: paginatedList,
