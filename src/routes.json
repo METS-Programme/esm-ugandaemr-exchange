@@ -64,11 +64,6 @@
             "component": "VLSuppressionPredictionWorkspace"
         },
         {
-            "name": "chatbot-button",
-            "component": "ChatbotButton",
-            "slot": "homepage-widgets-slot"
-        },
-        {
             "component": "toolsModal",
             "name": "tools-modal",
             "online": true,
