@@ -1,7 +1,7 @@
 import React from "react";
 import { Checkbox, Form, FormGroup, Stack, TextInput } from "@carbon/react";
 import { useTranslation } from "react-i18next";
-import styles from "../fhir-detail.scss";
+import styles from "../sync-fhir-profile-detail.scss";
 
 const CaseBasedSettings = ({
   url,

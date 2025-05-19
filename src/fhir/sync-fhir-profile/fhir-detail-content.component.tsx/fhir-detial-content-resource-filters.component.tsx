@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Dropdown, Form, FormGroup, Stack, TextInput } from "@carbon/react";
 import { useTranslation } from "react-i18next";
-import { useGetPatientIdentifierType } from "../fhir.resource";
-import styles from "../fhir-detail.scss";
+import { useGetPatientIdentifierType } from "../sync-fhir-profile.resource";
+import styles from "../sync-fhir-profile-detail.scss";
 
 const ResourceFilters = ({
   isEditMode,

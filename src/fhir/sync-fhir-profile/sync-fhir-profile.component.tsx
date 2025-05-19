@@ -1,15 +1,15 @@
 import React from "react";
-import Header from "../components/header/header.component";
-import Illustration from "./fhir-illustration.component";
-import fhirStyles from "./fhir.scss";
+import Header from "../../components/header/header.component";
+import Illustration from "./sync-fhir-profile-illustration.component";
+import fhirStyles from "./sync-fhir-profile.scss";
 import { Button } from "@carbon/react";
 import { Add, Edit, View } from "@carbon/react/icons";
-import { useGetFhirProfiles } from "./fhir.resource";
-import { fhirTableHeaders } from "../constants";
-import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
-import FhirProfileDataList from "./fhir-detail-data-table.component";
+import { useGetFhirProfiles } from "./sync-fhir-profile.resource";
+import { fhirTableHeaders } from "../../constants";
+import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
+import FhirProfileDataList from "./sync-fhir-profile-detail-data-table.component";
 
-const Fhir: React.FC = () => {
+const SyncFhirProfile: React.FC = () => {
   const { fhirProfiles } = useGetFhirProfiles();
 
   return (
@@ -39,4 +39,4 @@ const Fhir: React.FC = () => {
   );
 };
 
-export default Fhir;
+export default SyncFhirProfile;

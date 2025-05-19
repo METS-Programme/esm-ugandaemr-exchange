@@ -3,13 +3,13 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { setLeftNav, unsetLeftNav } from "@openmrs/esm-framework";
 import LeftPanel from "./components/left-panel/left-panel.component";
 import styles from "./root.scss";
-import Fhir from "./fhir/fhir.component";
+import Fhir from "./fhir/sync-fhir-profile/sync-fhir-profile.component";
 import FacilityMetrics from "./facility-metrics/facility-metrics.component";
 import ClientRegistry from "./client-registry/client-registry.component";
 import FacilityRegistry from "./facility-registry/facility-registry.component";
 import ProductRegistry from "./product-registry/product-registry.component";
 import ScheduleManager from "./scheduler/scheduler.component";
-import SyncTaskTypes from "./fhir/sync-task-types/sync-task-types.component";
+import SyncTaskTypes from "./sync-task-types/sync-task-types.component";
 
 const Root: React.FC = () => {
   const spaBasePath = window.spaBase;

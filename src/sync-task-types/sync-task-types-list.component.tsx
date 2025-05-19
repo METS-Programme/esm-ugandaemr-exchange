@@ -24,7 +24,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "../components/data-table/data-tables.scss";
-import RowDetails from "./fhir-detail.component";
+import SyncTaskTypeRow from "./sync-task-type/sync-task-type.component";
 
 type FilterProps = {
   rowIds: Array<string>;
@@ -39,7 +39,7 @@ interface ListProps {
   data: any;
 }
 
-const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
+const SyncTaskTypeList: React.FC<ListProps> = ({ columns, data }) => {
   const { t } = useTranslation();
   const layout = useLayoutType();
   const isTablet = useLayoutType() === "tablet";
@@ -151,7 +151,7 @@ const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
                           className={styles.expandedActiveVisitRow}
                           colSpan={headers.length + 1}
                         >
-                          <RowDetails selectedProfileData={data[index]} />
+                          <SyncTaskTypeRow rowData={data[index]} />
                         </TableExpandedRow>
                       ) : (
                         <TableExpandedRow
@@ -199,4 +199,4 @@ const FhirProfileDataList: React.FC<ListProps> = ({ columns, data }) => {
   );
 };
 
-export default FhirProfileDataList;
+export default SyncTaskTypeList;

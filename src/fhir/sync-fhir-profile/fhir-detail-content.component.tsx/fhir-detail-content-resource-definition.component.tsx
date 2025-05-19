@@ -10,8 +10,8 @@ import {
   TextInput,
 } from "@carbon/react";
 import { useTranslation } from "react-i18next";
-import { caseBasedPrimaryResourceTypes } from "../../constants";
-import styles from "../fhir-detail.scss";
+import { caseBasedPrimaryResourceTypes } from "../../../constants";
+import styles from "../sync-fhir-profile-detail.scss";
 
 const ResourceDefinition = ({
   syncFhirName,
