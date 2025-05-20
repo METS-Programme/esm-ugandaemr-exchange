@@ -1,4 +1,7 @@
 import {
+  Button,
+  DatePicker,
+  DatePickerInput,
   DataTable,
   Pagination,
   Table,
@@ -10,7 +13,6 @@ import {
   TableRow,
   TableToolbar,
   TableToolbarContent,
-  TableToolbarSearch,
   Tile,
 } from "@carbon/react";
 import {
@@ -21,11 +23,8 @@ import {
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./sync-task-logs.scss";
-import { DatePickerInput } from "@carbon/react";
-import { DatePicker } from "@carbon/react";
 import SyncTaskTypesFilter from "./sync-task-type-filter/sync-task-type-filter.component";
-import { Button } from "@carbon/react";
-import { Add, PartitionAuto } from "@carbon/react/icons";
+import { PartitionAuto } from "@carbon/react/icons";
 
 type FilterProps = {
   rowIds: Array<string>;
