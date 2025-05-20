@@ -9,7 +9,7 @@ import {
 } from "@carbon/react";
 import { Edit, Save } from "@carbon/react/icons";
 import { useTranslation } from "react-i18next";
-import { syncTaskTypeDataTypes } from "../../../constants";
+import { syncTaskTypeDataTypes } from "../../constants";
 import styles from "./sync-task-type.scss";
 
 export const SyncTaskTypeRow = ({ rowData }) => {

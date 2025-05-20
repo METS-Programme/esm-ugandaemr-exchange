@@ -19,7 +19,16 @@ import {
   facilityRegistryDashboardMeta,
   productRegistryDashboardMeta,
   registryDashboardMeta,
+  smsStatisticsDashboardMeta,
+  syncFhirProfileDashboardMeta,
+  syncFhirProfileStatisticsDashboardMeta,
+  syncTaskLogsDashboardMeta,
+  syncTaskTypeListDashboardMeta,
+  ugandaemrSyncDashbaordMeta,
 } from "./dashboard.meta";
+import SyncTaskTypesComponent from "./sync-task-types/sync-task-types.component";
+import SyncTaskLogsComponent from "./sync-task-logs/sync-task-logs.component";
+import SyncFhirProfile from "./fhir/sync-fhir-profile/sync-fhir-profile.component";
 
 const moduleName = "@ugandaemr/esm-ugandaemr-exchange-app";
 
@@ -39,22 +48,6 @@ export const hieHomeLink = getSyncLifecycle(
   createLeftPanelLink({
     name: "facility-metrics",
     title: "Facility Metrics",
-  }),
-  options
-);
-
-export const fhirProfileLink = getSyncLifecycle(
-  createLeftPanelLink({
-    name: "fhir-exchange",
-    title: "Sync FHIR Profiles",
-  }),
-  options
-);
-
-export const syncTaskTypesLink = getSyncLifecycle(
-  createLeftPanelLink({
-    name: "sync-task-types",
-    title: "Sync Task Types",
   }),
   options
 );
@@ -157,6 +150,11 @@ export const registriesDashboard = getSyncLifecycle(
   options
 );
 
+export const ugandaemrSyncDashboard = getSyncLifecycle(
+  createDashboardGroup(ugandaemrSyncDashbaordMeta),
+  options
+);
+
 export const clientRegistryDashboardLink = getSyncLifecycle(
   createLeftPanelLink({
     ...clientRegistryDashboardMeta,
@@ -192,5 +190,60 @@ export const facilityRegistry = getSyncLifecycle(
 );
 export const productRegistry = getSyncLifecycle(
   productRegistryDashboardComponent,
+  options
+);
+
+export const syncTaskTypeListDashboardLink = getSyncLifecycle(
+  createLeftPanelLink({
+    ...syncTaskTypeListDashboardMeta,
+    name: "sync-task-types",
+  }),
+  options
+);
+
+export const syncTaskTypeListDashboard = getSyncLifecycle(
+  SyncTaskTypesComponent,
+  options
+);
+
+export const syncTaskLogsDashboardLink = getSyncLifecycle(
+  createLeftPanelLink({
+    ...syncTaskLogsDashboardMeta,
+    name: "sync-task-logs",
+  }),
+  options
+);
+
+export const syncTaskLogsDashboard = getSyncLifecycle(
+  SyncTaskLogsComponent,
+  options
+);
+
+export const syncFhirProfileDashboardLink = getSyncLifecycle(
+  createLeftPanelLink({
+    ...syncFhirProfileDashboardMeta,
+    name: "fhir-exchange",
+  }),
+  options
+);
+
+export const syncFhirProfileDashboard = getSyncLifecycle(
+  SyncFhirProfile,
+  options
+);
+
+export const syncFhirProfileStatisticsDashboardLink = getSyncLifecycle(
+  createLeftPanelLink({
+    ...syncFhirProfileStatisticsDashboardMeta,
+    name: "fhir-profile-statistics",
+  }),
+  options
+);
+
+export const smsStatisticsDashboardLink = getSyncLifecycle(
+  createLeftPanelLink({
+    ...smsStatisticsDashboardMeta,
+    name: "sms-statistics",
+  }),
   options
 );

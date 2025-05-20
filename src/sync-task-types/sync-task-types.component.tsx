@@ -1,15 +1,15 @@
 import React from "react";
-import Header from "../../components/header/header.component";
-import Illustration from "../fhir-illustration.component";
+import Header from "../components/header/header.component";
+import Illustration from "../fhir/sync-fhir-profile/sync-fhir-profile-illustration.component";
 import { Button } from "@carbon/react";
 import { Add } from "@carbon/react/icons";
 import styles from "./sync-task-types.scss";
 import { useGetSyncTaskTypes } from "./sync-task-types.resource";
-import { syncTaskTypeTableHeaders } from "../../constants";
+import { syncTaskTypeTableHeaders } from "../constants";
 import SyncTaskTypeList from "./sync-task-types-list.component";
-import { EmptyStateComponent } from "../../components/empty-state/empty-state.component";
+import { EmptyStateComponent } from "../components/empty-state/empty-state.component";
 
-export const SyncTaskTypes = () => {
+export const SyncTaskTypesComponent = () => {
   const { syncTaskTypes } = useGetSyncTaskTypes();
   return (
     <>
@@ -40,4 +40,4 @@ export const SyncTaskTypes = () => {
   );
 };
 
-export default SyncTaskTypes;
+export default SyncTaskTypesComponent;

@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from "react";
 import Header from "../components/header/header.component";
 import Illustration from "../facility-metrics/facility-metrics-illustration.component";
-import fhirStyles from "../fhir/fhir.scss";
+import fhirStyles from "../fhir/sync-fhir-profile/sync-fhir-profile.scss";
 import DataList from "../components/data-table/data-table.component";
 import {
   runTask,

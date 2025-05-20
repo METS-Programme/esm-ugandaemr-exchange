@@ -23,28 +23,22 @@
             "order": 0
         },
         {
-            "component": "fhirProfileLink",
-            "name": "fhir-profile-link",
-            "slot": "health-exchange-left-panel-slot",
-            "order": 1
-        },
-        {
-            "component": "syncTaskTypesLink",
-            "name": "sync-task-types",
-            "slot": "health-exchange-left-panel-slot",
-            "order": 2
-        },
-        {
           "component": "scheduleManagerLink",
           "name": "scheduler-manager-link",
           "slot": "health-exchange-left-panel-slot",
-          "order": 3
+          "order": 1
         },
         {
             "component": "registriesDashboard",
             "name": "registry-link",
             "slot": "health-exchange-left-panel-slot",
-            "order": 4
+            "order": 2
+        },
+        {
+            "component": "ugandaemrSyncDashboard",
+            "name": "ugandaemr-sync-link",
+            "slot": "health-exchange-left-panel-slot",
+            "order": 3
         },
         {
             "name": "vl-suppression-prediction",
@@ -52,8 +46,59 @@
             "slot": "action-menu-chart-items-slot"
         },
         {
-            "name": "sync-task-types-component",
-            "component": "SyncTaskTypesComponent"
+            "name": "sync-task-type-list",
+            "component": "syncTaskTypeListDashboardLink",
+            "slot": "ugandaemr-sync-slot",
+            "meta": {
+                "slot": "sync-task-type-list-dashboard-slot",
+                "columns": 1,
+                "path": "sync-task-type-list",
+                "layoutMode": "anchored"
+            }
+        },
+        {
+            "name": "sync-task-logs-list",
+            "component": "syncTaskLogsDashboardLink",
+            "slot": "ugandaemr-sync-slot",
+            "meta": {
+                "slot": "sync-task-logs-slot",
+                "columns": 2,
+                "path": "sync-task-logs",
+                "layoutMode": "anchored"
+            }
+        },
+        {
+            "name": "sync-fhir-profile-list",
+            "component": "syncFhirProfileDashboardLink",
+            "slot": "ugandaemr-sync-slot",
+            "meta": {
+                "slot": "sync-fhir-profile-slot",
+                "columns": 2,
+                "path": "fhir-exchange",
+                "layoutMode": "anchored"
+            }
+        },
+        {
+            "name": "sync-fhir-profile-statistics-list",
+            "component": "syncFhirProfileStatisticsDashboardLink",
+            "slot": "ugandaemr-sync-slot",
+            "meta": {
+                "slot": "sync-fhir-profile-statistics-slot",
+                "columns": 2,
+                "path": "fhir-profile-statistics",
+                "layoutMode": "anchored"
+            }
+        },
+        {
+            "name": "sms-statistics-list",
+            "component": "smsStatisticsDashboardLink",
+            "slot": "ugandaemr-sync-slot",
+            "meta": {
+                "slot": "sms-statistics-slot",
+                "columns": 2,
+                "path": "sms-statistics",
+                "layoutMode": "anchored"
+            }
         },
         {
             "name": "sync-tasktype-row-details",
@@ -158,11 +203,6 @@
             "name": "facility-registry-dashboard-ext",
             "slot": "facility-registry-dashboard-slot",
             "component": "facilityRegistry"
-        },
-        {
-            "name": "product-registry-dashboard-ext",
-            "slot": "product-registry-dashboard-slot",
-            "component": "productRegistry"
         }
         
     ]

@@ -1,0 +1,91 @@
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/layout';
+@use '@openmrs/esm-styleguide/src/vars' as *;
+
+
+.logsContainer{
+  padding: 1rem;
+}
+
+.tableContainer {
+  padding-top: 1rem;
+
+  :global(.cds--data-table-content) {
+    border: 1px solid colors.$gray-20;
+    border-bottom: none;
+    overflow: visible;
+  }
+
+  :global(.cds--table-toolbar) {
+  position: relative;
+  min-height: layout.$spacing-10; 
+  padding: layout.$spacing-03 0;
+  overflow: visible;
+}
+
+
+  &:global(.cds--data-table-container) {
+    padding-top: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  tr {
+    width: spacing.$spacing-01;
+  }
+
+  .cds--table-sort__description {
+    display: none;
+  }
+}
+
+.toolbarContent {
+  display: flex;
+  align-items: center;
+  height: layout.$spacing-09;
+  margin-top: layout.$spacing-05;
+}
+.datePicker{
+  display: flex;
+  width: fit-content;
+
+  input{
+    background-color: #ffffff;
+  }
+
+  :global(.cds--date-picker-container) {
+    margin-right: 1rem !important;
+  }
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.tileContainer {
+  background-color: $ui-02;
+  border-top: 1px solid $ui-03;
+  padding: layout.$spacing-11 0;
+}
+
+.tile {
+  margin: auto;
+  width: fit-content;
+}
+
+.tileContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
