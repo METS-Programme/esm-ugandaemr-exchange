@@ -24,3 +24,17 @@ export function useGetSyncTaskTypes() {
     isLoading,
   };
 }
+
+export function useGetSyncTaskLogs() {
+  const apiUrl = `${restBaseUrl}/synctask?v=full`;
+  const { data, error, isLoading } = useSWR<{ data: { results: any } }, Error>(
+    apiUrl,
+    openmrsFetch
+  );
+
+  return {
+    syncTaskLogs: data ? data?.data?.results : [],
+    isError: error,
+    isLoading,
+  };
+}

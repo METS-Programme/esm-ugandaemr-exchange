@@ -28,6 +28,9 @@ import {
 } from "./dashboard.meta";
 import SyncTaskTypesComponent from "./sync-task-types/sync-task-types.component";
 import SyncFhirProfile from "./fhir/sync-fhir-profile/sync-fhir-profile.component";
+import SyncTaskLogs from "./sync-task-logs/sync-task-logs.component";
+import SyncFhirProfileComponent from "./sync-task-logs/sync-task-logs.component";
+import SyncTaskLogsComponent from "./sync-task-logs/sync-task-logs.component";
 
 const moduleName = "@ugandaemr/esm-ugandaemr-exchange-app";
 
@@ -213,6 +216,11 @@ export const syncTaskLogsDashboardLink = getSyncLifecycle(
   options
 );
 
+export const syncTaskLogsDashboard = getSyncLifecycle(
+  SyncTaskLogsComponent,
+  options
+);
+
 export const syncFhirProfileDashboardLink = getSyncLifecycle(
   createLeftPanelLink({
     ...syncFhirProfileDashboardMeta,
@@ -222,7 +230,7 @@ export const syncFhirProfileDashboardLink = getSyncLifecycle(
 );
 
 export const syncFhirProfileDashboard = getSyncLifecycle(
-  SyncFhirProfile,
+  SyncFhirProfileComponent,
   options
 );
 

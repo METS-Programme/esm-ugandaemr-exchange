@@ -46,6 +46,51 @@ export const syncTaskTypeTableHeaders = [
   },
 ];
 
+export const syncTaskLogsHeaders = [
+  {
+    id: 1,
+    key: "syncTask",
+    header: "Sync Task",
+    accessor: "syncTask",
+  },
+  {
+    id: 2,
+    key: "name",
+    header: "Sync Task Type Name",
+    accessor: "name",
+  },
+  {
+    id: 3,
+    key: "status",
+    header: "Status",
+    accessor: "status",
+  },
+  {
+    id: 4,
+    key: "statusCode",
+    header: "Status Code",
+    accessor: "statusCode",
+  },
+  {
+    id: 5,
+    key: "requireAction",
+    header: "Require Action",
+    accessor: "requireAction",
+  },
+  {
+    id: 6,
+    key: "actionCompleted",
+    header: "Action Completed",
+    accessor: "actionCompleted",
+  },
+  {
+    id: 7,
+    key: "dateSent",
+    header: "Date Sent",
+    accessor: "dateSent",
+  },
+];
+
 export const profileTransactionsHeaders = [
   {
     id: "1",

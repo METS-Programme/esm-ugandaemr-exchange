@@ -29,7 +29,7 @@ export const productRegistryDashboardMeta = {
 };
 
 export const ugandaemrSyncDashbaordMeta = {
-  title: "UgandaEMR Sync",
+  title: "Sync Settings",
   slotName: "ugandaemr-sync-slot",
   isExpanded: false,
 };
