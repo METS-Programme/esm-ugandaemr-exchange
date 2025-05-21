@@ -169,3 +169,16 @@ type taskItem = {
   description?: string;
   taskClass?: string;
 };
+
+type syncTaskTypePayload = {
+  uuid: number;
+  name: string;
+  dataType: string;
+  dataTypeId: string;
+  url: string;
+  urlToken: string;
+  urlUserName: string;
+  urlPassword: string;
+  tokenExpiryDate: Date;
+  tokenType: string;
+};

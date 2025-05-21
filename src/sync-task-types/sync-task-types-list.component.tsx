@@ -86,7 +86,7 @@ const SyncTaskTypeList: React.FC<ListProps> = ({ columns, data }) => {
       return rows.push({ ...item, id: index++ });
     });
     setAllRows(rows);
-  }, [paginatedList, allRows]);
+  }, [paginatedList]);
 
   return (
     <DataTable
