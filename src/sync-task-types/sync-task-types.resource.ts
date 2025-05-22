@@ -14,7 +14,7 @@ export interface Result {
 
 export function useGetSyncTaskTypes() {
   const apiUrl = `${restBaseUrl}/synctasktype?v=full`;
-  const { data, error, isLoading } = useSWR<
+  const { data, error, isLoading, mutate } = useSWR<
     { data: SyncTaskTypeResponse },
     Error
   >(apiUrl, openmrsFetch);
@@ -22,6 +22,7 @@ export function useGetSyncTaskTypes() {
     syncTaskTypes: data ? data?.data?.results : [],
     isError: error,
     isLoading,
+    mutate,
   };
 }
 
@@ -37,4 +38,22 @@ export function useGetSyncTaskLogs() {
     isError: error,
     isLoading,
   };
+}
+
+export async function saveSyncTaskType(payload: syncTaskTypePayload) {
+  const abortController = new AbortController();
+  const isUpdating = !!payload.uuid;
+
+  const url = isUpdating
+    ? `${restBaseUrl}/synctasktype/${payload.uuid}`
+    : `${restBaseUrl}/synctasktype`;
+
+  return await openmrsFetch(url, {
+    method: "POST",
+    signal: abortController.signal,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: payload,
+  });
 }
