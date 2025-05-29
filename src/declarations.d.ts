@@ -171,7 +171,7 @@ type taskItem = {
 };
 
 type syncTaskTypePayload = {
-  uuid: number;
+  uuid: string;
   name: string;
   dataType: string;
   dataTypeId: string;
@@ -182,3 +182,26 @@ type syncTaskTypePayload = {
   tokenExpiryDate: Date;
   tokenType: string;
 };
+
+type syncFhirProfilePayload = {
+  uuid: string;
+  name: string;
+  resourceTypes: string;
+  profileEnabled: boolean;
+  patientIdentifierType: string;
+  numberOfResourcesInBundle: number;
+  durationToKeepSyncedResources: number;
+  generateBundle: boolean;
+  isCaseBasedProfile: boolean;
+  caseBasedPrimaryResourceType: string;
+  caseBasedPrimaryResourceTypeId: string;
+  url: string;
+  syncLimit: number;
+  urlToken: string;
+  urlUserName: string;
+  urlPassword: string;
+  syncDataEverSince: boolean;
+  dataToSyncStartDate: Date;
+  searchable: boolean;
+  searchURL: string;
+}
