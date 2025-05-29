@@ -5,8 +5,10 @@ import SyncTaskLogsList from "./sync-task-logs-list.component";
 import { syncTaskLogsHeaders } from "../constants";
 import { useGetSyncTaskLogs } from "../sync-task-types/sync-task-types.resource";
 import styles from "./sync-task-logs.scss";
+import { useTranslation } from "react-i18next";
 
 const SyncTaskLogsComponent: React.FC = () => {
+  const { t } = useTranslation();
   const { syncTaskLogs } = useGetSyncTaskLogs();
   return (
     <>
