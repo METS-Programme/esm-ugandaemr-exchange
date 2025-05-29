@@ -249,7 +249,4 @@ export const smsStatisticsDashboardLink = getSyncLifecycle(
   options
 );
 
-export const sentSmsDashboard = getSyncLifecycle(
-  SentSmsComponent,
-  options
-);
+export const sentSmsDashboard = getSyncLifecycle(SentSmsComponent, options);

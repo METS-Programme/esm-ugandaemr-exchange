@@ -118,7 +118,6 @@ export const profileTransactionsHeaders = [
   },
 ];
 
-
 export const sentSmsHeaders = [
   {
     id: "1",
@@ -138,8 +137,7 @@ export const sentSmsHeaders = [
     header: "Date Sent",
     accessor: "dateSent",
   },
-]
-
+];
 
 export const incomingTransactionsHeaders = [
   {
