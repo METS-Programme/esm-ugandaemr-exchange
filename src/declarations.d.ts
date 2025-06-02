@@ -171,14 +171,23 @@ type taskItem = {
 };
 
 type syncTaskTypePayload = {
-  uuid: number;
+  uuid: string;
   name: string;
   dataType: string;
   dataTypeId: string;
   url: string;
   urlToken: string;
-  urlUserName: string;
-  urlPassword: string;
+  urlUserName?: string;
+  urlPassword?: string;
   tokenExpiryDate: Date;
   tokenType: string;
+};
+
+type smsMessagePayload = {
+  id: number;
+  facility_id: string;
+  mobile_no: string;
+  message: string;
+  sent_status: number;
+  date_created: string;
 };

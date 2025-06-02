@@ -118,6 +118,27 @@ export const profileTransactionsHeaders = [
   },
 ];
 
+export const sentSmsHeaders = [
+  {
+    id: "1",
+    key: "mobile_no",
+    header: "Mobile Number",
+    accessor: "mobile_no",
+  },
+  {
+    id: "2",
+    key: "message",
+    header: "Message",
+    accessor: "message",
+  },
+  {
+    id: "3",
+    key: "date_created",
+    header: "Date Sent",
+    accessor: "date_created",
+  },
+];
+
 export const incomingTransactionsHeaders = [
   {
     id: "1",
