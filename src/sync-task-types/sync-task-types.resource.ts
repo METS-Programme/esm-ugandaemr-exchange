@@ -49,7 +49,7 @@ export function useGetSmsMessages() {
 
   const fetcher = async (): Promise<smsMessagePayload[]> => {
     const authHeader = `Basic ${btoa(
-      `${smsTaskType.urlUserName}:${smsTaskType.urlPassword}`
+      `${smsTaskType?.urlUserName}:${smsTaskType?.urlPassword}`
     )}`;
 
     try {
