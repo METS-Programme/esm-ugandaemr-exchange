@@ -1,3 +1,5 @@
+export const organizationUuid = "ugandaemr.dhis2.organizationuuid";
+
 export const fhirTableHeaders = [
   {
     id: "1",
@@ -121,9 +123,9 @@ export const profileTransactionsHeaders = [
 export const sentSmsHeaders = [
   {
     id: "1",
-    key: "mobileNumber",
+    key: "mobile_no",
     header: "Mobile Number",
-    accessor: "mobileNumber",
+    accessor: "mobile_no",
   },
   {
     id: "2",
@@ -133,9 +135,9 @@ export const sentSmsHeaders = [
   },
   {
     id: "3",
-    key: "dateSent",
+    key: "date_created",
     header: "Date Sent",
-    accessor: "dateSent",
+    accessor: "date_created",
   },
 ];
 
