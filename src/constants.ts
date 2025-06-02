@@ -1,5 +1,3 @@
-export const organizationUuid = "ugandaemr.dhis2.organizationuuid";
-
 export const fhirTableHeaders = [
   {
     id: "1",

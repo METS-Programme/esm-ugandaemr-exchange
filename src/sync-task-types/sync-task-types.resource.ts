@@ -1,7 +1,6 @@
 import useSWR from "swr";
 import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
 import axios from "axios";
-import { organizationUuid } from "../constants";
 
 export interface SyncTaskTypeResponse {
   results: syncTaskTypePayload[];
@@ -49,7 +48,7 @@ export function useGetSmsMessages() {
 
   const fetcher = async (): Promise<smsMessagePayload[]> => {
     const authHeader = `Basic ${btoa(
-      `${smsTaskType?.urlUserName}:${smsTaskType?.urlPassword}`
+      `${smsTaskType.urlUserName}:${smsTaskType.urlPassword}`
     )}`;
 
     try {
