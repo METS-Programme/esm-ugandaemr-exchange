@@ -47,7 +47,7 @@ const DataList: React.FC<ListProps> = ({ columns, data, pageSize }) => {
   const isTablet = useLayoutType() === "tablet";
   const responsiveSize = isTablet ? "lg" : "sm";
   const [allRows, setAllRows] = useState([]);
-  const [list] = useState(data);
+  const list = data;
   const [documentType, setDocumentType] = useState<DocumentType>(null);
   const pageSizes = [10, 20, 30, 40, 50];
   const [currentPageSize, setPageSize] = useState(pageSize ?? 10);
@@ -97,6 +97,8 @@ const DataList: React.FC<ListProps> = ({ columns, data, pageSize }) => {
       const jsonBlob = new Blob([csvString], { type: "application/json" });
       saveAs(jsonBlob, "data.json");
     }
+
+    setDocumentType(null);
   }, [list, columns, documentType]);
 
   const convertToCSV = (data, columns) => {
