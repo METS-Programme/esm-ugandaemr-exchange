@@ -172,7 +172,6 @@ type taskItem = {
 
 type syncTaskTypePayload = {
   uuid: string;
-  uuid: string;
   name: string;
   dataType: string;
   dataTypeId: string;
@@ -205,7 +204,9 @@ type syncFhirProfilePayload = {
   isCaseBasedProfile: boolean;
   caseBasedPrimaryResourceType: string;
   caseBasedPrimaryResourceTypeId: string;
+  resourceSearchParameter: string;
   url: string;
+  conceptSource: string;
   syncLimit: number;
   urlToken: string;
   urlUserName: string;
@@ -214,4 +215,4 @@ type syncFhirProfilePayload = {
   dataToSyncStartDate: Date;
   searchable: boolean;
   searchURL: string;
-}
+};

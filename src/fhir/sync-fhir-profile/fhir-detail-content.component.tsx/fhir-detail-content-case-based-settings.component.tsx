@@ -52,7 +52,7 @@ const CaseBasedSettings = ({
             </FormGroup>
             <FormGroup>
               <TextInput
-                type="text"
+                type="password"
                 labelText={t("password", "Password")}
                 value={urlPassword}
                 id="password-input"

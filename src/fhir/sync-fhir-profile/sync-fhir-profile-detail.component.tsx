@@ -91,6 +91,24 @@ const RowDetails = ({ selectedProfileData }) => {
           encounterTypeUUIDS={resourceSearchParameterObject.encounterFilter.type.join(
             ","
           )}
+          episodeOfCareUUIDS={resourceSearchParameterObject.episodeofcareFilter.type.join(
+            ","
+          )}
+          medicationRequestCodes={resourceSearchParameterObject.medicationrequestFilter.code.join(
+            ","
+          )}
+          medicationDispenseCodes={resourceSearchParameterObject.medicationdispenseFilter.code.join(
+            ","
+          )}
+          conditionCodes={resourceSearchParameterObject.conditionFilter.code.join(
+            ","
+          )}
+          diagnosticReportCodes={resourceSearchParameterObject.diagnosticreportFilter.code.join(
+            ","
+          )}
+          serviceRequestCodes={resourceSearchParameterObject.servicerequestFilter.code.join(
+            ","
+          )}
           isEditMode={isEditMode}
         />
       )}

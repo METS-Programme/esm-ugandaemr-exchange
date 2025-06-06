@@ -205,71 +205,71 @@ export const syncTaskTypeDataTypes = [
     label: "java.lang.Boolean",
   },
   {
-    id: "dataType1",
+    id: "dataType2",
     label: "java.lang.Character",
   },
   {
-    id: "dataType1",
+    id: "dataType3",
     label: "java.lang.Float",
   },
   {
-    id: "dataType1",
+    id: "dataType4",
     label: "java.lang.Integer",
   },
   {
-    id: "dataType1",
+    id: "dataType5",
     label: "java.lang.String",
   },
   {
-    id: "dataType1",
+    id: "dataType6",
     label: "java.lang.Boolean",
   },
   {
-    id: "dataType1",
+    id: "dataType7",
     label: "org.openmrs.Concept",
   },
   {
-    id: "dataType1",
+    id: "dataType8",
     label: "org.openmrs.Drug",
   },
   {
-    id: "dataType1",
+    id: "dataType9",
     label: "org.openmrs.Encounter",
   },
   {
-    id: "dataType1",
+    id: "dataType10",
     label: "org.openmrs.Order",
   },
   {
-    id: "dataType1",
+    id: "dataType11",
     label: "org.openmrs.TestOrder",
   },
   {
-    id: "dataType1",
+    id: "dataType11",
     label: "org.openmrs.Location",
   },
   {
-    id: "dataType1",
+    id: "dataType12",
     label: "org.openmrs.Patient",
   },
   {
-    id: "dataType1",
+    id: "dataType13",
     label: "org.openmrs.Person",
   },
   {
-    id: "dataType1",
+    id: "dataType14",
     label: "org.openmrs.ProgramWorkflow",
   },
   {
-    id: "dataType1",
+    id: "dataType15",
     label: "org.openmrs.Provider",
   },
   {
-    id: "dataType1",
+    id: "dataType16",
     label: "org.openmrs.User",
   },
   {
-    id: "dataType1",
+    id: "dataType17",
     label: "org.openmrs.util.AttributableDate",
   },
 ];
