@@ -205,6 +205,7 @@ type syncFhirProfilePayload = {
   caseBasedPrimaryResourceType: string;
   caseBasedPrimaryResourceTypeId: string;
   resourceSearchParameter: string;
+  conceptSource: string;
   url: string;
   conceptSource: string;
   syncLimit: number;

@@ -5,12 +5,19 @@ import styles from "../sync-fhir-profile-detail.scss";
 
 const CaseBasedSettings = ({
   url,
+  setUrl,
   syncLimit,
+  setSyncLimit,
   urlToken,
+  setUrlToken,
   urlUserName,
+  setUrlUserName,
   urlPassword,
+  setUrlPassword,
   searchable,
+  setSearchable,
   searchURL,
+  setSearchURL,
   isEditMode,
 }) => {
   const { t } = useTranslation();
@@ -26,6 +33,7 @@ const CaseBasedSettings = ({
                 labelText={t("url", "URL")}
                 id="url-input"
                 value={url}
+                onChange={(e) => setUrl(e.target.value)}
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -37,6 +45,7 @@ const CaseBasedSettings = ({
                   "Number of Resources to Sync at a time"
                 )}
                 value={syncLimit}
+                onChange={(e) => setSyncLimit(Number(e.target.value))}
                 id="sync-limit-input"
                 disabled={!isEditMode}
               />
@@ -46,6 +55,7 @@ const CaseBasedSettings = ({
                 type="text"
                 labelText={t("username", "Username")}
                 value={urlUserName}
+                onChange={(e) => setUrlUserName(e.target.value)}
                 id="username-input"
                 disabled={!isEditMode}
               />
@@ -55,6 +65,7 @@ const CaseBasedSettings = ({
                 type="password"
                 labelText={t("password", "Password")}
                 value={urlPassword}
+                onChange={(e) => setUrlPassword(e.target.value)}
                 id="password-input"
                 disabled={!isEditMode}
               />
@@ -70,6 +81,7 @@ const CaseBasedSettings = ({
                 type="text"
                 labelText={t("authToken", "Auth Token")}
                 value={urlToken}
+                onChange={(e) => setUrlToken(e.target.value)}
                 id="auth-token-input"
                 disabled={!isEditMode}
               />
@@ -79,13 +91,15 @@ const CaseBasedSettings = ({
                 labelText={t("syncHistoricalData", "Sync Historical Data")}
                 id="checkbox-label-2"
                 checked={searchable}
+                onChange={(e) => setSearchable(e.target.checked)}
                 disabled={!isEditMode}
               />
               <TextInput
                 type="text"
                 labelText={t("profileSearchable", "Is Profile Searchable")}
-                id="url-input"
+                id="profile-searchable"
                 value={searchURL}
+                onChange={(e) => setSearchURL(e.target.value)}
                 disabled={!isEditMode}
               />
             </FormGroup>

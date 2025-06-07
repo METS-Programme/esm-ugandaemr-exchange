@@ -8,17 +8,56 @@ import {
 import styles from "../sync-fhir-profile-detail.scss";
 import { showSnackbar } from "@openmrs/esm-framework";
 
-const ResourceFilters = ({
+interface ResourceFiltersProps {
+  isEditMode: boolean;
+  patientIdentifierType: any;
+  setPatientIdentifierType: (value: any) => void;
+
+  observationFilterCodes: string;
+  setObservationFilterCodes: (value: string) => void;
+
+  encounterTypeUUIDS: string;
+  setEncounterTypeUUIDS: (value: string) => void;
+
+  episodeOfCareUUIDS: string;
+  setEpisodeOfCareUUIDS: (value: string) => void;
+
+  medicationRequestCodes: string;
+  setMedicationRequestCodes: (value: string) => void;
+
+  medicationDispenseCodes: string;
+  setMedicationDispenseCodes: (value: string) => void;
+
+  conditionCodes: string;
+  setConditionCodes: (value: string) => void;
+
+  diagnosticReportCodes: string;
+  setDiagnosticReportCodes: (value: string) => void;
+
+  serviceRequestCodes: string;
+  setServiceRequestCodes: (value: string) => void;
+}
+
+const ResourceFilters: React.FC<ResourceFiltersProps> = ({
   isEditMode,
   patientIdentifierType,
+  setPatientIdentifierType,
   observationFilterCodes,
+  setObservationFilterCodes,
   encounterTypeUUIDS,
+  setEncounterTypeUUIDS,
   episodeOfCareUUIDS,
+  setEpisodeOfCareUUIDS,
   medicationRequestCodes,
+  setMedicationRequestCodes,
   medicationDispenseCodes,
+  setMedicationDispenseCodes,
   conditionCodes,
+  setConditionCodes,
   diagnosticReportCodes,
+  setDiagnosticReportCodes,
   serviceRequestCodes,
+  setServiceRequestCodes,
 }) => {
   const { t } = useTranslation();
 
@@ -28,191 +67,6 @@ const ResourceFilters = ({
     id: type.uuid,
     label: type.display,
   }));
-
-  const [observationConceptIds, setObservationConceptIds] = useState("");
-  const [encounterTypeUuids, setEncounterTypeUuids] = useState("");
-  const [episodeOfCareUuids, setEpisodeOfCareUuids] = useState("");
-  const [medicationRequestIds, setMedicationRequestIds] = useState("");
-  const [medicationDispenseIds, setMedicationDispenseIds] = useState("");
-  const [conditionConceptIds, setConditionConceptIds] = useState("");
-  const [diagnosticReportIds, setDiagnosticReportIds] = useState("");
-  const [serviceRequestIds, setServiceRequestIds] = useState("");
-
-  const [selectedItem, setSelectedItem] = useState(
-    patientIdentifierType
-      ? {
-          id: patientIdentifierType.uuid,
-          label: patientIdentifierType.display,
-        }
-      : null
-  );
-
-  const handleSelectionChange = (selectedItem) => {
-    setSelectedItem(selectedItem);
-  };
-
-  useEffect(() => {
-    if (patientIdentifierType) {
-      setSelectedItem({
-        id: patientIdentifierType.uuid,
-        label: patientIdentifierType.display,
-      });
-    }
-  }, [patientIdentifierType]);
-
-  useEffect(() => {
-    if (observationFilterCodes) {
-      setObservationConceptIds(observationFilterCodes);
-    }
-  }, [observationFilterCodes]);
-
-  useEffect(() => {
-    if (encounterTypeUUIDS) {
-      setEncounterTypeUuids(encounterTypeUUIDS);
-    }
-  }, [encounterTypeUUIDS]);
-
-  useEffect(() => {
-    if (episodeOfCareUUIDS) {
-      setEpisodeOfCareUuids(episodeOfCareUUIDS);
-    }
-  }, [episodeOfCareUUIDS]);
-
-  useEffect(() => {
-    if (medicationRequestCodes) {
-      setMedicationRequestIds(medicationRequestCodes);
-    }
-  }, [medicationRequestCodes]);
-
-  useEffect(() => {
-    if (medicationDispenseCodes) {
-      setMedicationDispenseIds(medicationDispenseCodes);
-    }
-  }, [medicationDispenseCodes]);
-
-  useEffect(() => {
-    if (conditionCodes) {
-      setConditionConceptIds(conditionCodes);
-    }
-  }, [conditionCodes]);
-
-  useEffect(() => {
-    if (diagnosticReportCodes) {
-      setDiagnosticReportIds(diagnosticReportCodes);
-    }
-  }, [diagnosticReportCodes]);
-
-  useEffect(() => {
-    if (serviceRequestCodes) {
-      setServiceRequestIds(serviceRequestCodes);
-    }
-  }, [serviceRequestCodes]);
-
-  const buildResourceSearchParameter = () => {
-    return {
-      observationFilter: {
-        code: observationConceptIds ? [observationConceptIds] : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      encounterFilter: {
-        type: encounterTypeUuids ? encounterTypeUuids.split(",") : [],
-        date: { lowerBound: "", myUpperBound: "" },
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-        subject: [],
-        location: [],
-        id: [],
-        participant: [],
-      },
-      episodeofcareFilter: {
-        type: episodeOfCareUuids ? episodeOfCareUuids.split(",") : [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      medicationrequestFilter: {
-        code: medicationRequestIds ? medicationRequestIds.split(",") : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      medicationdispenseFilter: {
-        code: medicationDispenseIds ? medicationDispenseIds.split(",") : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      conditionFilter: {
-        code: conditionConceptIds ? conditionConceptIds.split(",") : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      diagnosticreportFilter: {
-        code: diagnosticReportIds ? diagnosticReportIds.split(",") : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      servicerequestFilter: {
-        code: serviceRequestIds ? serviceRequestIds.split(",") : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-    };
-  };
-
-  const resourceSearchParameter = JSON.stringify(
-    buildResourceSearchParameter()
-  );
 
   return (
     <div className={styles.formContainer}>
@@ -227,8 +81,17 @@ const ResourceFilters = ({
                   "Patient Identifier Type"
                 )}
                 items={dropdownPatientIdentifierItems}
-                selectedItem={selectedItem}
-                onChange={(event) => handleSelectionChange(event.selectedItem)}
+                selectedItem={
+                  patientIdentifierType
+                    ? {
+                        id: patientIdentifierType.uuid,
+                        label: patientIdentifierType.display,
+                      }
+                    : null
+                }
+                onChange={(event) =>
+                  setPatientIdentifierType(event.selectedItem)
+                }
                 itemToString={(item) => (item ? item.label : "")}
                 label="Select Patient Identifier Type"
                 disabled={!isEditMode}
@@ -249,8 +112,13 @@ const ResourceFilters = ({
               <TextInput
                 type="text"
                 labelText={t("encounterTypeUuids", "Encounter Type UUIDS")}
-                value={encounterTypeUuids}
-                onChange={(e) => setEncounterTypeUuids(e.target.value)}
+                placeholder="Comma separate encounter type uuids"
+                value={encounterTypeUUIDS}
+                onChange={(e) =>
+                  setEncounterTypeUUIDS(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 id="encounter-type-uuids"
                 disabled={!isEditMode}
               />
@@ -260,9 +128,13 @@ const ResourceFilters = ({
                 type="text"
                 labelText={t("observationConceptId", "Observation Concept IDs")}
                 id="observation-concept-id"
-                value={observationConceptIds}
+                value={observationFilterCodes}
                 placeholder="Comma separate concept IDs eg 99046,47453"
-                onChange={(e) => setObservationConceptIds(e.target.value)}
+                onChange={(e) =>
+                  setObservationFilterCodes(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -275,8 +147,12 @@ const ResourceFilters = ({
                 )}
                 id="episode-of-care"
                 placeholder="Comma separate program uuids"
-                value={episodeOfCareUuids}
-                onChange={(e) => setEpisodeOfCareUuids(e.target.value)}
+                value={episodeOfCareUUIDS}
+                onChange={(e) =>
+                  setEpisodeOfCareUUIDS(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -295,8 +171,12 @@ const ResourceFilters = ({
                 )}
                 id="medication-request-id"
                 placeholder="Comma separate concept IDs eg 99046,47453"
-                value={medicationRequestIds}
-                onChange={(e) => setMedicationRequestIds(e.target.value)}
+                value={medicationRequestCodes}
+                onChange={(e) =>
+                  setMedicationRequestCodes(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -309,8 +189,12 @@ const ResourceFilters = ({
                 )}
                 id="medication-dispense-id"
                 placeholder="Comma separate concept IDs eg 99046,47453"
-                value={medicationDispenseIds}
-                onChange={(e) => setMedicationDispenseIds(e.target.value)}
+                value={medicationDispenseCodes}
+                onChange={(e) =>
+                  setMedicationDispenseCodes(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -320,8 +204,12 @@ const ResourceFilters = ({
                 labelText={t("conditionConceptIds", "Condition Concept IDs")}
                 id="condition-id"
                 placeholder="Comma separate concept IDs eg 99046,47453"
-                value={conditionConceptIds}
-                onChange={(e) => setConditionConceptIds(e.target.value)}
+                value={conditionCodes}
+                onChange={(e) =>
+                  setConditionCodes(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -331,8 +219,12 @@ const ResourceFilters = ({
                 labelText={t("diagnosticReportIds", "Diagnostic Report IDs")}
                 id="diagnostic-report-id"
                 placeholder="Comma separate concept IDs eg 99046,47453"
-                value={diagnosticReportIds}
-                onChange={(e) => setDiagnosticReportIds(e.target.value)}
+                value={diagnosticReportCodes}
+                onChange={(e) =>
+                  setDiagnosticReportCodes(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
@@ -342,8 +234,12 @@ const ResourceFilters = ({
                 labelText={t("servceRequestIds", "Service Request IDs")}
                 id="service-request-id"
                 placeholder="Comma separate concept IDs eg 99046,47453"
-                value={serviceRequestIds}
-                onChange={(e) => setServiceRequestIds(e.target.value)}
+                value={serviceRequestCodes}
+                onChange={(e) =>
+                  setServiceRequestCodes(
+                    e.target.value.split(",").map((item) => item.trim())
+                  )
+                }
                 disabled={!isEditMode}
               />
             </FormGroup>
