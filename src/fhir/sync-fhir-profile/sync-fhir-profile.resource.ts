@@ -56,3 +56,21 @@ export function mapDataElements(dataArray: Array<Record<string, any>>) {
 
   return arrayToReturn;
 }
+
+export async function saveSyncFhirProfile(payload: syncFhirProfilePayload) {
+  const abortController = new AbortController();
+  const isUpdating = !!payload.uuid;
+
+  const url = isUpdating
+    ? `${restBaseUrl}/syncfhirprofile/${payload.uuid}`
+    : `${restBaseUrl}/syncfhirprofile`;
+
+  return await openmrsFetch(url, {
+    method: "POST",
+    signal: abortController.signal,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: payload,
+  });
+}

@@ -191,3 +191,29 @@ type smsMessagePayload = {
   sent_status: number;
   date_created: string;
 };
+
+type syncFhirProfilePayload = {
+  uuid: string;
+  name: string;
+  resourceTypes: string;
+  profileEnabled: boolean;
+  patientIdentifierType: string;
+  numberOfResourcesInBundle: number;
+  durationToKeepSyncedResources: number;
+  generateBundle: boolean;
+  isCaseBasedProfile: boolean;
+  caseBasedPrimaryResourceType: string;
+  caseBasedPrimaryResourceTypeId: string;
+  resourceSearchParameter: string;
+  conceptSource: string;
+  url: string;
+  conceptSource: string;
+  syncLimit: number;
+  urlToken: string;
+  urlUserName: string;
+  urlPassword: string;
+  syncDataEverSince: boolean;
+  dataToSyncStartDate: string;
+  searchable: boolean;
+  searchURL: string;
+};
