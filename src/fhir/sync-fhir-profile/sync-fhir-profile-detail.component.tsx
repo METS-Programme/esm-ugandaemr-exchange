@@ -14,6 +14,7 @@ import CaseBasedSettings from "./fhir-detail-content.component.tsx/fhir-detail-c
 import ResourceFilters from "./fhir-detail-content.component.tsx/fhir-detial-content-resource-filters.component";
 import { showNotification, showSnackbar } from "@openmrs/esm-framework";
 import { saveSyncFhirProfile } from "./sync-fhir-profile.resource";
+import dayjs from "dayjs";
 const RowDetails = ({ selectedProfileData }) => {
   const { t } = useTranslation();
   const [tabType, setTabType] = useState("Resource Definition");
@@ -46,9 +47,11 @@ const RowDetails = ({ selectedProfileData }) => {
   const [syncDataEverSince, setSyncDataEverSince] = useState(
     selectedProfileData.syncDataEverSince
   );
-  const [dataToSyncStartDate, setDataToSyncStartDate] = useState(
-    selectedProfileData.dataToSyncStartDate
-  );
+  const [dataToSyncStartDate, setDataToSyncStartDate] = useState(() => {
+    const fetchedDate = selectedProfileData.dataToSyncStartDate;
+    return fetchedDate ? fetchedDate.split("T")[0] : "";
+  });
+
   const [resourceSearchParameterObject, setResourceSearchParameterObject] =
     useState(JSON.parse(selectedProfileData.resourceSearchParameter));
 
@@ -74,10 +77,6 @@ const RowDetails = ({ selectedProfileData }) => {
 
   const handleEdit = () => {
     setIsEditMode(true);
-  };
-
-  const handleSubmit = () => {
-    setIsEditMode(false);
   };
 
   const handleCancel = () => {
@@ -109,107 +108,16 @@ const RowDetails = ({ selectedProfileData }) => {
     resourceSearchParameterObject.servicerequestFilter?.code || ""
   );
 
-  const buildResourceSearchParameter = () => {
-    return {
-      observationFilter: {
-        code: observationFilterCodes ? [observationFilterCodes] : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      encounterFilter: {
-        type: encounterTypeUUIDS ? encounterTypeUUIDS : [],
-        date: { lowerBound: "", myUpperBound: "" },
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-        subject: [],
-        location: [],
-        id: [],
-        participant: [],
-      },
-      episodeofcareFilter: {
-        type: episodeOfCareUUIDS ? episodeOfCareUUIDS : [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      medicationrequestFilter: {
-        code: medicationRequestCodes ? medicationRequestCodes : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      medicationdispenseFilter: {
-        code: medicationDispenseCodes ? medicationDispenseCodes : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      conditionFilter: {
-        code: conditionCodes ? conditionCodes : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      diagnosticreportFilter: {
-        code: diagnosticReportCodes ? diagnosticReportCodes : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-      servicerequestFilter: {
-        code: serviceRequestCodes ? serviceRequestCodes : [],
-        encounterReference: [],
-        patientReference: [],
-        valueQuantityParam: [],
-        hasMemberReference: [],
-        valueStringParam: [],
-        id: [],
-        valueConcept: [],
-        valueDateParam: { lowerBound: "", myUpperBound: "" },
-        date: { lowerBound: "", myUpperBound: "" },
-        category: [],
-        lastUpdated: { lowerBound: "", myUpperBound: "" },
-      },
-    };
-  };
+  const buildResourceSearchParameter = () => ({
+    encounterFilter: encounterTypeUUIDS,
+    episodeofcareFilter: episodeOfCareUUIDS,
+    observationFilter: observationFilterCodes,
+    medicationrequestFilter: medicationRequestCodes,
+    medicationdispenseFilter: medicationDispenseCodes,
+    diagnosticreportFilter: diagnosticReportCodes,
+    conditionFilter: conditionCodes,
+    servicerequestFilter: serviceRequestCodes,
+  });
 
   const resourceSearchParameter = JSON.stringify(
     buildResourceSearchParameter()
@@ -237,13 +145,14 @@ const RowDetails = ({ selectedProfileData }) => {
         urlUserName,
         urlPassword,
         syncDataEverSince,
-        dataToSyncStartDate,
+        dataToSyncStartDate: dataToSyncStartDate
+          ? dayjs(dataToSyncStartDate).format("YYYY-MM-DDTHH:mm:ss.SSSZ")
+          : null,
         searchable,
         searchURL,
       };
 
       const response = await saveSyncFhirProfile(payload);
-      console.log(payload);
 
       if (response?.status === 200 || response?.status === 201) {
         showSnackbar({
@@ -255,7 +164,6 @@ const RowDetails = ({ selectedProfileData }) => {
           ),
         });
         setIsEditMode(false);
-        // Optionally refetch or mutate
       } else {
         throw new Error("Unexpected response from server");
       }

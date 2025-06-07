@@ -1,12 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { Dropdown, Form, FormGroup, Stack, TextInput } from "@carbon/react";
 import { useTranslation } from "react-i18next";
-import {
-  saveSyncFhirProfile,
-  useGetPatientIdentifierType,
-} from "../sync-fhir-profile.resource";
+import { useGetPatientIdentifierType } from "../sync-fhir-profile.resource";
 import styles from "../sync-fhir-profile-detail.scss";
-import { showSnackbar } from "@openmrs/esm-framework";
 
 interface ResourceFiltersProps {
   isEditMode: boolean;

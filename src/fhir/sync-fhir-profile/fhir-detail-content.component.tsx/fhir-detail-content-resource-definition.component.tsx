@@ -10,7 +10,10 @@ import {
   TextInput,
 } from "@carbon/react";
 import { useTranslation } from "react-i18next";
-import { caseBasedPrimaryResourceTypes } from "../../../constants";
+import {
+  caseBasedPrimaryResourceTypes,
+  resourceTypeGroups,
+} from "../../../constants";
 import styles from "../sync-fhir-profile-detail.scss";
 
 const ResourceDefinition = ({
@@ -40,27 +43,6 @@ const ResourceDefinition = ({
 }) => {
   const { t } = useTranslation();
 
-  const normalizeString = (str) => str.toLowerCase().replace(/\s+/g, "");
-
-  const dropdownItems = caseBasedPrimaryResourceTypes.map((type) => ({
-    id: type.id,
-    label: type.label,
-  }));
-
-  const findItemByLabel = (apiValue, items) => {
-    const normalizedApiValue = normalizeString(apiValue);
-    return items.find(
-      (item) => normalizeString(item.label) === normalizedApiValue
-    );
-  };
-
-  const [
-    selectedCaseBasedPrimaryResourceType,
-    setSelectedCaseBasedPrimaryResourceType,
-  ] = useState(() =>
-    findItemByLabel(caseBasedPrimaryResourceType, dropdownItems)
-  );
-
   const [checkedResourceTypes, setCheckedResourceTypes] = useState([]);
   useEffect(() => {
     if (resourceTypes) {
@@ -69,11 +51,13 @@ const ResourceDefinition = ({
   }, [resourceTypes]);
 
   const handleCheckboxChange = (value: string) => {
-    setCheckedResourceTypes((previous) =>
-      previous.includes(value)
-        ? previous.filter((v) => v !== value)
-        : [...previous, value]
-    );
+    setCheckedResourceTypes((prev) => {
+      const updated = prev.includes(value)
+        ? prev.filter((v) => v !== value)
+        : [...prev, value];
+      setResourceTypes(updated.join(","));
+      return updated;
+    });
   };
 
   return (
@@ -95,7 +79,7 @@ const ResourceDefinition = ({
               <FormGroup>
                 <Checkbox
                   labelText={t("enableProfile", "Enable Profile")}
-                  id="checkbox-label-1"
+                  id="enable-profile"
                   checked={profileEnabled}
                   onChange={(e) => setProfileEnabled(e.target.checked)}
                   disabled={!isEditMode}
@@ -104,7 +88,7 @@ const ResourceDefinition = ({
               <FormGroup>
                 <Checkbox
                   labelText={t("generateBundle", "Generate Bundle")}
-                  id="checkbox-label-2"
+                  id="generate-bundle"
                   checked={generateBundle}
                   onChange={(e) => setGenerateBundle(e.target.checked)}
                   disabled={!isEditMode}
@@ -113,22 +97,29 @@ const ResourceDefinition = ({
               <FormGroup>
                 <Checkbox
                   labelText={t("syncHistoricalData", "Sync Historical Data")}
-                  id="checkbox-label-2"
+                  id="sync-historical-data"
                   checked={syncDataEverSince}
                   onChange={(e) => setSyncDataEverSince(e.target.checked)}
                   disabled={!isEditMode}
                 />
               </FormGroup>
               <FormGroup>
-                <DatePicker datePickerType="single">
+                <DatePicker
+                  datePickerType="single"
+                  dateFormat="Y-m-d"
+                  value={dataToSyncStartDate}
+                  onChange={(dates) => {
+                    if (dates.length) {
+                      setDataToSyncStartDate(dates[0]);
+                    }
+                  }}
+                >
                   <DatePickerInput
-                    placeholder="mm/dd/yyyy"
+                    placeholder="yyyy-mm-dd"
                     labelText={t("syncStartDate", "Sync Start Date")}
-                    id="date-picker-single"
+                    id="sync-start-date"
                     size="md"
-                    value={dataToSyncStartDate}
-                    onChange={(e) => setDataToSyncStartDate(e.target.value)}
-                    disabled={!isEditMode}
+                    disabled={!isEditMode || !syncDataEverSince}
                   />
                 </DatePicker>
               </FormGroup>
@@ -165,79 +156,26 @@ const ResourceDefinition = ({
       <div className={`${styles.form} ${styles.formRight}`}>
         <Form>
           <Stack gap={2}>
+            <span>{t("resourceTypes", "Resource Types")}</span>
             <div className={styles.resourceType}>
-              <div>
-                <span>{t("resourceTypes", "Resource Types")}</span>
-                <FormGroup>
-                  <Checkbox
-                    labelText={t("patient", "Patient")}
-                    id="resource-type-1"
-                    checked={checkedResourceTypes.includes("Patient")}
-                    onChange={() => handleCheckboxChange("Patient")}
-                    disabled={!isEditMode}
-                  />
-                  <Checkbox
-                    labelText={t("person", "Person")}
-                    id="resource-type-2"
-                    checked={checkedResourceTypes.includes("Person")}
-                    onChange={() => handleCheckboxChange("Person")}
-                    disabled={!isEditMode}
-                  />
-                  <Checkbox
-                    labelText={t("episodeOfCare", "Episode of Care (Program)")}
-                    id="resource-type-3"
-                    checked={checkedResourceTypes.includes("EpisodeOfCare")}
-                    onChange={() => handleCheckboxChange("EpisodeOfCare")}
-                    disabled={!isEditMode}
-                  />
-                  <Checkbox
-                    labelText={t("encounter", "Encounter")}
-                    id="resource-type-4"
-                    checked={checkedResourceTypes.includes("Encounter")}
-                    onChange={() => handleCheckboxChange("Encounter")}
-                    disabled={!isEditMode}
-                  />
-                </FormGroup>
-              </div>
-              <div>
-                <FormGroup>
-                  <Checkbox
-                    labelText={t("observation", "Observation")}
-                    id="resource-type-5"
-                    checked={checkedResourceTypes.includes("Observation")}
-                    onChange={() => handleCheckboxChange("Observation")}
-                    disabled={!isEditMode}
-                  />
-                  <Checkbox
-                    labelText={t(
-                      "serviceRequest",
-                      "Service Request (Lab Orders)"
-                    )}
-                    id="checkbox-label-2"
-                    checked={checkedResourceTypes.includes("ServiceRequest")}
-                    onChange={() => handleCheckboxChange("ServiceRequest")}
-                    disabled={!isEditMode}
-                  />
-                  <Checkbox
-                    labelText={t(
-                      "medicationRequest",
-                      "Medication Request (Medication Orders)"
-                    )}
-                    id="checkbox-label-2"
-                    checked={checkedResourceTypes.includes("MedicationRequest")}
-                    onChange={() => handleCheckboxChange("MedicationRequest")}
-                    disabled={!isEditMode}
-                  />
-                  <Checkbox
-                    labelText={t("practitioner", "Practioner (Provider)")}
-                    id="checkbox-label-2"
-                    checked={checkedResourceTypes.includes("Practitioner")}
-                    onChange={() => handleCheckboxChange("Practitioner")}
-                    disabled={!isEditMode}
-                  />
-                </FormGroup>
-              </div>
+              {resourceTypeGroups.map((group, idx) => (
+                <div key={`group-${idx}`}>
+                  <FormGroup>
+                    {group.map(({ id, labelKey, fallback }) => (
+                      <Checkbox
+                        key={id}
+                        labelText={t(labelKey, fallback)}
+                        id={`resource-type-${id}`}
+                        checked={checkedResourceTypes.includes(id)}
+                        onChange={() => handleCheckboxChange(id)}
+                        disabled={!isEditMode}
+                      />
+                    ))}
+                  </FormGroup>
+                </div>
+              ))}
             </div>
+
             <span>{t("caseBasedSettings", "Case Based Settings")}</span>
             <FormGroup>
               <Checkbox
@@ -250,15 +188,17 @@ const ResourceDefinition = ({
             </FormGroup>
             <FormGroup>
               <Dropdown
-                id="dropdown-2"
+                id="resource-type"
                 titleText={t(
                   "caseBasedPrimaryResourceType",
                   "Case Based Primary Resource Type"
                 )}
-                items={dropdownItems}
-                selectedItem={selectedCaseBasedPrimaryResourceType}
+                items={caseBasedPrimaryResourceTypes}
+                selectedItem={caseBasedPrimaryResourceTypes.find(
+                  (item) => item.id === caseBasedPrimaryResourceType
+                )}
                 onChange={({ selectedItem }) =>
-                  setSelectedCaseBasedPrimaryResourceType(selectedItem)
+                  setCaseBasedPrimaryResourceType(selectedItem.id)
                 }
                 itemToString={(item) => (item ? item.label : "")}
                 label="Select Primary Resource Type"

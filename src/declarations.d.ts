@@ -213,7 +213,7 @@ type syncFhirProfilePayload = {
   urlUserName: string;
   urlPassword: string;
   syncDataEverSince: boolean;
-  dataToSyncStartDate: Date;
+  dataToSyncStartDate: string;
   searchable: boolean;
   searchURL: string;
 };

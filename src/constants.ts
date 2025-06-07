@@ -174,11 +174,11 @@ export const incomingTransactionsHeaders = [
 
 export const caseBasedPrimaryResourceTypes: Array<Item> = [
   {
-    id: "encounter",
+    id: "Encounter",
     label: "Encounter",
   },
   {
-    id: "episodeOfCare",
+    id: "EpisodeOfCare",
     label: "Episode of Care (Program)",
   },
   {
@@ -186,15 +186,15 @@ export const caseBasedPrimaryResourceTypes: Array<Item> = [
     label: "Program Workflow State",
   },
   {
-    id: "patientIdentifierType",
+    id: "PatientIdentifierType",
     label: "Patient Identifier Type",
   },
   {
-    id: "order",
+    id: "Order",
     label: "Order",
   },
   {
-    id: "cohortType",
+    id: "CohortType",
     label: "Cohort Type",
   },
 ];
@@ -272,4 +272,35 @@ export const syncTaskTypeDataTypes = [
     id: "dataType17",
     label: "org.openmrs.util.AttributableDate",
   },
+];
+
+export const resourceTypeGroups = [
+  [
+    { id: "Patient", labelKey: "patient", fallback: "Patient" },
+    { id: "Person", labelKey: "person", fallback: "Person" },
+    {
+      id: "EpisodeOfCare",
+      labelKey: "episodeOfCare",
+      fallback: "Episode of Care (Program)",
+    },
+    { id: "Encounter", labelKey: "encounter", fallback: "Encounter" },
+  ],
+  [
+    { id: "Observation", labelKey: "observation", fallback: "Observation" },
+    {
+      id: "ServiceRequest",
+      labelKey: "serviceRequest",
+      fallback: "Service Request (Lab Orders)",
+    },
+    {
+      id: "MedicationRequest",
+      labelKey: "medicationRequest",
+      fallback: "Medication Request (Medication Orders)",
+    },
+    {
+      id: "Practitioner",
+      labelKey: "practitioner",
+      fallback: "Practitioner (Provider)",
+    },
+  ],
 ];
