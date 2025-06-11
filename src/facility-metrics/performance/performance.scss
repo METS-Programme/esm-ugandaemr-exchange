@@ -1,8 +1,8 @@
-@use 'node_modules/@carbon/styles/scss/colors';
-@use 'node_modules/@carbon/styles/scss/spacing';
-@use 'node_modules/@carbon/styles/scss/type/index';
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type/index';
 @use '@carbon/styles/scss/type';
-@import "node_modules/@openmrs/esm-styleguide/src/vars";
+@use '@openmrs/esm-styleguide/src/vars' as *;
 
 .chartRowContainer {
   display: flex;

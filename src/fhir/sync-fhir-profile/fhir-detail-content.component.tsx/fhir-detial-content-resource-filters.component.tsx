@@ -77,17 +77,14 @@ const ResourceFilters: React.FC<ResourceFiltersProps> = ({
                   "Patient Identifier Type"
                 )}
                 items={dropdownPatientIdentifierItems}
-                selectedItem={
-                  patientIdentifierType
-                    ? {
-                        id: patientIdentifierType.uuid,
-                        label: patientIdentifierType.display,
-                      }
-                    : null
-                }
-                onChange={(event) =>
-                  setPatientIdentifierType(event.selectedItem)
-                }
+                selectedItem={dropdownPatientIdentifierItems.find(
+                  (type) => type.id === patientIdentifierType
+                )}
+                onChange={({ selectedItem }) => {
+                  if (selectedItem) {
+                    setPatientIdentifierType(selectedItem.id);
+                  }
+                }}
                 itemToString={(item) => (item ? item.label : "")}
                 label="Select Patient Identifier Type"
                 disabled={!isEditMode}

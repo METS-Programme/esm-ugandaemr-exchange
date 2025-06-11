@@ -27,7 +27,7 @@ const RowDetails = ({ selectedProfileData }) => {
     selectedProfileData.profileEnabled
   );
   const [patientIdentifierType, setPatientIdentifierType] = useState(
-    selectedProfileData.patientIdentifierType
+    selectedProfileData.patientIdentifierType?.uuid
   );
   const [numberOfResourcesInBundle, setNumberOfResourcesInBundle] = useState(
     selectedProfileData.numberOfResourcesInBundle
@@ -108,18 +108,25 @@ const RowDetails = ({ selectedProfileData }) => {
     resourceSearchParameterObject.servicerequestFilter?.code || ""
   );
 
-  const buildResourceSearchParameter = () => ({
-    encounterFilter: encounterTypeUUIDS,
-    episodeofcareFilter: episodeOfCareUUIDS,
-    observationFilter: observationFilterCodes,
-    medicationrequestFilter: medicationRequestCodes,
-    medicationdispenseFilter: medicationDispenseCodes,
-    diagnosticreportFilter: diagnosticReportCodes,
-    conditionFilter: conditionCodes,
-    servicerequestFilter: serviceRequestCodes,
-  });
+  const buildResourceSearchParameter = () => {
+    const paramBody = (val) => {
+      if (Array.isArray(val)) return val.join(",");
+      return typeof val === "string" ? val : "";
+    };
 
-  const resourceSearchParameter = JSON.stringify(
+    return {
+      observationFilter: paramBody(observationFilterCodes),
+      encounterFilter: paramBody(encounterTypeUUIDS),
+      episodeofcareFilter: paramBody(episodeOfCareUUIDS),
+      medicationdispenseFilter: paramBody(medicationDispenseCodes),
+      medicationrequestFilter: paramBody(medicationRequestCodes),
+      diagnosticreportFilter: paramBody(diagnosticReportCodes),
+      conditionFilter: paramBody(conditionCodes),
+      servicerequestFilter: paramBody(serviceRequestCodes),
+    };
+  };
+
+  const resourceSearchParameterBody = JSON.stringify(
     buildResourceSearchParameter()
   );
 
@@ -137,7 +144,7 @@ const RowDetails = ({ selectedProfileData }) => {
         isCaseBasedProfile,
         caseBasedPrimaryResourceType,
         caseBasedPrimaryResourceTypeId,
-        resourceSearchParameter,
+        resourceSearchParameter: resourceSearchParameterBody,
         url,
         conceptSource,
         syncLimit,
@@ -187,7 +194,7 @@ const RowDetails = ({ selectedProfileData }) => {
     isCaseBasedProfile,
     caseBasedPrimaryResourceType,
     caseBasedPrimaryResourceTypeId,
-    resourceSearchParameter,
+    resourceSearchParameterBody,
     url,
     syncLimit,
     urlToken,
