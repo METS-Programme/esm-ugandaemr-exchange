@@ -57,3 +57,22 @@ export interface Attribute {
   display: string;
   links: Link[];
 }
+
+export interface FhirProfileCase {
+  uuid: string;
+  caseIdentifier: string;
+  patient: Patient;
+  profile: ProfileInterface;
+  dateCreated: Date;
+  dateChanged: Date;
+}
+
+export interface Patient {
+  uuid: string;
+  display: string;
+}
+
+export interface profile {
+  uuid: string;
+  name: string;
+}
