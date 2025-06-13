@@ -242,7 +242,10 @@ export const syncFhirProfileStatisticsDashboardLink = getSyncLifecycle(
   options
 );
 
-export const syncFhirProfileStatDashboard = getSyncLifecycle(SyncFhirProfileStatistics, options);
+export const syncFhirProfileStatDashboard = getSyncLifecycle(
+  SyncFhirProfileStatistics,
+  options
+);
 
 export const smsStatisticsDashboardLink = getSyncLifecycle(
   createLeftPanelLink({
