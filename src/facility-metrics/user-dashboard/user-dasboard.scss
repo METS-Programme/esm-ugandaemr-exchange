@@ -1,8 +1,7 @@
 @use '@carbon/styles/scss/spacing';
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/colors';
-@import '../../root.scss';
-@import '~@openmrs/esm-styleguide/src/vars';
+@use '@openmrs/esm-styleguide/src/vars' as *;
 .createIcon {
     padding: 1.0rem;
     margin-right: 60px;
