@@ -304,3 +304,30 @@ export const resourceTypeGroups = [
     },
   ],
 ];
+
+export const fhirProfileCaseHeaders = [
+  {
+    id: "1",
+    key: "patient",
+    header: "Patient",
+    accessor: "patient",
+  },
+  {
+    id: "2",
+    key: "profileIdentifier",
+    header: "Profile Identifier",
+    accessor: "profileIdentifier",
+  },
+  {
+    id: "3",
+    key: "dateCreated",
+    header: "Date Created",
+    accessor: "dateCreated",
+  },
+  {
+    id: "4",
+    key: "lastUpdateDate",
+    header: "Last Updated",
+    accessor: "lastUpdateDate",
+  },
+];
