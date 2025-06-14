@@ -76,8 +76,8 @@ export async function saveSyncFhirProfile(payload: syncFhirProfilePayload) {
   });
 }
 
-export function useGetSyncFhirCase(params: syncFhirProfilePayload) {
-  const apiUrl = `${restBaseUrl}/syncfhircase?${params.uuid}&v=full`;
+export function useGetSyncFhirCase(uuid: string) {
+  const apiUrl = `${restBaseUrl}/syncfhircase?profile=${uuid}&v=full`;
   const { data, isLoading, error, mutate } = useSWR<
     { data: { results: Array<FhirProfileCase> } },
     Error

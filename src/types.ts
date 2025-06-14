@@ -64,7 +64,7 @@ export interface FhirProfileCase {
   patient: Patient;
   profile: ProfileInterface;
   dateCreated: Date;
-  dateChanged: Date;
+  lastUpdateDate: Date;
 }
 
 export interface Patient {

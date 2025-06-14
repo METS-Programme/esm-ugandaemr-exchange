@@ -1,9 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useGetFhirProfiles } from "../sync-fhir-profile/sync-fhir-profile.resource";
-import { DropdownSkeleton } from "@carbon/react";
+import { Dropdown, DropdownSkeleton } from "@carbon/react";
 import { showSnackbar } from "@openmrs/esm-framework";
-import { Dropdown } from "@carbon/react";
+import styles from "./sync-fhir-profile-statistics.scss";
 
 const SyncFhirProfileFilter: React.FC<{
   onFilterChange: (selectedFhirProfile: string) => void;
@@ -32,11 +32,12 @@ const SyncFhirProfileFilter: React.FC<{
   if (fhirProfiles.length === 0) {
     return null;
   }
+
   return (
-    <div>
+    <div className={styles.filterContainer}>
       <Dropdown
         id="syncfhirprofile"
-        initialSelectedItem={fhirProfiles[0]}
+        initialSelectedItem={fhirProfilesNames[0]}
         items={fhirProfilesNames}
         itemToString={(item) => (item ? item : "")}
         onChange={({ selectedItem }) => onFilterChange(selectedItem)}
