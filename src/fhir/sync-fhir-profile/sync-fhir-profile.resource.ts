@@ -1,6 +1,10 @@
 import useSWR from "swr";
 import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
-import { FhirProfileCase, FhirProfileLog } from "../../types";
+import {
+  FhirProfileCase,
+  FhirProfileLog,
+  FhirProfileResources,
+} from "../../types";
 
 export function useGetFhirProfiles() {
   const apiUrl = `${restBaseUrl}/syncfhirprofile`;
@@ -100,6 +104,21 @@ export function useGetSyncFhirProfileLog(uuid: string) {
 
   return {
     fhirProfileLogs: data ? data?.data?.results : [],
+    isLoading,
+    error,
+    mutate,
+  };
+}
+
+export function useGetSyncFhirResource(uuid: string) {
+  const apiUrl = `${restBaseUrl}/syncfhirresource?profile=${uuid}&v=full`;
+  const { data, isLoading, error, mutate } = useSWR<
+    { data: { results: Array<FhirProfileResources> } },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    fhirProfileResources: data ? data?.data?.results : [],
     isLoading,
     error,
     mutate,

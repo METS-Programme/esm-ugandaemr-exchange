@@ -10,11 +10,13 @@ import styles from "./sync-fhir-profile-statistics-tab.scss";
 import {
   fhirProfileCaseHeaders,
   fhirProfileLogHeaders,
+  fhirProfileResourcesHeaders,
 } from "../../../constants";
 import {
   useGetSyncFhirCase,
   useGetFhirProfiles,
   useGetSyncFhirProfileLog,
+  useGetSyncFhirResource,
 } from "../../sync-fhir-profile/sync-fhir-profile.resource";
 import SyncFhirProfileDatalist from "./sync-fhir-profile-data-list.component";
 
@@ -33,6 +35,8 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
     useGetSyncFhirCase(selectedProfileUuid);
 
   const { fhirProfileLogs } = useGetSyncFhirProfileLog(selectedProfileUuid);
+
+  const { fhirProfileResources } = useGetSyncFhirResource(selectedProfileUuid);
 
   const handleTabTypeChange = ({ name }) => {
     setTabType(name);
@@ -99,6 +103,21 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
             selectedProfile={selectedProfileUuid}
             columns={fhirProfileLogHeaders}
             data={fhirProfileLogs}
+          />
+        ))}
+
+      {tabType === "resources" &&
+        (isLoading ? (
+          <DataTableSkeleton
+            headers={fhirProfileCaseHeaders}
+            showHeader
+            showToolbar
+          />
+        ) : (
+          <SyncFhirProfileDatalist
+            selectedProfile={selectedProfileUuid}
+            columns={fhirProfileResourcesHeaders}
+            data={fhirProfileResources}
           />
         ))}
     </div>

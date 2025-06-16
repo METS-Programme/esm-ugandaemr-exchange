@@ -352,3 +352,30 @@ export const fhirProfileLogHeaders = [
     accessor: "numberOfResources",
   },
 ];
+
+export const fhirProfileResourcesHeaders = [
+  {
+    id: "1",
+    key: "uuid",
+    header: "Resource ID",
+    accessor: "uuid",
+  },
+  {
+    id: "2",
+    key: "dateCreated",
+    header: "Date Created",
+    accessor: "dateCreated",
+  },
+  {
+    id: "3",
+    key: "synced",
+    header: "Synced to Server",
+    accessor: "synced",
+  },
+  {
+    id: "4",
+    key: "dateSynced",
+    header: "Date Synced",
+    accessor: "dateSynced",
+  },
+];

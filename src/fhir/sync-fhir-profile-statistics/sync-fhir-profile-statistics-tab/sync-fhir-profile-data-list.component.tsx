@@ -177,7 +177,11 @@ const SyncFhirProfileDatalist: React.FC<ListProps> = ({
                 {rows.map((row) => (
                   <TableRow key={row.id}>
                     {row.cells.map((cell) => (
-                      <TableCell key={cell.id}>{cell.value}</TableCell>
+                      <TableCell key={cell.id}>
+                        {cell.value !== null && cell.value !== undefined
+                          ? String(cell.value)
+                          : "—"}
+                      </TableCell>
                     ))}
                   </TableRow>
                 ))}

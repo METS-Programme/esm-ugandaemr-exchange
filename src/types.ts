@@ -80,6 +80,13 @@ export interface profile {
 export interface FhirProfileLog {
   uuid: string;
   resourceType: string;
-  lastGenerationDate: string;
+  lastGenerationDate: Date;
   numberOfResources: string;
+}
+
+export interface FhirProfileResources {
+  uuid: string;
+  dateCreated: Date;
+  synced: boolean;
+  dateSynced: Date;
 }
