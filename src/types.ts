@@ -76,3 +76,10 @@ export interface profile {
   uuid: string;
   name: string;
 }
+
+export interface FhirProfileLog {
+  uuid: string;
+  resourceType: string;
+  lastGenerationDate: string;
+  numberOfResources: string;
+}

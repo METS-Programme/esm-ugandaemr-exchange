@@ -7,12 +7,16 @@ import {
   SoftwareResourceCluster,
 } from "@carbon/react/icons";
 import styles from "./sync-fhir-profile-statistics-tab.scss";
-import SyncFhirProfileStatExchangeProfile from "./sync-fhir-profile-stat-exchange.component";
-import { fhirProfileCaseHeaders } from "../../../constants";
+import {
+  fhirProfileCaseHeaders,
+  fhirProfileLogHeaders,
+} from "../../../constants";
 import {
   useGetSyncFhirCase,
   useGetFhirProfiles,
+  useGetSyncFhirProfileLog,
 } from "../../sync-fhir-profile/sync-fhir-profile.resource";
+import SyncFhirProfileDatalist from "./sync-fhir-profile-data-list.component";
 
 const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
   const { t } = useTranslation();
@@ -20,7 +24,6 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
 
   const { fhirProfiles } = useGetFhirProfiles();
 
-  // Find UUID from selected name
   const selectedProfileObj = fhirProfiles.find(
     (profile) => profile.name === selectedFhirProfile
   );
@@ -28,6 +31,8 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
 
   const { fhirProfileCases, isLoading } =
     useGetSyncFhirCase(selectedProfileUuid);
+
+  const { fhirProfileLogs } = useGetSyncFhirProfileLog(selectedProfileUuid);
 
   const handleTabTypeChange = ({ name }) => {
     setTabType(name);
@@ -75,10 +80,25 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
             showToolbar
           />
         ) : (
-          <SyncFhirProfileStatExchangeProfile
+          <SyncFhirProfileDatalist
             selectedProfile={selectedProfileUuid}
             columns={fhirProfileCaseHeaders}
             data={formattedExchangeProfileData}
+          />
+        ))}
+
+      {tabType === "profileLogs" &&
+        (isLoading ? (
+          <DataTableSkeleton
+            headers={fhirProfileCaseHeaders}
+            showHeader
+            showToolbar
+          />
+        ) : (
+          <SyncFhirProfileDatalist
+            selectedProfile={selectedProfileUuid}
+            columns={fhirProfileLogHeaders}
+            data={fhirProfileLogs}
           />
         ))}
     </div>

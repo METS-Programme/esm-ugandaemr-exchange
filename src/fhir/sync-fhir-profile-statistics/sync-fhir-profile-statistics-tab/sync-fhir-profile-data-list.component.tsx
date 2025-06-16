@@ -42,7 +42,7 @@ interface ListProps {
 
 type DocumentType = "csv" | "pdf" | "json";
 
-const SyncFhirProfileStatExchangeProfile: React.FC<ListProps> = ({
+const SyncFhirProfileDatalist: React.FC<ListProps> = ({
   columns,
   data,
   pageSize,
@@ -218,4 +218,4 @@ const SyncFhirProfileStatExchangeProfile: React.FC<ListProps> = ({
   );
 };
 
-export default SyncFhirProfileStatExchangeProfile;
+export default SyncFhirProfileDatalist;

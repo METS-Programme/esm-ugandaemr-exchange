@@ -331,3 +331,24 @@ export const fhirProfileCaseHeaders = [
     accessor: "lastUpdateDate",
   },
 ];
+
+export const fhirProfileLogHeaders = [
+  {
+    id: "1",
+    key: "resourceType",
+    header: "Resource",
+    accessor: "resourceType",
+  },
+  {
+    id: "2",
+    key: "lastGenerationDate",
+    header: "Last Sync Date",
+    accessor: "lastGenerationDate",
+  },
+  {
+    id: "3",
+    key: "numberOfResources",
+    header: "Number of Resources",
+    accessor: "numberOfResources",
+  },
+];
