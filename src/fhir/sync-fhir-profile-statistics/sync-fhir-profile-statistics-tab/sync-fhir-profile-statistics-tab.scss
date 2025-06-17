@@ -1,0 +1,9 @@
+@use '@carbon/styles/scss/colors';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/spacing';
+
+.switch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}

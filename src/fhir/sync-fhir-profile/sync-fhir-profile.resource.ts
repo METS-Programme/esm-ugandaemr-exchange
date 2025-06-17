@@ -1,5 +1,10 @@
 import useSWR from "swr";
 import { openmrsFetch, restBaseUrl } from "@openmrs/esm-framework";
+import {
+  FhirProfileCase,
+  FhirProfileLog,
+  FhirProfileResources,
+} from "../../types";
 
 export function useGetFhirProfiles() {
   const apiUrl = `${restBaseUrl}/syncfhirprofile`;
@@ -73,4 +78,55 @@ export async function saveSyncFhirProfile(payload: syncFhirProfilePayload) {
     },
     body: payload,
   });
+}
+
+export function useGetSyncFhirCase(uuid: string) {
+  const apiUrl = uuid
+    ? `${restBaseUrl}/syncfhircase?profile=${uuid}&v=full`
+    : null;
+  const { data, isLoading, error, mutate } = useSWR<
+    { data: { results: Array<FhirProfileCase> } },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    fhirProfileCases: data ? data?.data?.results : [],
+    isLoading,
+    error,
+    mutate,
+  };
+}
+
+export function useGetSyncFhirProfileLog(uuid: string) {
+  const apiUrl = uuid
+    ? `${restBaseUrl}/syncfhirprofilelog?profile=${uuid}&v=full`
+    : null;
+  const { data, isLoading, error, mutate } = useSWR<
+    { data: { results: Array<FhirProfileLog> } },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    fhirProfileLogs: data ? data?.data?.results : [],
+    isLoading,
+    error,
+    mutate,
+  };
+}
+
+export function useGetSyncFhirResource(uuid: string) {
+  const apiUrl = uuid
+    ? `${restBaseUrl}/syncfhirresource?profile=${uuid}&v=full`
+    : null;
+
+  const { data, isLoading, error } = useSWR<
+    { data: { results: Array<FhirProfileResources> } },
+    Error
+  >(apiUrl, openmrsFetch);
+
+  return {
+    fhirProfileResources: data ? data?.data?.results : [],
+    isLoading,
+    error,
+  };
 }

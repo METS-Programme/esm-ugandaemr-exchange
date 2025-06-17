@@ -53,7 +53,7 @@ export const syncTaskLogsDashboardMeta = {
 export const syncFhirProfileDashboardMeta = {
   slot: "sync-fhir-profile-slot",
   columns: 1,
-  title: "Fhir Profile",
+  title: "Sync Fhir Profile",
   path: "fhir-exchange",
   layoutmode: "anchored",
 };
@@ -61,7 +61,7 @@ export const syncFhirProfileDashboardMeta = {
 export const syncFhirProfileStatisticsDashboardMeta = {
   slot: "sync-fhir-profile-statistics-slot",
   columns: 1,
-  title: "Fhir Profile Statistics",
+  title: "Sync Fhir Profile Statistics",
   path: "fhir-profile-statistics",
   layoutmode: "anchored",
 };
