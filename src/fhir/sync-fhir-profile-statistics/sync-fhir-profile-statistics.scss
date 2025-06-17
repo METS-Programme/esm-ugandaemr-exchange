@@ -2,7 +2,7 @@
 
 .filterContainer {
   :global(.cds--dropdown__wrapper--inline) {
-    gap: 0;
+    gap: 0rem 3rem;
   }
 
   :global(.cds--list-box__menu-icon) {
@@ -11,7 +11,16 @@
 
   :global(.cds--dropdown--inline) :global(.cds--list-box__field) {
     min-width: 15rem;
+    background-color: #ffffff;
   }
 
 
+}
+
+.profileFilterContainer {
+  padding: 1rem 1rem 0 1rem;
+}
+
+.profileTabContainer {
+  padding: 0 1rem 1rem 1rem;
 }

@@ -38,6 +38,7 @@ interface ListProps {
   data: any;
   pageSize?: number;
   selectedProfile: string;
+  noDataMessage?: string;
 }
 
 type DocumentType = "csv" | "pdf" | "json";
@@ -47,6 +48,7 @@ const SyncFhirProfileDatalist: React.FC<ListProps> = ({
   data,
   pageSize,
   selectedProfile,
+  noDataMessage,
 }) => {
   const { t } = useTranslation();
   const layout = useLayoutType();
@@ -192,7 +194,7 @@ const SyncFhirProfileDatalist: React.FC<ListProps> = ({
                 <Tile className={styles.tile}>
                   <div className={styles.tileContent}>
                     <p className={styles.content}>
-                      {t("No data", "No data to display")}
+                      {noDataMessage || t("No data", "No data to display")}
                     </p>
                   </div>
                 </Tile>

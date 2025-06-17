@@ -88,21 +88,10 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
             selectedProfile={selectedProfileUuid}
             columns={fhirProfileCaseHeaders}
             data={formattedExchangeProfileData}
-          />
-        ))}
-
-      {tabType === "profileLogs" &&
-        (isLoading ? (
-          <DataTableSkeleton
-            headers={fhirProfileCaseHeaders}
-            showHeader
-            showToolbar
-          />
-        ) : (
-          <SyncFhirProfileDatalist
-            selectedProfile={selectedProfileUuid}
-            columns={fhirProfileLogHeaders}
-            data={fhirProfileLogs}
+            noDataMessage={t(
+              "noExchangeProfileToDisplay",
+              "No Patient in the Exchange Profile to display"
+            )}
           />
         ))}
 
@@ -118,6 +107,26 @@ const SyncFhirProfileStatTab = ({ selectedFhirProfile }) => {
             selectedProfile={selectedProfileUuid}
             columns={fhirProfileResourcesHeaders}
             data={fhirProfileResources}
+            noDataMessage={t("noResourcesToDisplay", "No Resources to display")}
+          />
+        ))}
+
+      {tabType === "profileLogs" &&
+        (isLoading ? (
+          <DataTableSkeleton
+            headers={fhirProfileCaseHeaders}
+            showHeader
+            showToolbar
+          />
+        ) : (
+          <SyncFhirProfileDatalist
+            selectedProfile={selectedProfileUuid}
+            columns={fhirProfileLogHeaders}
+            data={fhirProfileLogs}
+            noDataMessage={t(
+              "noProfileLogsToDisplay",
+              "No Profile Logs to display"
+            )}
           />
         ))}
     </div>

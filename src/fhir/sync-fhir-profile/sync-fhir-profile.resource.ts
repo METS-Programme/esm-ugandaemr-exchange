@@ -81,7 +81,9 @@ export async function saveSyncFhirProfile(payload: syncFhirProfilePayload) {
 }
 
 export function useGetSyncFhirCase(uuid: string) {
-  const apiUrl = `${restBaseUrl}/syncfhircase?profile=${uuid}&v=full`;
+  const apiUrl = uuid
+    ? `${restBaseUrl}/syncfhircase?profile=${uuid}&v=full`
+    : null;
   const { data, isLoading, error, mutate } = useSWR<
     { data: { results: Array<FhirProfileCase> } },
     Error
@@ -96,7 +98,9 @@ export function useGetSyncFhirCase(uuid: string) {
 }
 
 export function useGetSyncFhirProfileLog(uuid: string) {
-  const apiUrl = `${restBaseUrl}/syncfhirprofilelog?profile=${uuid}&v=full`;
+  const apiUrl = uuid
+    ? `${restBaseUrl}/syncfhirprofilelog?profile=${uuid}&v=full`
+    : null;
   const { data, isLoading, error, mutate } = useSWR<
     { data: { results: Array<FhirProfileLog> } },
     Error
@@ -111,8 +115,11 @@ export function useGetSyncFhirProfileLog(uuid: string) {
 }
 
 export function useGetSyncFhirResource(uuid: string) {
-  const apiUrl = `${restBaseUrl}/syncfhirresource?profile=${uuid}&v=full`;
-  const { data, isLoading, error, mutate } = useSWR<
+  const apiUrl = uuid
+    ? `${restBaseUrl}/syncfhirresource?profile=${uuid}&v=full`
+    : null;
+
+  const { data, isLoading, error } = useSWR<
     { data: { results: Array<FhirProfileResources> } },
     Error
   >(apiUrl, openmrsFetch);
@@ -121,6 +128,5 @@ export function useGetSyncFhirResource(uuid: string) {
     fhirProfileResources: data ? data?.data?.results : [],
     isLoading,
     error,
-    mutate,
   };
 }
