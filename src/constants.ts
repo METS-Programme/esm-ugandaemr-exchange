@@ -304,3 +304,78 @@ export const resourceTypeGroups = [
     },
   ],
 ];
+
+export const fhirProfileCaseHeaders = [
+  {
+    id: "1",
+    key: "patient",
+    header: "Patient",
+    accessor: "patient",
+  },
+  {
+    id: "2",
+    key: "profileIdentifier",
+    header: "Profile Identifier",
+    accessor: "profileIdentifier",
+  },
+  {
+    id: "3",
+    key: "dateCreated",
+    header: "Date Created",
+    accessor: "dateCreated",
+  },
+  {
+    id: "4",
+    key: "lastUpdateDate",
+    header: "Last Updated",
+    accessor: "lastUpdateDate",
+  },
+];
+
+export const fhirProfileLogHeaders = [
+  {
+    id: "1",
+    key: "resourceType",
+    header: "Resource",
+    accessor: "resourceType",
+  },
+  {
+    id: "2",
+    key: "lastGenerationDate",
+    header: "Last Sync Date",
+    accessor: "lastGenerationDate",
+  },
+  {
+    id: "3",
+    key: "numberOfResources",
+    header: "Number of Resources",
+    accessor: "numberOfResources",
+  },
+];
+
+export const fhirProfileResourcesHeaders = [
+  {
+    id: "1",
+    key: "uuid",
+    header: "Resource ID",
+    accessor: "uuid",
+  },
+  {
+    id: "2",
+    key: "dateCreated",
+    header: "Date Created",
+    accessor: "dateCreated",
+  },
+  {
+    id: "3",
+    key: "synced",
+    header: "Synced to Server",
+    accessor: "synced",
+  },
+  {
+    id: "4",
+    key: "dateSynced",
+    header: "Date Synced",
+    accessor: "dateSynced",
+  },
+];

@@ -57,3 +57,36 @@ export interface Attribute {
   display: string;
   links: Link[];
 }
+
+export interface FhirProfileCase {
+  uuid: string;
+  caseIdentifier: string;
+  patient: Patient;
+  profile: ProfileInterface;
+  dateCreated: Date;
+  lastUpdateDate: Date;
+}
+
+export interface Patient {
+  uuid: string;
+  display: string;
+}
+
+export interface profile {
+  uuid: string;
+  name: string;
+}
+
+export interface FhirProfileLog {
+  uuid: string;
+  resourceType: string;
+  lastGenerationDate: Date;
+  numberOfResources: string;
+}
+
+export interface FhirProfileResources {
+  uuid: string;
+  dateCreated: Date;
+  synced: boolean;
+  dateSynced: Date;
+}

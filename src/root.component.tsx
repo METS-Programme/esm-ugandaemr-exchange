@@ -12,6 +12,7 @@ import ScheduleManager from "./scheduler/scheduler.component";
 import SyncTaskTypes from "./sync-task-types/sync-task-types.component";
 import SyncTaskLogsComponent from "./sync-task-logs/sync-task-logs.component";
 import SentSmsComponent from "./sent-sms/sent-sms.component";
+import SyncFhirProfileStatistics from "./fhir/sync-fhir-profile-statistics/sync-fhir-profile-statistics.component";
 
 const Root: React.FC = () => {
   const spaBasePath = window.spaBase;
@@ -36,6 +37,10 @@ const Root: React.FC = () => {
           <Route path="/sync-task-types" element={<SyncTaskTypes />} />
           <Route path="/sync-task-logs" element={<SyncTaskLogsComponent />} />
           <Route path="/sms-statistics" element={<SentSmsComponent />} />
+          <Route
+            path="fhir-profile-statistics"
+            element={<SyncFhirProfileStatistics />}
+          />
 
           <Route
             path="/client-registry-dashboard"
